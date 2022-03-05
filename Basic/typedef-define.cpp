@@ -5,18 +5,24 @@ typedef double db;
 typedef unsigned long int ul;
 
 using namespace std;
-class CodeLearn
+class Product
 {
+private:
+    int quantity;
+    float price;
+
 public:
-    CodeLearn()
+    Product(int q, float p)
     {
-        cout << "Code Learn" << endl;
+        quantity = p;
+        price = q;
     }
 };
-typedef CodeLearn CL;
+typedef Product P;
+
 struct codelearn
 {
-    void printf()
+    void print()
     {
         cout << "code learn" << endl;
     }
@@ -37,9 +43,9 @@ int main()
     cout << val1 << endl;
     cout << val2 << endl;
 
-    CL CL1;
+    P p1(5, 3.99);
     cl cl1;
-    cl1.printf();
+    cl1.print();
 
     number n; // khai báo biến n kiểu int
     cout << "N = ";

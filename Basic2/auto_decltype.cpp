@@ -17,6 +17,5 @@ int main()
 
     int i_value;
     decltype(i_value) what_is_this = 5;
-
-    cout << typeid(what_is_this).name() << endl; // int
+    cout << typeid(what_is_this).name() << endl;
 }
