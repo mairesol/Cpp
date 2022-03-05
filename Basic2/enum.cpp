@@ -1,60 +1,60 @@
-// #include <iostream>
-// using namespace std;
+#include <iostream>
+using namespace std;
 
 // EXAMPLE 1: Thong tin san pham
-// enum ItemTypes
-// {
-//     LAPTOP,
-//     DESKTOP,
-//     MOBILE,
-//     NETWORK
-// };
+enum ItemTypes
+{
+    LAPTOP,
+    DESKTOP,
+    MOBILE,
+    NETWORK
+};
 
-// void showAllLaptop()
-// {
-//     cout << "Laptop Information\n";
-// }
+void showAllLaptop()
+{
+    cout << "Laptop Information\n";
+}
 
-// void showAllDesktop()
-// {
-//     cout << "Desktop Information\n";
-// }
+void showAllDesktop()
+{
+    cout << "Desktop Information\n";
+}
 
-// void showAllMobile()
-// {
-//     cout << "Mobile Information\n";
-// }
+void showAllMobile()
+{
+    cout << "Mobile Information\n";
+}
 
-// void showAllNetworkItem()
-// {
-//     cout << "Network Item Information\n";
-// }
+void showAllNetworkItem()
+{
+    cout << "Network Item Information\n";
+}
 
-// void showProducts(ItemTypes type)
-// {
+void showProducts(ItemTypes type)
+{
 
-//     switch (type)
-//     {
-//     case LAPTOP:
-//         showAllLaptop();
-//         break;
+    switch (type)
+    {
+    case LAPTOP:
+        showAllLaptop();
+        break;
 
-//     case DESKTOP:
-//         showAllDesktop();
-//         break;
+    case DESKTOP:
+        showAllDesktop();
+        break;
 
-//     case MOBILE:
-//         showAllMobile();
-//         break;
+    case MOBILE:
+        showAllMobile();
+        break;
 
-//     case NETWORK:
-//         showAllNetworkItem();
-//         break;
+    case NETWORK:
+        showAllNetworkItem();
+        break;
 
-//     default:
-//         break;
-//     }
-// }
+    default:
+        break;
+    }
+}
 
 // EXAMPLE 2: Trang thai cua boss
 // enum BossState
@@ -120,8 +120,8 @@
 int main()
 {
     // example 1
-    //     ItemTypes type = MOBILE;
-    //     showProducts(type);
+    ItemTypes type = MOBILE;
+    showProducts(type);
 
     // example 3
     // if (initialize() == false) {

@@ -15,7 +15,7 @@ void Swap(int &a, int &b)
     b = a - b;
     a = a - b;
 }
-int add(int a, int b)
+int add(int a = 0, int b = 0)
 {
     return (a + b);
 }

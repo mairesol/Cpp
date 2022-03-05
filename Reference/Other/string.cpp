@@ -363,8 +363,8 @@ int main()
     str.append("here: ");                     // "here: "
     str.append(10u, '.');                     // ".........."
     str.append(str3.begin() + 8, str3.end()); // " and then 5 more"
-    str.append<int>(5, 0x2E);                 // "....."
-                                              // Writing 10 dots here: .......... and then 5 more.....
+    str.append(5, 0x2E);                      // "....."
+    // Writing 10 dots here: .......... and then 5 more.....
 
     std::string str;
     std::string base = "The quick brown fox jumps over a lazy dog.";
@@ -384,7 +384,7 @@ int main()
     str.assign(10, '*');
     std::cout << str << '\n';
 
-    str.assign<int>(10, 0x2D);
+    str.assign(10, 0x2D);
     std::cout << str << '\n';
 
     str.assign(base.begin() + 16, base.end() - 12);
