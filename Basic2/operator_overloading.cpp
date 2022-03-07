@@ -7,10 +7,10 @@ private:
     int real, imag;
 
 public:
-    Complex(int r = 0, int i = 0)
+    Complex(int real = 0, int imag = 0)
     {
-        real = r;
-        imag = i;
+        this->real = real;
+        this->imag = imag;
     }
     void print() { cout << real << " + i" << imag << '\n'; }
     friend Complex operator+(Complex const &, Complex const &);
@@ -21,47 +21,56 @@ Complex operator+(Complex const &c1, Complex const &c2)
     return Complex(c1.real + c2.real, c1.imag + c2.imag);
 }
 
-struct PS
+class Fraction
 {
-    int tu, mau;
-};
+private:
+    int num, den;
 
-PS operator+(PS p1, PS p2)
-{
-    PS p;
-    p.tu = p1.tu * p2.mau + p2.tu * p1.mau;
-    p.mau = p1.mau * p2.mau;
-    return p;
-}
-PS operator-(PS p1, PS p2)
-{
-    PS p;
-    p.tu = p1.tu * p2.mau - p2.tu * p1.mau;
-    p.mau = p1.mau * p2.mau;
-    return p;
-}
-PS operator*(PS p1, PS p2)
-{
-    PS p;
-    p.tu = p1.tu * p2.tu;
-    p.mau = p1.mau * p2.mau;
-    return p;
-}
-PS operator/(PS p1, PS p2)
-{
-    PS p;
-    p.tu = p1.tu * p2.mau;
-    p.mau = p1.mau * p2.tu;
-    return p;
-}
+public:
+    Fraction(int num = 0, int den = 1)
+    {
+        this->num = num;
+        this->den = den;
+    }
+
+    Fraction operator+(Fraction b)
+    {
+        Fraction c;
+        c.num = this->num * b.den + this->den * b.num;
+        c.den = this->den * b.den;
+        return c;
+    }
+    friend Fraction operator-(Fraction a, Fraction b)
+    {
+        Fraction c;
+        c.num = a.num * b.den - a.den * b.num;
+        c.den = a.den * b.den;
+        return c;
+    }
+    friend istream &operator>>(istream &is, Fraction &obj)
+    {
+        cout << "Nhap tu so: ";
+        is >> obj.num;
+        cout << "Nhap mau so: ";
+        is >> obj.den;
+        return is;
+    }
+
+    friend ostream &operator<<(ostream &os, Fraction obj)
+    {
+        os << obj.num << "/" << obj.den << endl;
+        return os;
+    }
+};
 
 int main()
 {
     Complex c1(10, 5), c2(2, 4);
     Complex c3 = c1 + c2;
     c3.print();
-    PS f1 = {3, 2}, f2 = {4, 5};
-    PS f3 = f1 + f2;
-    cout << f3.tu << " / " << f3.mau;
+
+    Fraction f1 = {3, 2}, f2 = {4, 5};
+    Fraction f3 = f1 + f2;
+    cout << f3;
     return 0;
 }

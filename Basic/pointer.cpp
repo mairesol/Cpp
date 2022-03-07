@@ -56,6 +56,20 @@ void output(int **matrix, int row, int col)
     }
 }
 
+int *soNgauNhien()
+{
+    static int r[10];
+
+    srand((unsigned)time(NULL));
+    for (int i = 0; i < 10; ++i)
+    {
+        r[i] = rand();
+        cout << r[i] << endl;
+    }
+
+    return r;
+}
+
 int main()
 {
     /*
@@ -135,5 +149,14 @@ int main()
     // q->numerator = 2;
     // q->denominator = 3;
     // cout << x.numerator << "/" << x.denominator << endl;
+
+    int *p;
+
+    p = soNgauNhien();
+    for (int i = 0; i < 10; i++)
+    {
+        cout << "Gia tri cua *(p + " << i << ") : ";
+        cout << *(p + i) << endl;
+    }
     return 0;
 }
