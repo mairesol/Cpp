@@ -35,7 +35,7 @@ public:
     int accno;
     string name;
     static int count;
-    Account(int accno, string name)
+    Account(int accno = 0, string name = "")
     {
         this->accno = accno;
         this->name = name;

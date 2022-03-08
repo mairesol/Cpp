@@ -10,12 +10,25 @@ private:
     float salary;
 
 public:
+    Employee()
+    {
+        this->id = 0;
+        this->name = "";
+        this->salary = 0;
+    }
     Employee(int id = 0, string name = "", float salary = 0)
     {
         this->id = id;
         this->name = name;
         this->salary = salary;
     }
+    Employee(const Employee &A)
+    {
+        this->id = A.id;
+        this->name = A.name;
+        this->salary = A.salary;
+    }
+
     ~Employee()
     {
         this->id = 0;

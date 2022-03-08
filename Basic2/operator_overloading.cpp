@@ -33,14 +33,15 @@ public:
         this->den = den;
     }
 
-    Fraction operator+(Fraction b)
+    Fraction operator+(const Fraction &b)
     {
         Fraction c;
         c.num = this->num * b.den + this->den * b.num;
         c.den = this->den * b.den;
         return c;
     }
-    friend Fraction operator-(Fraction a, Fraction b)
+
+    friend Fraction operator-(const Fraction &a, const Fraction &b)
     {
         Fraction c;
         c.num = a.num * b.den - a.den * b.num;
@@ -56,9 +57,14 @@ public:
         return is;
     }
 
-    friend ostream &operator<<(ostream &os, Fraction obj)
+    friend ostream &operator<<(ostream &os, Fraction &obj)
     {
-        os << obj.num << "/" << obj.den << endl;
+        if (obj.num == 0)
+            os << 0;
+        else if (obj.den == 1)
+            os << obj.num;
+        else
+            os << obj.num << "/" << obj.den << endl;
         return os;
     }
 };
