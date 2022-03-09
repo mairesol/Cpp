@@ -45,8 +45,7 @@ int main()
             A += 0.00004;
             B += 0.00002;
         }
-        Sleep(2000);
-        system("cls");
+        Sleep(30000);
     }
     return 0;
 }
