@@ -31,9 +31,11 @@ double Room::calculateVolume()
 
 class Account
 {
-public:
+private:
     int accno;
     string name;
+
+public:
     static int count;
     Account(int accno = 0, string name = "")
     {
