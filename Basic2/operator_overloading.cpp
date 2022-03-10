@@ -67,7 +67,7 @@ public:
         c.den = a.den * b.den;
         return c;
     }
-    friend istream &operator>>(istream &is, Fraction &obj)
+    friend istream &operator>>(istream &is, const Fraction &obj)
     {
         cout << "Enter numerator: ";
         is >> obj.num;

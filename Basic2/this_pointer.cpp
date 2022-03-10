@@ -17,11 +17,7 @@ public:
         this->height = height;
     }
 
-    double Volume()
-    {
-        return length * width * height;
-    }
-
+    double Volume();
     int Compare(Box box)
     {
         if (this->Volume() > box.Volume())
@@ -33,6 +29,10 @@ public:
             return -1;
     }
 };
+double Box::Volume()
+{
+    return this->length * this->width * this->height;
+}
 
 int main(void)
 {
