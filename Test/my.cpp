@@ -1,24 +1,37 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-int chocolateFeast(int n, int c, int m)
+class Fraction
 {
-    int ans = 0;
-    int choco = n / c, wrap, remain = 0;
-    do
+private:
+    int num, den;
+    int tinh1()
     {
-        ans += choco;
-        wrap = choco;
-        choco = (wrap + remain) / m;
-        remain = wrap - choco * m;
-    } while (choco != 0);
-    return ans;
+        return num + den;
+    }
+
+public:
+    Fraction(int a, int b)
+    {
+        num = a;
+        den = b;
+    }
+    ~Fraction()
+    {
+    }
+    int tinh2();
+};
+
+int Fraction::tinh2()
+{
+    cout << tinh1();
+    cout << num;
+    return this->tinh1() + num;
 }
 
 int main()
 {
-    int n, c, m;
-    cin >> n >> c >> m;
-    cout << chocolateFeast(n, c, m);
+    Fraction a(2, 3);
+    cout << a.tinh2();
     return 0;
 }
