@@ -12,32 +12,13 @@ public:
         this->real = real;
         this->imag = imag;
     }
+    void print() { cout << real << " + i" << imag << '\n'; }
     friend Complex operator+(Complex const &, Complex const &);
-    friend istream &operator>>(istream &, Complex const &);
-    friend ostream &operator<<(ostream &, Complex const &);
 };
+
 Complex operator+(Complex const &c1, Complex const &c2)
 {
     return Complex(c1.real + c2.real, c1.imag + c2.imag);
-}
-istream &operator>>(istream &is, Complex const &obj)
-{
-    cout << "Enter real number: ";
-    is >> obj.real;
-    cout << "Enter imaginary number: ";
-    is >> obj.imag;
-    return is;
-}
-
-ostream &operator<<(ostream &os, Complex const &obj)
-{
-    if (obj.real == 0)
-        os << obj.imag << "i" << endl;
-    else if (obj.imag == 0)
-        os << obj.real << endl;
-    else
-        os << obj.real << " + " << obj.imag << "i" << endl;
-    return os;
 }
 
 class Fraction
@@ -69,18 +50,19 @@ public:
     }
     friend istream &operator>>(istream &is, const Fraction &obj)
     {
-        cout << "Enter numerator: ";
+        cout << "Nhap tu so: ";
         is >> obj.num;
-        cout << "Enter donoinator: ";
+        cout << "Nhap mau so: ";
         is >> obj.den;
         return is;
     }
+
     friend ostream &operator<<(ostream &os, Fraction &obj)
     {
         if (obj.num == 0)
-            os << 0 << endl;
+            os << 0;
         else if (obj.den == 1)
-            os << obj.num << endl;
+            os << obj.num;
         else
             os << obj.num << "/" << obj.den << endl;
         return os;
@@ -91,7 +73,7 @@ int main()
 {
     Complex c1(10, 5), c2(2, 4);
     Complex c3 = c1 + c2;
-    cout << c3;
+    c3.print();
 
     Fraction f1 = {3, 2}, f2 = {4, 5};
     Fraction f3 = f1 + f2;
