@@ -5,7 +5,7 @@ using namespace std;
 struct node
 {
     int data;
-    struct node *pNext;
+    node *pNext;
 };
 typedef node NODE;
 struct List
@@ -15,14 +15,13 @@ struct List
 };
 typedef List LIST;
 
-void Init(LIST &);
-int IsEmpty(LIST);
-NODE *GetNode(int data);
-void AddHead(LIST, NODE *);
-void AddTail(LIST, NODE *);
-
-void Input(LIST &);
-void Output(LIST);
+void init(LIST &);
+int isEmpty(LIST);
+NODE *getNode(int);
+void addHead(LIST, NODE *);
+void addTail(LIST, NODE *);
+void input(LIST &);
+void output(LIST);
 int main()
 {
 
@@ -40,7 +39,7 @@ int isEmpty(LIST l)
         return 1;
     return 0;
 }
-NODE *GetNode(int data)
+NODE *getNode(int data)
 {
     NODE *p = new NODE;
     if (p == NULL)
@@ -49,12 +48,11 @@ NODE *GetNode(int data)
     p->pNext = NULL;
     return p;
 }
-void AddHead(LIST l, NODE *p)
+void addHead(LIST l, NODE *p)
 {
-    if (l.pHead == NULL)
+    if (isEmpty(l))
     {
-        l.pHead == p;
-        l.pTail == p;
+        l.pHead = l.pTail = p;
     }
     else
     {
@@ -62,12 +60,11 @@ void AddHead(LIST l, NODE *p)
         l.pHead = p;
     }
 }
-void AddTail(LIST l, NODE *p)
+void addTail(LIST l, NODE *p)
 {
-    if (l.pHead == NULL)
+    if (isEmpty(l))
     {
-        l.pHead == p;
-        l.pTail == p;
+        l.pHead = l.pTail = p;
     }
     else
     {
@@ -76,7 +73,7 @@ void AddTail(LIST l, NODE *p)
     }
 }
 
-void Input(LIST &l)
+void input(LIST &l)
 {
     int n;
     cin >> n;
@@ -84,12 +81,12 @@ void Input(LIST &l)
     {
         int data;
         cin >> data;
-        NODE *p = GetNode(data);
+        NODE *p = getNode(data);
         if (p != NULL)
-            AddHead(l, p);
+            addHead(l, p);
     }
 }
-void Output(LIST l)
+void output(LIST l)
 {
     NODE *p = l.pHead;
     while (p != NULL)

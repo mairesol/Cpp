@@ -11,143 +11,79 @@ int gcd(int a, int b)
     return gcd(b, a % b);
 }
 
-class PS
+class Fraction
 {
 public:
-    int tu, mau;
-    PS(int tu = 0, int mau = 1)
+    int num, den;
+    Fraction(int num = 0, int den = 1)
     {
-        this->tu = tu;
-        this->mau = mau;
+        this->num = num;
+        this->den = den;
     }
-    ~PS()
+    ~Fraction()
     {
-        this->tu = 0;
-        this->mau = 0;
+        this->num = 0;
+        this->den = 0;
     }
-    void input()
+    void input();
+    void simplify();
+    void standard();
+    void output();
+    Fraction operator+(Fraction p)
     {
-        cin >> tu >> mau;
-    }
-    void simplify()
-    {
-        while (gcd(tu, mau) != 1)
-        {
-            int temp = tu;
-            tu /= gcd(tu, mau);
-            mau /= gcd(temp, mau);
-        }
-    }
-    void output()
-    {
-        this->simplify();
-        if (tu == 0)
-            cout << 0;
-        else if (mau == 0)
-            cout << tu;
-        else
-            cout << tu << "/" << mau;
-    }
-    PS operator+(PS p)
-    {
-        PS ans;
-        ans.tu = tu * p.mau + p.tu * mau;
-        ans.mau = mau * p.mau;
-        ans.simplify();
+        Fraction ans;
+        ans.num = num * p.den + p.num * den;
+        ans.den = den * p.den;
+        ans.standard();
         return ans;
     }
-    PS operator-(PS p)
+    Fraction operator-(Fraction p)
     {
-        PS ans;
-        ans.tu = tu * p.mau - p.tu * mau;
-        ans.mau = mau * p.mau;
-        ans.simplify();
+        Fraction ans;
+        ans.num = num * p.den - p.num * den;
+        ans.den = den * p.den;
+        ans.standard();
         return ans;
     }
-    PS operator*(PS p)
+    Fraction operator*(Fraction p)
     {
-        PS ans;
-        ans.tu = tu * p.tu;
-        ans.mau = mau * p.mau;
-        ans.simplify();
+        Fraction ans;
+        ans.num = num * p.num;
+        ans.den = den * p.den;
+        ans.standard();
         return ans;
     }
-    PS operator/(PS p)
+    Fraction operator/(Fraction p)
     {
-        PS ans;
-        ans.tu = tu * p.mau;
-        ans.mau = mau * p.tu;
-        ans.simplify();
+        Fraction ans;
+        ans.num = num * p.den;
+        ans.den = den * p.num;
+        ans.standard();
         return ans;
     }
-    bool operator<(PS p)
+    bool operator<(Fraction p)
     {
-        return (tu * p.mau < p.tu * mau);
+        return (num * p.den < p.num * den);
     }
-    bool operator>(PS p)
+    bool operator>(Fraction p)
     {
-        return (tu * p.mau > p.tu * mau);
+        return (num * p.den > p.num * den);
     }
 };
 
-PS max(PS p1, PS p2)
-{
-    PS ans;
-    if (p1.tu * p2.mau > p2.tu * p1.mau)
-    {
-        ans.tu = p1.tu;
-        ans.mau = p1.mau;
-    }
-    else
-    {
-        ans.tu = p2.tu;
-        ans.mau = p2.mau;
-    }
-    ans.simplify();
-    return ans;
-}
-void swap(PS &p1, PS &p2)
-{
-    PS temp = p1;
-    p1 = p2;
-    p2 = temp;
-}
+void swap(Fraction &, Fraction &);
+Fraction max(Fraction, Fraction);
+Fraction max_element(Fraction *, int);
 
-void input(PS *arr, int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        cout << "Nhap phan so thu " << i + 1 << ": ";
-        arr->input();
-        arr++;
-    }
-}
-PS max(PS *arr, int n)
-{
-    PS ans = *arr;
-    for (int i = 0; i < n; i++)
-    {
-        ans = max(ans, *arr);
-        arr++;
-    }
-    return ans;
-}
-void output(PS *arr, int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        arr->output();
-        arr++;
-        cout << " ";
-    }
-}
+void input(Fraction *, int);
+void output(Fraction *, int);
 
 int main()
 {
     // Cac chuc nang
-    PS p, p1, p2;
-    PS ans;
-    PS *arr;
+    Fraction p, p1, p2;
+    Fraction ans;
+    Fraction *arr;
     bool flag = true;
 
     while (flag)
@@ -197,9 +133,9 @@ int main()
             int n;
             cout << "Nhap n: ";
             cin >> n;
-            arr = new PS[n];
+            arr = new Fraction[n];
             input(arr, n);
-            ans = max(arr, n);
+            ans = max_element(arr, n);
             cout << "Phan so lon nhat: ";
             ans.output();
             cout << endl;
@@ -255,4 +191,90 @@ int menu()
     cout << "\n Lua chon cua ban: ";
     cin >> choice;
     return choice;
+}
+void Fraction::input()
+{
+    cin >> num >> den;
+}
+void Fraction::simplify()
+{
+    while (gcd(num, den) != 1)
+    {
+        int temp = num;
+        num /= gcd(num, den);
+        den /= gcd(temp, den);
+    }
+}
+void Fraction::standard()
+{
+    this->simplify();
+    if ((num < 0 && den < 0) || (num > 0 && den < 0))
+    {
+        num = -num;
+        den = -den;
+    }
+}
+void Fraction::output()
+{
+    this->standard();
+    if (num == 0)
+        cout << 0;
+    else if (den == 0)
+        cout << num;
+    else
+        cout << num << "/" << den;
+}
+
+void swap(Fraction &p1, Fraction &p2)
+{
+    Fraction temp = p1;
+    p1 = p2;
+    p2 = temp;
+}
+
+Fraction max(Fraction p1, Fraction p2)
+{
+    Fraction ans;
+    if (p1.num * p2.den > p2.num * p1.den)
+    {
+        ans.num = p1.num;
+        ans.den = p1.den;
+    }
+    else
+    {
+        ans.num = p2.num;
+        ans.den = p2.den;
+    }
+    ans.standard();
+    return ans;
+}
+Fraction max_element(Fraction *arr, int n)
+{
+    Fraction ans = *arr;
+    for (int i = 0; i < n; i++)
+    {
+        ans = max(ans, *arr);
+        arr++;
+    }
+    ans.standard();
+    return ans;
+}
+
+void input(Fraction *arr, int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Nhap phan so thu " << i + 1 << ": ";
+        arr->input();
+        arr++;
+    }
+}
+void output(Fraction *arr, int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        arr->output();
+        arr++;
+        cout << " ";
+    }
 }
