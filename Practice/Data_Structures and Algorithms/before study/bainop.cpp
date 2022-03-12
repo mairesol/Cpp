@@ -11,9 +11,20 @@ int gcd(int a, int b)
     return gcd(b, a % b);
 }
 
-struct PS
+class PS
 {
+public:
     int tu, mau;
+    PS(int tu = 0, int mau = 1)
+    {
+        this->tu = tu;
+        this->mau = mau;
+    }
+    ~PS()
+    {
+        this->tu = 0;
+        this->mau = 0;
+    }
     void input()
     {
         cin >> tu >> mau;

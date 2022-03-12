@@ -66,7 +66,7 @@ int main()
 int menu()
 {
     int choice;
-    if (menu_yet == false)
+    if (::menu_yet == false)
     {
         cout << "\n ================================";
         cout << "\n Vui long chon chuc nang tuong ung";
