@@ -109,7 +109,7 @@ void Fraction::output()
     this->standard();
     if (num == 0)
         cout << 0;
-    else if (den == 0)
+    else if (den == 1)
         cout << num;
     else
         cout << num << "/" << den;
