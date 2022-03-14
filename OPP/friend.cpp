@@ -14,11 +14,11 @@ public:
     }
     friend int printLength(Box);
     /*
-    Hàm không nằm trong phạm vi của lớp mà nó đã được khai báo là friend.
-    Nó không thể được gọi bằng cách sử dụng đối tượng vì nó không nằm trong phạm vi của lớp đó.
-    Nó có thể được gọi như một hàm bình thường mà không cần sử dụng đối tượng.
-    Nó không thể truy cập trực tiếp vào tên thành viên và phải sử dụng tên đối tượng và dấu chấm toán tử với tên thành viên.
-    Nó có thể được khai báo trong phần private hoặc public.
+    Hàm bạn là một hàm có thể truy cập đến các thành viên private (gồm cả các biến thành viên và các hàm thành viên) của một class,
+    như thể nó là một thành viên của class đó. Ngoại trừ đặc điểm ở trên ra thì hàm bạn hoàn toàn giống với hàm bình thường.
+    Một hàm bạn có thể chỉ là một hàm bình thường, hoặc là một hàm thành viên của một class khác. Để khai báo một hàm bạn,
+    chỉ cần sử dụng từ khóa friend ở trước phần nguyên mẫu (prototype) của hàm mà bạn muốn nó trở thành bạn của class.
+    Có thể khai báo hàm bạn bên trong phần public (công khai) hoặc phần private (riêng tư) của class đều được.
     */
 };
 

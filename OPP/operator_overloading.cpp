@@ -4,40 +4,30 @@ using namespace std;
 class Complex
 {
 private:
-    int real, imag;
+    double real, imag;
 
 public:
-    Complex(int real = 0, int imag = 0)
+    Complex(double real = 0, double imag = 0)
     {
         this->real = real;
         this->imag = imag;
     }
-    friend Complex operator+(Complex const &, Complex const &);
-    friend istream &operator>>(istream &is, Complex &obj)
+    ~Complex()
     {
-        cout << "Nhap so thuc: ";
-        is >> obj.real;
-        cout << "Nhap so ao: ";
-        is >> obj.imag;
-        return is;
+        this->real = 0;
+        this->imag = 0;
     }
-
-    friend ostream &operator<<(ostream &os, const Complex &obj)
-    {
-        if (obj.real == 0)
-            os << obj.imag << "i";
-        else if (obj.imag == 0)
-            os << obj.real;
-        else
-            os << obj.real << " + " << obj.imag << "i";
-        return os;
-    }
+    Complex operator-();
+    void operator=(Complex &);
+    void operator+=(Complex &);
+    void operator-=(Complex &);
+    friend Complex operator+(Complex &, Complex &);
+    friend Complex operator-(Complex &, Complex &);
+    friend Complex operator*(Complex &, Complex &);
+    friend Complex operator/(Complex &, Complex &);
+    friend istream &operator>>(istream &is, Complex &);
+    friend ostream &operator<<(ostream &os, const Complex &);
 };
-
-Complex operator+(Complex const &c1, Complex const &c2)
-{
-    return Complex(c1.real + c2.real, c1.imag + c2.imag);
-}
 
 class Fraction
 {
@@ -50,45 +40,21 @@ public:
         this->num = num;
         this->den = den;
     }
-
-    Fraction operator+(const Fraction &b)
+    ~Fraction()
     {
-        Fraction c;
-        c.num = this->num * b.den + this->den * b.num;
-        c.den = this->den * b.den;
-        return c;
-    }
-    operator float() const
-    {
-        return float(num) / float(den);
+        this->num = 0;
+        this->den = 1;
     }
 
-    friend Fraction operator-(const Fraction &a, const Fraction &b)
-    {
-        Fraction c;
-        c.num = a.num * b.den - a.den * b.num;
-        c.den = a.den * b.den;
-        return c;
-    }
-    friend istream &operator>>(istream &is, Fraction &obj)
-    {
-        cout << "Nhap tu so: ";
-        is >> obj.num;
-        cout << "Nhap mau so: ";
-        is >> obj.den;
-        return is;
-    }
-
-    friend ostream &operator<<(ostream &os, const Fraction &obj)
-    {
-        if (obj.num == 0)
-            os << 0;
-        else if (obj.den == 1)
-            os << obj.num;
-        else
-            os << obj.num << "/" << obj.den;
-        return os;
-    }
+    friend Fraction operator+(Fraction &, Fraction &);
+    friend Fraction operator-(Fraction &, Fraction &);
+    friend Fraction operator*(Fraction &, Fraction &);
+    friend Fraction operator/(Fraction &, Fraction &);
+    operator float();
+    friend istream &operator>>(istream &, Fraction &);
+    friend ostream &operator<<(ostream &, const Fraction &);
+    bool operator<(Fraction &);
+    bool operator>(Fraction &);
 };
 
 class Time
@@ -108,43 +74,10 @@ public:
         this->hour = 0;
         this->minute = 0;
     }
-    friend istream &operator>>(istream &is, Time &obj)
-    {
-        cout << "Nhap gio: ";
-        is >> obj.hour;
-        cout << "Nhap phut: ";
-        is >> obj.minute;
-        return is;
-    }
-    friend ostream &operator<<(ostream &os, const Time &obj)
-    {
-        os << obj.hour << ":" << obj.minute;
-        return os;
-    }
-
-    Time operator++()
-    {
-        ++minute;
-        if (minute >= 60)
-        {
-            ++hour;
-            minute -= 60;
-        }
-        return Time(hour, minute);
-    }
-
-    Time operator++(int)
-    {
-        Time T(hour, minute);
-
-        minute++;
-        if (minute >= 60)
-        {
-            hour++;
-            minute -= 60;
-        }
-        return T;
-    }
+    Time operator++();
+    Time operator++(int);
+    friend istream &operator>>(istream &, Time &);
+    friend ostream &operator<<(ostream &, const Time &);
 };
 int main()
 {
@@ -159,4 +92,144 @@ int main()
     Time t1(19, 30);
     cout << t1++ << " " << ++t1;
     return 0;
+}
+Complex Complex::operator-()
+{
+    return Complex(-real, -imag);
+};
+void Complex::operator=(Complex &c)
+{
+    this->real = c.real;
+    this->imag = c.imag;
+}
+void Complex::operator+=(Complex &c)
+{
+    this->real += c.real;
+    this->imag += c.imag;
+}
+void Complex::operator-=(Complex &c)
+{
+    this->real -= c.real;
+    this->imag -= c.imag;
+}
+Complex operator+(Complex &c1, Complex &c2)
+{
+    return Complex(c1.real + c2.real, c1.imag + c2.imag);
+}
+Complex operator-(Complex &c1, Complex &c2)
+{
+    return Complex(c1.real - c2.real, c1.imag - c2.imag);
+}
+
+Complex operator*(Complex &c1, Complex &c2)
+{
+    return Complex(c1.real * c2.real - c1.imag * c2.imag, c1.real * c2.imag + c1.imag * c2.real);
+}
+Complex operator/(Complex &c1, Complex &c2)
+{
+    return Complex((c1.real * c2.real + c1.imag * c2.imag) / (c2.real * c2.real + c2.imag * c2.imag), (c1.imag * c2.real - c1.real * c2.imag) / (c2.real * c2.real + c2.imag * c2.imag));
+}
+
+istream &operator>>(istream &is, Complex &obj)
+{
+    cout << "Nhap so thuc: ";
+    is >> obj.real;
+    cout << "Nhap so ao: ";
+    is >> obj.imag;
+    return is;
+}
+ostream &operator<<(ostream &os, const Complex &obj)
+{
+    if (obj.real == 0)
+        os << obj.imag << "i";
+    else if (obj.imag == 0)
+        os << obj.real;
+    else
+        os << obj.real << " + " << obj.imag << "i";
+    return os;
+}
+
+Fraction operator+(Fraction &b1, Fraction &b2)
+{
+    return Fraction(b1.num * b2.den + b2.num * b1.den, b1.den * b2.den);
+}
+Fraction operator-(Fraction &b1, Fraction &b2)
+{
+    return Fraction(b1.num * b2.den - b2.num * b1.den, b1.den * b2.den);
+}
+Fraction operator*(Fraction &b1, Fraction &b2)
+{
+    return Fraction(b1.num * b2.num, b1.den * b2.den);
+}
+Fraction operator/(Fraction &b1, Fraction &b2)
+{
+    return Fraction(b1.num * b2.den, b1.den * b2.num);
+}
+Fraction::operator float()
+{
+    return float(num) / float(den);
+}
+bool Fraction::operator<(Fraction &p)
+{
+    return (num * p.den < p.num * den);
+}
+bool Fraction::operator>(Fraction &p)
+{
+    return (num * p.den > p.num * den);
+}
+istream &operator>>(istream &is, Fraction &obj)
+{
+    cout << "Nhap tu so: ";
+    is >> obj.num;
+    cout << "Nhap mau so: ";
+    is >> obj.den;
+    return is;
+}
+
+ostream &operator<<(ostream &os, const Fraction &obj)
+{
+    if (obj.num == 0)
+        os << 0;
+    else if (obj.den == 1)
+        os << obj.num;
+    else
+        os << obj.num << "/" << obj.den;
+    return os;
+}
+
+Time Time::operator++()
+{
+    ++minute;
+    if (minute >= 60)
+    {
+        ++hour;
+        minute -= 60;
+    }
+    return Time(hour, minute);
+}
+
+Time Time ::operator++(int)
+{
+    Time T(hour, minute);
+
+    minute++;
+    if (minute >= 60)
+    {
+        hour++;
+        minute -= 60;
+    }
+    return T;
+}
+istream &operator>>(istream &is, Time &obj)
+{
+    cout << "Nhap gio: ";
+    is >> obj.hour;
+    cout << "Nhap phut: ";
+    is >> obj.minute;
+    return is;
+}
+ostream &operator<<(ostream &os, const Time &obj)
+{
+    os << obj.hour << ":" << obj.minute;
+    return os;
 }

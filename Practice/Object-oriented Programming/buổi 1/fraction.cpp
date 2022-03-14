@@ -13,8 +13,9 @@ int gcd(int a, int b)
 
 class Fraction
 {
-public:
     int num, den;
+
+public:
     Fraction(int num = 0, int den = 1)
     {
         this->num = num;
@@ -23,56 +24,25 @@ public:
     ~Fraction()
     {
         this->num = 0;
-        this->den = 0;
+        this->den = 1;
     }
     void input();
     void simplify();
     void standard();
     void output();
-    Fraction operator+(Fraction p)
-    {
-        Fraction ans;
-        ans.num = num * p.den + p.num * den;
-        ans.den = den * p.den;
-        ans.standard();
-        return ans;
-    }
-    Fraction operator-(Fraction p)
-    {
-        Fraction ans;
-        ans.num = num * p.den - p.num * den;
-        ans.den = den * p.den;
-        ans.standard();
-        return ans;
-    }
-    Fraction operator*(Fraction p)
-    {
-        Fraction ans;
-        ans.num = num * p.num;
-        ans.den = den * p.den;
-        ans.standard();
-        return ans;
-    }
-    Fraction operator/(Fraction p)
-    {
-        Fraction ans;
-        ans.num = num * p.den;
-        ans.den = den * p.num;
-        ans.standard();
-        return ans;
-    }
-    bool operator<(Fraction p)
-    {
-        return (num * p.den < p.num * den);
-    }
-    bool operator>(Fraction p)
-    {
-        return (num * p.den > p.num * den);
-    }
+    friend Fraction operator+(Fraction &, Fraction &);
+    friend Fraction operator-(Fraction &, Fraction &);
+    friend Fraction operator*(Fraction &, Fraction &);
+    friend Fraction operator/(Fraction &, Fraction &);
+    operator float();
+    friend istream &operator>>(istream &, Fraction &);
+    friend ostream &operator<<(ostream &, const Fraction &);
+    bool operator<(Fraction &);
+    bool operator>(Fraction &);
+    friend Fraction max(Fraction, Fraction);
 };
 
 void swap(Fraction &, Fraction &);
-Fraction max(Fraction, Fraction);
 Fraction max_element(Fraction *, int);
 
 void input(Fraction *, int);
@@ -82,10 +52,7 @@ int main()
 {
     return 0;
 }
-void Fraction::input()
-{
-    cin >> num >> den;
-}
+
 void Fraction::simplify()
 {
     while (gcd(num, den) != 1)
@@ -104,17 +71,53 @@ void Fraction::standard()
         den = -den;
     }
 }
-void Fraction::output()
+Fraction operator+(Fraction &b1, Fraction &b2)
 {
-    this->standard();
-    if (num == 0)
-        cout << 0;
-    else if (den == 1)
-        cout << num;
-    else
-        cout << num << "/" << den;
+    return Fraction(b1.num * b2.den + b2.num * b1.den, b1.den * b2.den);
+}
+Fraction operator-(Fraction &b1, Fraction &b2)
+{
+    return Fraction(b1.num * b2.den - b2.num * b1.den, b1.den * b2.den);
+}
+Fraction operator*(Fraction &b1, Fraction &b2)
+{
+    return Fraction(b1.num * b2.num, b1.den * b2.den);
+}
+Fraction operator/(Fraction &b1, Fraction &b2)
+{
+    return Fraction(b1.num * b2.den, b1.den * b2.num);
+}
+Fraction::operator float()
+{
+    return float(num) / float(den);
+}
+bool Fraction::operator<(Fraction &p)
+{
+    return (num * p.den < p.num * den);
+}
+bool Fraction::operator>(Fraction &p)
+{
+    return (num * p.den > p.num * den);
+}
+istream &operator>>(istream &is, Fraction &obj)
+{
+    cout << "Nhap tu so: ";
+    is >> obj.num;
+    cout << "Nhap mau so: ";
+    is >> obj.den;
+    return is;
 }
 
+ostream &operator<<(ostream &os, const Fraction &obj)
+{
+    if (obj.num == 0)
+        os << 0;
+    else if (obj.den == 1)
+        os << obj.num;
+    else
+        os << obj.num << "/" << obj.den;
+    return os;
+}
 void swap(Fraction &p1, Fraction &p2)
 {
     Fraction temp = p1;
