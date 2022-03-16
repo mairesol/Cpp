@@ -79,6 +79,40 @@ public:
     friend istream &operator>>(istream &, Time &);
     friend ostream &operator<<(ostream &, const Time &);
 };
+
+class Array
+{
+private:
+    int *array;
+    int size;
+
+public:
+    Array(int size = 0, int element = 0)
+    {
+        this->size = size;
+        array = new int[size]{element};
+    }
+    Array(int *array = NULL)
+    {
+        this->array = array;
+    }
+    ~Array()
+    {
+        delete[] array;
+        array = NULL;
+    }
+    int &operator[](const int index)
+    {
+        if (index >= size || index < 0)
+            return array[size];
+        else
+            return array[index];
+    }
+    Array operator()(int *array)
+    {
+        return Array(array);
+    }
+};
 int main()
 {
     Complex c1(10, 5), c2(2, 4);
@@ -205,20 +239,15 @@ Time Time::operator++()
         ++hour;
         minute -= 60;
     }
-    return Time(hour, minute);
+    return *this;
 }
 
 Time Time ::operator++(int)
 {
-    Time T(hour, minute);
-
-    minute++;
-    if (minute >= 60)
-    {
-        hour++;
-        minute -= 60;
-    }
-    return T;
+    Time aux;
+    aux = *this;
+    ++(*this);
+    return aux;
 }
 istream &operator>>(istream &is, Time &obj)
 {

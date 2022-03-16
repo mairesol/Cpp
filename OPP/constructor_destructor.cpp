@@ -22,7 +22,7 @@ public:
         this->name = name;
         this->salary = salary;
     }
-    Employee(const Employee &A)
+    Employee(Employee &A)
     {
         this->id = A.id;
         this->name = A.name;
