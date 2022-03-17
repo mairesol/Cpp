@@ -12,7 +12,10 @@ Print the big integer.
 Convert an integer to a big integer.
 */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string.h>
+#include <string>
+#include <vector>
 
 using namespace std;
 

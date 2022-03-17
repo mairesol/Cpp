@@ -10,6 +10,7 @@ int gcd(int a, int b)
 
 class Fraction
 {
+private:
     int num, den;
 
 public:

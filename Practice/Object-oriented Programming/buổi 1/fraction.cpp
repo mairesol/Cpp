@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+
 using namespace std;
 
 bool menu_yet = false;
@@ -13,6 +14,7 @@ int gcd(int a, int b)
 
 class Fraction
 {
+private:
     int num, den;
 
 public:
@@ -39,7 +41,7 @@ public:
     friend ostream &operator<<(ostream &, const Fraction &);
     bool operator<(Fraction &);
     bool operator>(Fraction &);
-    friend Fraction max(Fraction, Fraction);
+    friend Fraction max(const Fraction &, const Fraction &);
 };
 
 void swap(Fraction &, Fraction &);
@@ -65,7 +67,7 @@ void Fraction::simplify()
 void Fraction::standard()
 {
     this->simplify();
-    if ((den < 0)
+    if (den < 0)
     {
         num = -num;
         den = -den;
