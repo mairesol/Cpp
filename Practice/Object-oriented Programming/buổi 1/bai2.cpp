@@ -1,9 +1,6 @@
 #include <iostream>
 using namespace std;
 
-bool menu_yet = false;
-int menu();
-
 int gcd(int a, int b)
 {
     if (b == 0)
@@ -28,34 +25,21 @@ public:
     }
     void simplify();
     void standard();
-    friend Fraction operator+(Fraction &, Fraction &);
-    friend Fraction operator-(Fraction &, Fraction &);
-    friend Fraction operator*(Fraction &, Fraction &);
-    friend Fraction operator/(Fraction &, Fraction &);
     friend istream &operator>>(istream &, Fraction &);
     friend ostream &operator<<(ostream &, Fraction &);
+    friend Fraction max(const Fraction &, const Fraction &);
 };
 
 int main()
 {
-    // Nhap vao hai phan so, tinh tong, hieu, tich, thuong cua chung roi xuat ket qua
+    // Nhap vao hai phan so, tim phan so lon nhat roi xuat ket qua
     Fraction f, f1, f2;
     cout << "Nhap phan so thu nhat: " << endl;
     cin >> f1;
     cout << "Nhap phan so thu hai: " << endl;
     cin >> f2;
-
-    cout << "Tong cua 2 phan so: ";
-    f = f1 + f2;
-    cout << f << endl;
-    cout << "Hieu cua 2 phan so: ";
-    f = f1 - f2;
-    cout << f << endl;
-    cout << "Tich cua 2 phan so: ";
-    f = f1 * f2;
-    cout << f << endl;
-    cout << "Thuong cua 2 phan so: ";
-    f = f1 / f2;
+    cout << "Phan so lon nhat: ";
+    f = max(f1, f2);
     cout << f << endl;
     return 0;
 }
@@ -78,22 +62,6 @@ void Fraction::standard()
         den = -den;
     }
 }
-Fraction operator+(Fraction &b1, Fraction &b2)
-{
-    return Fraction(b1.num * b2.den + b2.num * b1.den, b1.den * b2.den);
-}
-Fraction operator-(Fraction &b1, Fraction &b2)
-{
-    return Fraction(b1.num * b2.den - b2.num * b1.den, b1.den * b2.den);
-}
-Fraction operator*(Fraction &b1, Fraction &b2)
-{
-    return Fraction(b1.num * b2.num, b1.den * b2.den);
-}
-Fraction operator/(Fraction &b1, Fraction &b2)
-{
-    return Fraction(b1.num * b2.den, b1.den * b2.num);
-}
 istream &operator>>(istream &is, Fraction &obj)
 {
     cout << "Nhap tu so: ";
@@ -114,4 +82,10 @@ ostream &operator<<(ostream &os, Fraction &obj)
     else
         os << obj.num << "/" << obj.den;
     return os;
+}
+Fraction max(const Fraction &A, const Fraction &B)
+{
+    if (A.num * B.den > A.den * B.num)
+        return A;
+    return B;
 }
