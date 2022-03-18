@@ -1,97 +1,204 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
-struct node
+class Node
 {
+public:
     int data;
-    node *pNext;
+    Node *next;
+    Node(int d)
+    {
+        data = d;
+        next = NULL;
+    }
+    ~Node()
+    {
+        this->data = 0;
+        delete next;
+    }
 };
-typedef node NODE;
-struct List
-{
-    node *pHead;
-    node *pTail;
-};
-typedef List LIST;
 
-void init(LIST &);
-int isEmpty(LIST);
-NODE *getNode(int);
-void addHead(LIST, NODE *);
-void addTail(LIST, NODE *);
-void input(LIST &);
-void output(LIST);
+class List
+{
+public:
+    Node *head;
+    Node *tail;
+    List();
+    List(Node *h, Node *t);
+    ~List()
+    {
+        clear();
+    };
+    bool empty();
+    void insert_head(Node *);
+    void insert_tail(Node *);
+    void insert_after(Node *, Node *);
+    int erase_head();
+    int erase_after(Node *);
+    int find_and_erase_after(int);
+    Node *search(int);
+    void clear();
+    void selection_sort();
+
+    void input();
+    void output();
+};
 int main()
 {
-
+    List l;
+    l.input();
+    l.selection_sort();
+    l.output();
     return 0;
 }
 
-void init(LIST &l)
+List::List()
 {
-    l.pHead = NULL;
-    l.pTail = NULL;
+    head = tail = NULL;
 }
-int isEmpty(LIST l)
+List::List(Node *h, Node *t)
 {
-    if (l.pHead == NULL)
+    head = h;
+    tail = t;
+}
+
+bool List ::empty()
+{
+    return (head == NULL);
+}
+void List ::insert_head(Node *node)
+{
+    if (empty())
+        head = tail = node;
+    else
+    {
+        node->next = head;
+        head = node;
+    }
+}
+void List ::insert_tail(Node *node)
+{
+    if (empty())
+        head = tail = node;
+    else
+    {
+        tail->next = node;
+        tail = node;
+    }
+}
+void List ::insert_after(Node *benode, Node *node)
+{
+    if (benode == NULL)
+        insert_head(node);
+    else
+    {
+        node->next = benode->next;
+        benode->next = node;
+        if (tail == benode)
+            tail = node;
+    }
+}
+int List ::erase_head()
+{
+    if (empty())
+        return 0;
+    else
+    {
+        Node *node = head;
+        head = node->next;
+        delete node;
+        if (empty())
+            tail = NULL;
         return 1;
-    return 0;
-}
-NODE *getNode(int data)
-{
-    NODE *p = new NODE;
-    if (p == NULL)
-        return NULL;
-    p->data = data;
-    p->pNext = NULL;
-    return p;
-}
-void addHead(LIST l, NODE *p)
-{
-    if (isEmpty(l))
-    {
-        l.pHead = l.pTail = p;
     }
+}
+int List ::erase_after(Node *benode)
+{
+    if (benode == NULL)
+        return 0;
     else
     {
-        p->pNext = l.pHead;
-        l.pHead = p;
+        Node *node = benode->next;
+        if (node != NULL)
+        {
+            benode->next = node->next;
+            if (node == tail)
+                tail = benode;
+            delete node;
+        }
+        return 1;
     }
 }
-void addTail(LIST l, NODE *p)
+int List ::find_and_erase_after(int x)
 {
-    if (isEmpty(l))
+    Node *node = head, *benode = NULL;
+    while (node != NULL && node->data != x)
     {
-        l.pHead = l.pTail = p;
+        benode = node;
+        node = node->next;
     }
+    if (node == NULL)
+        return 0;
+    if (benode != NULL)
+        erase_after(benode);
     else
+        erase_head();
+    return 1;
+}
+Node *List ::search(int x)
+{
+    Node *node = head;
+    while (node != NULL && node->data != x)
+        node = node->next;
+    return node;
+}
+
+void List ::clear()
+{
+    Node *node;
+    while (!empty())
     {
-        l.pTail->pNext = p;
-        l.pTail = p;
+        node = head;
+        head = node->next;
+        delete node;
     }
 }
 
-void input(LIST &l)
+void List ::selection_sort()
+{
+    Node *min;
+    for (Node *p = head; p != tail; p = p->next)
+    {
+        min = p;
+        for (Node *q = p->next; q != NULL; q = q->next)
+        {
+            if (q->data < min->data)
+                min = q;
+            swap(p->data, min->data);
+        }
+    }
+}
+void List::input()
 {
     int n;
     cin >> n;
     for (int i = 0; i < n; i++)
     {
-        int data;
-        cin >> data;
-        NODE *p = getNode(data);
+        int x;
+        cin >> x;
+        Node *p = new Node(x);
         if (p != NULL)
-            addHead(l, p);
+            insert_tail(p);
     }
 }
-void output(LIST l)
+void List::output()
 {
-    NODE *p = l.pHead;
+    Node *p = head;
     while (p != NULL)
     {
         cout << p->data << " ";
-        p = p->pNext;
+        p = p->next;
     }
 }
