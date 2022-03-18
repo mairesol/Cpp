@@ -19,13 +19,13 @@ public:
         this->imag = 0;
     }
     Complex operator-();
-    void operator=(Complex &);
-    void operator+=(Complex &);
-    void operator-=(Complex &);
-    friend Complex operator+(Complex &, Complex &);
-    friend Complex operator-(Complex &, Complex &);
-    friend Complex operator*(Complex &, Complex &);
-    friend Complex operator/(Complex &, Complex &);
+    void operator=(const Complex &);
+    void operator+=(const Complex &);
+    void operator-=(const Complex &);
+    friend Complex operator+(const Complex &, const Complex &);
+    friend Complex operator-(const Complex &, const Complex &);
+    friend Complex operator*(const Complex &, const Complex &);
+    friend Complex operator/(const Complex &, const Complex &);
     friend istream &operator>>(istream &is, Complex &);
     friend ostream &operator<<(ostream &os, const Complex &);
 };
@@ -47,10 +47,10 @@ public:
         this->den = 1;
     }
 
-    friend Fraction operator+(Fraction &, Fraction &);
-    friend Fraction operator-(Fraction &, Fraction &);
-    friend Fraction operator*(Fraction &, Fraction &);
-    friend Fraction operator/(Fraction &, Fraction &);
+    friend Fraction operator+(const Fraction &, const Fraction &);
+    friend Fraction operator-(const Fraction &, const Fraction &);
+    friend Fraction operator*(const Fraction &, const Fraction &);
+    friend Fraction operator/(const Fraction &, const Fraction &);
     operator float();
     friend istream &operator>>(istream &, Fraction &);
     friend ostream &operator<<(ostream &, const Fraction &);
@@ -75,8 +75,10 @@ public:
         this->hour = 0;
         this->minute = 0;
     }
-    Time operator++();
+    Time &operator++();
     Time operator++(int);
+    Time &operator--();
+    Time operator--(int);
     friend istream &operator>>(istream &, Time &);
     friend ostream &operator<<(ostream &, const Time &);
 };
@@ -93,9 +95,10 @@ public:
         this->size = size;
         array = new int[size]{element};
     }
-    Array(int *array = NULL)
+    Array(Array &array)
     {
-        this->array = array;
+        this->array = array.array;
+        this->size = array.size;
     }
     ~Array()
     {
@@ -109,9 +112,38 @@ public:
         else
             return array[index];
     }
-    Array operator()(int *array)
+};
+class Matrix
+{
+private:
+    int **matrix;
+    int row, col;
+
+public:
+    Matrix(int row = 0, int col = 0)
     {
-        return Array(array);
+        this->matrix = new int *[row];
+        for (int i = 0; i < row; i++)
+        {
+            this->matrix[i] = new int[col];
+        }
+        this->row = row;
+        this->col = col;
+    }
+    ~Matrix()
+    {
+        for (int i = 0; i < row; i++)
+        {
+            delete[] matrix[i];
+            matrix[i] = NULL;
+        }
+        delete[] matrix;
+        matrix = NULL;
+    }
+
+    int &operator()(const int irow, const int icol)
+    {
+        return matrix[irow][icol];
     }
 };
 int main()
@@ -132,35 +164,35 @@ Complex Complex::operator-()
 {
     return Complex(-real, -imag);
 };
-void Complex::operator=(Complex &c)
+void Complex::operator=(const Complex &c)
 {
     this->real = c.real;
     this->imag = c.imag;
 }
-void Complex::operator+=(Complex &c)
+void Complex::operator+=(const Complex &c)
 {
     this->real += c.real;
     this->imag += c.imag;
 }
-void Complex::operator-=(Complex &c)
+void Complex::operator-=(const Complex &c)
 {
     this->real -= c.real;
     this->imag -= c.imag;
 }
-Complex operator+(Complex &c1, Complex &c2)
+Complex operator+(const Complex &c1, const Complex &c2)
 {
     return Complex(c1.real + c2.real, c1.imag + c2.imag);
 }
-Complex operator-(Complex &c1, Complex &c2)
+Complex operator-(const Complex &c1, const Complex &c2)
 {
     return Complex(c1.real - c2.real, c1.imag - c2.imag);
 }
 
-Complex operator*(Complex &c1, Complex &c2)
+Complex operator*(const Complex &c1, const Complex &c2)
 {
     return Complex(c1.real * c2.real - c1.imag * c2.imag, c1.real * c2.imag + c1.imag * c2.real);
 }
-Complex operator/(Complex &c1, Complex &c2)
+Complex operator/(const Complex &c1, const Complex &c2)
 {
     return Complex((c1.real * c2.real + c1.imag * c2.imag) / (c2.real * c2.real + c2.imag * c2.imag), (c1.imag * c2.real - c1.real * c2.imag) / (c2.real * c2.real + c2.imag * c2.imag));
 }
@@ -184,19 +216,19 @@ ostream &operator<<(ostream &os, const Complex &obj)
     return os;
 }
 
-Fraction operator+(Fraction &b1, Fraction &b2)
+Fraction operator+(const Fraction &b1, const Fraction &b2)
 {
     return Fraction(b1.num * b2.den + b2.num * b1.den, b1.den * b2.den);
 }
-Fraction operator-(Fraction &b1, Fraction &b2)
+Fraction operator-(const Fraction &b1, const Fraction &b2)
 {
     return Fraction(b1.num * b2.den - b2.num * b1.den, b1.den * b2.den);
 }
-Fraction operator*(Fraction &b1, Fraction &b2)
+Fraction operator*(const Fraction &b1, const Fraction &b2)
 {
     return Fraction(b1.num * b2.num, b1.den * b2.den);
 }
-Fraction operator/(Fraction &b1, Fraction &b2)
+Fraction operator/(const Fraction &b1, const Fraction &b2)
 {
     return Fraction(b1.num * b2.den, b1.den * b2.num);
 }
@@ -232,22 +264,38 @@ ostream &operator<<(ostream &os, const Fraction &obj)
     return os;
 }
 
-Time Time::operator++()
+Time &Time::operator++()
 {
     ++minute;
-    if (minute >= 60)
+    if (minute == 60)
     {
         ++hour;
-        minute -= 60;
+        minute = 0;
     }
     return *this;
 }
 
 Time Time ::operator++(int)
 {
-    Time aux;
-    aux = *this;
+    Time aux = *this;
     ++(*this);
+    return aux;
+}
+Time &Time::operator--()
+{
+    --minute;
+    if (minute = -1)
+    {
+        --hour;
+        minute = 59;
+    }
+    return *this;
+}
+
+Time Time ::operator--(int)
+{
+    Time aux = *this;
+    --(*this);
     return aux;
 }
 istream &operator>>(istream &is, Time &obj)

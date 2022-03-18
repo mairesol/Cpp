@@ -4,8 +4,10 @@ using namespace std;
 
 class Day
 {
-public:
+private:
     int date, month, year;
+
+public:
     Day(int date = 0, int month = 0, int year = 0)
     {
         this->date = date;
@@ -34,7 +36,7 @@ public:
                 year++;
             }
         }
-        return Day(date, month, year);
+        return *this;
     }
     Day operator--()
     {
@@ -49,7 +51,7 @@ public:
                 year--;
             }
         }
-        return Day(date, month, year);
+        return *this;
     }
     friend istream &operator>>(istream &is, Day &obj)
     {
@@ -74,7 +76,8 @@ public:
 
 int main()
 {
-
+    Day d;
+    cout << ++d;
     return 0;
 }
 bool Day::isLeapYear()
