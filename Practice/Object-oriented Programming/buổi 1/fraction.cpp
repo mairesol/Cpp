@@ -2,9 +2,6 @@
 
 using namespace std;
 
-bool menu_yet = false;
-int menu();
-
 int gcd(int a, int b)
 {
     if (b == 0)

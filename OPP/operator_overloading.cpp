@@ -207,7 +207,9 @@ istream &operator>>(istream &is, Complex &obj)
 }
 ostream &operator<<(ostream &os, const Complex &obj)
 {
-    if (obj.real == 0)
+    if (obj.real == 0 && obj.imag == 0)
+        os << 0;
+    else if (obj.real == 0)
         os << obj.imag << "i";
     else if (obj.imag == 0)
         os << obj.real;

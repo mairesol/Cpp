@@ -80,7 +80,6 @@ void output(Fraction *, int);
 
 int main()
 {
-    // Cac chuc nang
     Fraction p, p1, p2;
     Fraction ans;
     Fraction *arr;

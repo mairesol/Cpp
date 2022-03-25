@@ -50,8 +50,8 @@ public:
     // Addition and Subtraction
     friend BigInt &operator+=(BigInt &, const BigInt &);
     friend BigInt operator+(const BigInt &, const BigInt &);
-    friend BigInt operator-(const BigInt &, const BigInt &);
     friend BigInt &operator-=(BigInt &, const BigInt &);
+    friend BigInt operator-(const BigInt &, const BigInt &);
 
     // Comparison operators
     friend bool operator==(const BigInt &, const BigInt &);
@@ -69,8 +69,8 @@ public:
     friend BigInt operator/(const BigInt &, const BigInt &);
 
     // Modulo
-    friend BigInt operator%(const BigInt &, const BigInt &);
     friend BigInt &operator%=(BigInt &, const BigInt &);
+    friend BigInt operator%(const BigInt &, const BigInt &);
 
     // Power Function
     friend BigInt &operator^=(BigInt &, const BigInt &);
@@ -88,6 +88,9 @@ public:
     friend BigInt NthFibonacci(int n);
     friend BigInt Factorial(int n);
 };
+BigInt NthCatalan(int);
+BigInt NthFibonacci(int);
+BigInt Factorial(int);
 
 int main()
 {
