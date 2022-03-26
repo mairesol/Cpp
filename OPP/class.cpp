@@ -45,6 +45,10 @@ public:
     {
         cout << accno << " " << name << endl;
     }
+    static int get_count()
+    {
+        return count;
+    }
 };
 int Account::count = 0;
 
@@ -63,5 +67,6 @@ int main()
     a2.display();
     a3.display();
     cout << "Tong cac doi tuong la: " << Account::count;
+    cout << "Tong cac doi tuong la: " << Account::get_count();
     return 0;
 }
