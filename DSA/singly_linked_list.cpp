@@ -13,11 +13,6 @@ public:
         data = d;
         next = NULL;
     }
-    ~Node()
-    {
-        this->data = 0;
-        delete next;
-    }
 };
 
 class List
@@ -29,12 +24,13 @@ public:
     List(Node *, Node *);
     ~List();
     bool empty();
+    int size();
     void insert_head(Node *);
     void insert_tail(Node *);
     void insert_after(Node *, Node *);
     void erase_head();
     void erase_after(Node *);
-    void erase(int);
+    bool erase(int);
     Node *search(int);
     void clear();
     void selection_sort();
@@ -46,8 +42,7 @@ int main()
 {
     List l;
     l.input();
-    l.selection_sort();
-    l.output();
+    l.clear();
     return 0;
 }
 
@@ -67,6 +62,17 @@ List::~List()
 bool List ::empty()
 {
     return (head == NULL);
+}
+int List::size()
+{
+    int size = 0;
+    Node *p = head;
+    while (p != NULL)
+    {
+        size++;
+        p = p->next;
+    }
+    return size;
 }
 void List ::insert_head(Node *p)
 {
@@ -125,7 +131,7 @@ void List ::erase_after(Node *q)
         }
     }
 }
-void List ::erase(int x)
+bool List ::erase(int x)
 {
     Node *p = head, *q = NULL;
     while (p != NULL && p->data != x)
@@ -134,11 +140,17 @@ void List ::erase(int x)
         p = p->next;
     }
     if (p == NULL) // Nếu list không có x
-        return;
-    if (q != NULL) // Nếu head không chứa x
-        erase_after(q);
-    else // Nếu head chứa x
-        erase_head();
+    {
+        return false;
+    }
+    else
+    {
+        if (q != NULL) // Nếu head không chứa x
+            erase_after(q);
+        else // Nếu head chứa x
+            erase_head();
+        return true;
+    }
 }
 Node *List ::search(int x)
 {
@@ -157,6 +169,7 @@ void List ::clear()
         head = head->next;
         delete p;
     }
+    tail = NULL;
 }
 
 void List ::selection_sort()
