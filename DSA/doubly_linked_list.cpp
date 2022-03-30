@@ -150,18 +150,14 @@ void List ::erase_tail()
 {
     if (!empty()) // Nếu list không rỗng
     {
-        Node *p = head;
-        if (p == tail) // Nếu list có 1 nút
+        Node *p = tail;
+        if (p == head) // Nếu list có 1 nút
             erase_head();
         else // Nếu list có nhiều nút
         {
-            while (p->next->next != NULL)
-            {
-                p = p->next;
-            }
-            delete p->next;
-            p->next = NULL;
-            tail = p;
+            tail = tail->prev;
+            tail->next = NULL;
+            delete p;
         }
     }
 }

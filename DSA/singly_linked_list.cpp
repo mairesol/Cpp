@@ -31,6 +31,7 @@ public:
     void erase_head();
     void erase_after(Node *);
     bool erase(int);
+    void erase_tail();
     Node *search(int);
     void clear();
     void selection_sort();
@@ -150,6 +151,25 @@ bool List ::erase(int x)
         else // Nếu head chứa x
             erase_head();
         return true;
+    }
+}
+void List ::erase_tail()
+{
+    if (!empty()) // Nếu list không rỗng
+    {
+        Node *p = head;
+        if (p == tail) // Nếu list có 1 nút
+            erase_head();
+        else // Nếu list có nhiều nút
+        {
+            while (p->next->next != NULL)
+            {
+                p = p->next;
+            }
+            delete p->next;
+            p->next = NULL;
+            tail = p;
+        }
     }
 }
 Node *List ::search(int x)

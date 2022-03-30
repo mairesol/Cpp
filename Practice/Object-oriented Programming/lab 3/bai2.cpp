@@ -87,6 +87,6 @@ istream &operator>>(istream &is, Diem &obj)
 }
 ostream &operator<<(ostream &os, const Diem &obj)
 {
-    cout << "(" << obj.x << "," << obj.y << ")";
+    cout << "(" << obj.x << ";" << obj.y << ")";
     return os;
 }

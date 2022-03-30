@@ -54,5 +54,5 @@ void Diem::nhap()
 }
 void Diem::xuat()
 {
-    cout << "(" << x << "," << y << ")";
+    cout << "(" << x << ";" << y << ")";
 }
