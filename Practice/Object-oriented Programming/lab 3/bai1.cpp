@@ -15,8 +15,8 @@ public:
     }
     ~Diem() {}
     void thay_doi(double, double);
-    double &hoanh_do();
-    double &tung_do();
+    double getx();
+    double gety();
     Diem tinh_tien(double, double);
     void nhap();
     void xuat();
@@ -31,11 +31,11 @@ void Diem::thay_doi(double dx, double dy)
     x = dx;
     y = dy;
 }
-double &Diem::hoanh_do()
+double Diem::getx()
 {
     return x;
 }
-double &Diem::tung_do()
+double Diem::gety()
 {
     return y;
 }

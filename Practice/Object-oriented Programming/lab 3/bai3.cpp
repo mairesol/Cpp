@@ -51,10 +51,7 @@ public:
 };
 int main()
 {
-    DaGiac S;
-    S.nhap();
-    S.thay_doi_kich_thuoc(6);
-    S.xuat();
+
     return 0;
 }
 void Diem::thay_doi(double dx, double dy)
