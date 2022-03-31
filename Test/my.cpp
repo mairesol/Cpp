@@ -1,134 +1,128 @@
 #include <iostream>
-#include <math.h>
+#include <string>
 #include <vector>
 
 using namespace std;
 
-#include <iostream>
-
-using namespace std;
-
-class Diem
+class Day
 {
 private:
-    double x, y;
+    int date, month, year;
 
 public:
-    Diem(double dx = 0, double dy = 0)
-    {
-        x = dx;
-        y = dy;
-    }
-    ~Diem() {}
-    void thay_doi(double, double);
-    double getx();
-    double gety();
-    Diem tinh_tien(double, double);
-    Diem quay(Diem, double);
-    friend istream &operator>>(istream &, Diem &);
-    friend ostream &operator<<(ostream &, const Diem &);
+    Day(int = 0, int = 0, int = 0);
+    ~Day() {}
+    friend istream &operator>>(istream &, Day &);
+    friend ostream &operator<<(ostream &, const Day &);
 };
-
-class DaGiac
+class Candidate
 {
 private:
-    vector<Diem> vect;
+    int ma;
+    string ten;
+    Day ngaysinh;
+    double diem_toan, diem_van, diem_anh;
 
 public:
-    DaGiac(vector<Diem> dvect = vector<Diem>(0))
-    {
-        vect = dvect;
-    }
-    ~DaGiac()
-    {
-        vect.clear();
-    }
-    DaGiac tinh_tien(double, double);
-    DaGiac quay(Diem, double);
-    DaGiac thay_doi_kich_thuoc(double);
+    Candidate(int = 0, string = "", Day = Day(0, 0, 0), double = 0, double = 0, double = 0);
+    ~Candidate() {}
+
+    double tong_diem();
     void nhap();
     void xuat();
 };
+class TestCandidate
+{
+    vector<Candidate> list;
+
+public:
+    void nhap();
+    void xuat_lon_hon_15();
+};
+
 int main()
 {
-    DaGiac S;
-    S.nhap();
-    S.thay_doi_kich_thuoc(6);
-    S.xuat();
+    TestCandidate l;
+    l.nhap();
+    l.xuat_lon_hon_15();
     return 0;
 }
-void Diem::thay_doi(double dx, double dy)
+Day::Day(int d, int m, int y)
 {
-    x = dx;
-    y = dy;
+    date = d;
+    month = m;
+    year = y;
 }
-double Diem::getx()
+istream &operator>>(istream &is, Day &obj)
 {
-    return x;
-}
-double Diem::gety()
-{
-    return y;
-}
-Diem Diem::tinh_tien(double a, double b)
-{
-    x += a;
-    y += b;
-    return *this;
-}
-Diem Diem::quay(Diem I, double goc)
-{
-    x = (x - I.x) * cos(goc) - (y - I.y) * sin(goc) + I.x;
-    y = (x - I.x) * sin(goc) + (y - I.y) * cos(goc) + I.y;
-    return *this;
-}
-istream &operator>>(istream &is, Diem &obj)
-{
-    is >> obj.x >> obj.y;
+    is >> obj.date >> obj.month >> obj.year;
     return is;
 }
-ostream &operator<<(ostream &os, const Diem &obj)
+ostream &operator<<(ostream &os, const Day &obj)
 {
-    cout << "(" << obj.x << ";" << obj.y << ")";
+    os << obj.date << "/" << obj.month << "/" << obj.year;
     return os;
 }
+Candidate::Candidate(int m, string t, Day n, double dt, double dv, double da)
+{
+    ma = m;
+    ten = t;
+    ngaysinh = n;
+    diem_toan = dt;
+    diem_van = dv;
+    diem_anh = da;
+}
+double Candidate::tong_diem()
+{
+    return diem_toan + diem_van + diem_anh;
+}
+void Candidate::nhap()
+{
+    cout << "Nhap ma: ";
+    cin >> ma;
+    cin.ignore(256, '\n');
+    cout << "Nhap ten: ";
+    getline(cin, ten);
+    cout << "Nhap ngay sinh: ";
+    cin >> ngaysinh;
+    cout << "Nhap diem toan: ";
+    cin >> diem_toan;
+    cout << "Nhap diem van: ";
+    cin >> diem_van;
+    cout << "Nhap diem anh: ";
+    cin >> diem_anh;
+}
+void Candidate::xuat()
+{
+    cout << ma << "\t" << ten << "\t" << ngaysinh << "\t"
+         << diem_toan << "\t" << diem_van << "\t" << diem_anh;
+}
 
-void DaGiac::nhap()
+void TestCandidate::nhap()
 {
-    cout << "Nhap so dinh cua da giac: ";
-    int s;
-    cin >> s;
-    vect.resize(s);
-    for (int i = 0; i < vect.size(); i++)
+    int n;
+    cout << "Nhap so thi sinh: ";
+    cin >> n;
+    list.resize(n);
+    for (int i = 0; i != n; i++)
     {
-        cout << "Nhap dinh thu " << i + 1 << ": ";
-        cin >> vect[i];
+        cout << "Nhap thi sinh thu " << i + 1 << ":\n";
+        list[i].nhap();
     }
 }
-void DaGiac::xuat()
+void TestCandidate::xuat_lon_hon_15()
 {
-    cout << "Da giac tao boi " << vect.size() << " diem: ";
-    for (int i = 0; i < vect.size() - 1; i++)
+    cout << "Danh sach thi sinh co tong diem lon hon 15: " << endl;
+    bool flag = false;
+    for (int i = 0; i != list.size(); i++)
     {
-        cout << vect[i] << ",";
+        if (list[i].tong_diem() > 15.0)
+        {
+            flag = true;
+            list[i].xuat();
+            cout << endl;
+        }
     }
-    cout << vect[vect.size() - 1] << "." << endl;
-}
-DaGiac DaGiac::tinh_tien(double a, double b)
-{
-    for (int i = 0; i < vect.size(); i++)
-        vect[i].tinh_tien(a, b);
-    return *this;
-}
-DaGiac DaGiac::quay(Diem I, double goc)
-{
-    for (int i = 0; i < vect.size(); i++)
-        vect[i].quay(I, goc);
-    return *this;
-}
-DaGiac DaGiac::thay_doi_kich_thuoc(double k)
-{
-    for (int i = 0; i < vect.size(); i++)
-        vect[i].thay_doi(vect[i].getx() * k, vect[i].gety() * k);
-    return *this;
+    if (flag == false)
+        cout << "Khong co thi sinh nao thoa man.\n";
 }

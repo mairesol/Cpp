@@ -8,11 +8,7 @@ private:
     int tu, mau;
 
 public:
-    PhanSo(int t = 0, int m = 1)
-    {
-        tu = t;
-        mau = m;
-    }
+    PhanSo(int = 0, int = 1);
     ~PhanSo() {}
     PhanSo cong(const PhanSo &);
     PhanSo tru(const PhanSo &);
@@ -52,7 +48,11 @@ int main()
     p.xuat();
     return 0;
 }
-
+PhanSo::PhanSo(int t, int m)
+{
+    tu = t;
+    mau = m;
+}
 PhanSo PhanSo::cong(const PhanSo &a)
 {
     return PhanSo(tu * a.mau + mau * a.tu, mau * a.mau);
@@ -83,7 +83,9 @@ void PhanSo::nhap()
 void PhanSo::xuat()
 {
     chuan_hoa(*this);
-    if (tu == 0)
+    if (mau == 0)
+        cout << "NaN" << endl;
+    else if (tu == 0)
         cout << 0 << endl;
     else if (mau == 1)
         cout << tu << endl;
@@ -114,6 +116,5 @@ PhanSo chuan_hoa(PhanSo &a)
         a.tu = -a.tu;
         a.mau = -a.mau;
     }
-
     return a;
 }

@@ -10,12 +10,7 @@ private:
     int date, month, year;
 
 public:
-    Day(int d = 0, int m = 0, int y = 0)
-    {
-        date = d;
-        month = m;
-        year = y;
-    }
+    Day(int = 0, int = 0, int = 0);
     ~Day() {}
     friend istream &operator>>(istream &, Day &);
     friend ostream &operator<<(ostream &, const Day &);
@@ -29,24 +24,7 @@ private:
     double diem_toan, diem_van, diem_anh;
 
 public:
-    Candidate()
-    {
-        ma = 0;
-        ten = "";
-        ngaysinh = Day(0, 0, 0);
-        diem_toan = 0;
-        diem_van = 0;
-        diem_anh = 0;
-    }
-    Candidate(int m, string t, Day n, double dt, double dv, double da)
-    {
-        ma = m;
-        ten = t;
-        ngaysinh = n;
-        diem_toan = dt;
-        diem_van = dv;
-        diem_anh = da;
-    }
+    Candidate(int = 0, string = "", Day = Day(0, 0, 0), double = 0, double = 0, double = 0);
     ~Candidate() {}
 
     double tong_diem();
@@ -69,7 +47,12 @@ int main()
     l.xuat_lon_hon_15();
     return 0;
 }
-
+Day::Day(int d, int m, int y)
+{
+    date = d;
+    month = m;
+    year = y;
+}
 istream &operator>>(istream &is, Day &obj)
 {
     is >> obj.date >> obj.month >> obj.year;
@@ -80,7 +63,15 @@ ostream &operator<<(ostream &os, const Day &obj)
     os << obj.date << "/" << obj.month << "/" << obj.year;
     return os;
 }
-
+Candidate::Candidate(int m, string t, Day n, double dt, double dv, double da)
+{
+    ma = m;
+    ten = t;
+    ngaysinh = n;
+    diem_toan = dt;
+    diem_van = dv;
+    diem_anh = da;
+}
 double Candidate::tong_diem()
 {
     return diem_toan + diem_van + diem_anh;

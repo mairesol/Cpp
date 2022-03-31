@@ -8,11 +8,7 @@ private:
     double thuc, ao;
 
 public:
-    SoPhuc(double t = 0, double a = 0)
-    {
-        thuc = t;
-        ao = a;
-    }
+    SoPhuc(double = 0, double = 0);
     ~SoPhuc() {}
 
     SoPhuc cong(const SoPhuc &);
@@ -50,7 +46,11 @@ int main()
     p.xuat();
     return 0;
 }
-
+SoPhuc::SoPhuc(double t, double a)
+{
+    thuc = t;
+    ao = a;
+}
 SoPhuc SoPhuc::cong(const SoPhuc &b)
 {
     return SoPhuc(thuc + b.thuc, ao + b.ao);
