@@ -8,11 +8,7 @@ private:
     double x, y;
 
 public:
-    Diem(double dx = 0, double dy = 0)
-    {
-        x = dx;
-        y = dy;
-    }
+    Diem(double = 0, double = 0);
     ~Diem() {}
     void thay_doi(double, double);
     double getx();
@@ -25,6 +21,11 @@ public:
 int main()
 {
     return 0;
+}
+Diem::Diem(double dx, double dy)
+{
+    x = dx;
+    y = dy;
 }
 void Diem::thay_doi(double dx, double dy)
 {

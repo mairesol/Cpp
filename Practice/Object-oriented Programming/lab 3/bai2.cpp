@@ -3,21 +3,13 @@
 
 using namespace std;
 
-#include <iostream>
-
-using namespace std;
-
 class Diem
 {
 private:
     double x, y;
 
 public:
-    Diem(double dx = 0, double dy = 0)
-    {
-        x = dx;
-        y = dy;
-    }
+    Diem(double = 0, double = 0);
     ~Diem() {}
     void thay_doi(double, double);
     double getx();
@@ -34,12 +26,7 @@ private:
     Diem A, B, C;
 
 public:
-    TamGiac(Diem dA = Diem(0, 0), Diem dB = Diem(0, 0), Diem dC = Diem(0, 0))
-    {
-        A = dA;
-        B = dB;
-        C = dC;
-    }
+    TamGiac(Diem = Diem(0, 0), Diem = Diem(0, 0), Diem = Diem(0, 0));
     ~TamGiac() {}
     TamGiac tinh_tien(double, double);
     TamGiac quay(Diem, double);
@@ -50,6 +37,11 @@ public:
 int main()
 {
     return 0;
+}
+Diem::Diem(double dx, double dy)
+{
+    x = dx;
+    y = dy;
 }
 void Diem::thay_doi(double dx, double dy)
 {
@@ -87,19 +79,13 @@ ostream &operator<<(ostream &os, const Diem &obj)
     return os;
 }
 
-void TamGiac::nhap()
+TamGiac::TamGiac(Diem dA, Diem dB, Diem dC)
 {
-    cout << "Nhap diem thu nhat: ";
-    cin >> A;
-    cout << "Nhap diem thu hai: ";
-    cin >> B;
-    cout << "Nhap diem thu ba: ";
-    cin >> C;
+    A = dA;
+    B = dB;
+    C = dC;
 }
-void TamGiac::xuat()
-{
-    cout << "Tam giac tao boi 3 diem: " << A << "," << B << "," << C << "." << endl;
-}
+
 TamGiac TamGiac::tinh_tien(double a, double b)
 {
     A.tinh_tien(a, b);
@@ -120,4 +106,17 @@ TamGiac TamGiac::thay_doi_kich_thuoc(double k)
     B.thay_doi(B.getx() * k, B.gety() * k);
     C.thay_doi(C.getx() * k, C.gety() * k);
     return *this;
+}
+void TamGiac::nhap()
+{
+    cout << "Nhap diem thu nhat: ";
+    cin >> A;
+    cout << "Nhap diem thu hai: ";
+    cin >> B;
+    cout << "Nhap diem thu ba: ";
+    cin >> C;
+}
+void TamGiac::xuat()
+{
+    cout << "Tam giac tao boi 3 diem: " << A << "," << B << "," << C << "." << endl;
 }

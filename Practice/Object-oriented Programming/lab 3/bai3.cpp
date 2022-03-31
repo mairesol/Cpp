@@ -14,12 +14,7 @@ private:
     double x, y;
 
 public:
-    Diem(double dx = 0, double dy = 0)
-    {
-        x = dx;
-        y = dy;
-    }
-    ~Diem() {}
+    Diem(double = 0, double = 0);
     void thay_doi(double, double);
     double getx();
     double gety();
@@ -35,14 +30,8 @@ private:
     vector<Diem> vect;
 
 public:
-    DaGiac(vector<Diem> dvect = vector<Diem>(0))
-    {
-        vect = dvect;
-    }
-    ~DaGiac()
-    {
-        vect.clear();
-    }
+    DaGiac(vector<Diem> dvect = vector<Diem>(0));
+    ~DaGiac();
     DaGiac tinh_tien(double, double);
     DaGiac quay(Diem, double);
     DaGiac thay_doi_kich_thuoc(double);
@@ -53,6 +42,11 @@ int main()
 {
 
     return 0;
+}
+Diem::Diem(double dx, double dy)
+{
+    x = dx;
+    y = dy;
 }
 void Diem::thay_doi(double dx, double dy)
 {
@@ -89,7 +83,14 @@ ostream &operator<<(ostream &os, const Diem &obj)
     cout << "(" << obj.x << ";" << obj.y << ")";
     return os;
 }
-
+DaGiac::DaGiac(vector<Diem> dvect)
+{
+    vect = dvect;
+}
+DaGiac::~DaGiac()
+{
+    vect.clear();
+}
 void DaGiac::nhap()
 {
     cout << "Nhap so dinh cua da giac: ";
