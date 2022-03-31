@@ -19,7 +19,7 @@ public:
         this->imag = 0;
     }
     Complex operator-();
-    void operator=(const Complex &);
+    const Complex &operator=(const Complex &);
     void operator+=(const Complex &);
     void operator-=(const Complex &);
     friend Complex operator+(const Complex &, const Complex &);
@@ -164,7 +164,7 @@ Complex Complex::operator-()
 {
     return Complex(-real, -imag);
 };
-void Complex::operator=(const Complex &c)
+const Complex &Complex::operator=(const Complex &c)
 {
     this->real = c.real;
     this->imag = c.imag;

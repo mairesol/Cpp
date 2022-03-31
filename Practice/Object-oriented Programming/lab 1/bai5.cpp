@@ -11,16 +11,8 @@ private:
     double math, literature;
 
 public:
-    Student(double math = 0, double literature = 0)
-    {
-        this->math = math;
-        this->literature = literature;
-    }
-    ~Student()
-    {
-        this->name = "";
-        this->math = this->literature = 0;
-    }
+    Student(string = "", double = 0, double = 0);
+    ~Student();
     void input();
     double average();
 };
@@ -32,6 +24,11 @@ int main()
     p.input();
     cout << "Diem trung binh: " << setprecision(2) << p.average();
     return 0;
+}
+Student::Student(string n, double m, double l)
+{
+    math = m;
+    literature = l;
 }
 
 void Student::input()

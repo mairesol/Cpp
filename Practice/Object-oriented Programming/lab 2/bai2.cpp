@@ -24,25 +24,25 @@ public:
 int main()
 {
     SoPhuc p, p1, p2;
-    cout << "Nhap so phuc thu nhat: " << endl;
+    cout << "Nhap so phuc thu nhat: ";
     p1.nhap();
-    cout << "Nhap so phuc thu hai: " << endl;
+    cout << "Nhap so phuc thu hai: ";
     p2.nhap();
 
     p = p1.cong(p2);
-    cout << "Tong cua 2 so phuc: ";
+    cout << "\nTong cua 2 so phuc: ";
     p.xuat();
 
     p = p1.tru(p2);
-    cout << "Hieu cua 2 so phuc: ";
+    cout << "\nHieu cua 2 so phuc: ";
     p.xuat();
 
     p = p1.nhan(p2);
-    cout << "Tich cua 2 so phuc: ";
+    cout << "\nTich cua 2 so phuc: ";
     p.xuat();
 
     p = p1.chia(p2);
-    cout << "Thuong cua 2 so phuc: ";
+    cout << "\nThuong cua 2 so phuc: ";
     p.xuat();
     return 0;
 }
@@ -70,19 +70,16 @@ SoPhuc SoPhuc::chia(const SoPhuc &b)
 
 void SoPhuc::nhap()
 {
-    cout << "Nhap phan thuc: ";
-    cin >> thuc;
-    cout << "Nhap phan ao: ";
-    cin >> ao;
+    cin >> thuc >> ao;
 }
 void SoPhuc::xuat()
 {
     if (thuc == 0 && ao == 0)
-        cout << 0 << endl;
+        cout << 0;
     else if (ao == 0)
-        cout << thuc << endl;
+        cout << thuc;
     else if (thuc == 0)
-        cout << ao << "i" << endl;
+        cout << ao << "i";
     else
-        cout << thuc << " + " << ao << "i" << endl;
+        cout << thuc << " + " << ao << "i";
 }

@@ -26,25 +26,25 @@ PhanSo chuan_hoa(PhanSo &);
 int main()
 {
     PhanSo p, p1, p2;
-    cout << "Nhap phan so thu nhat: " << endl;
+    cout << "Nhap phan so thu nhat: ";
     p1.nhap();
-    cout << "Nhap phan so thu hai: " << endl;
+    cout << "Nhap phan so thu hai: ";
     p2.nhap();
 
     p = p1.cong(p2);
-    cout << "Tong cua hai phan so: ";
+    cout << "\nTong cua hai phan so: ";
     p.xuat();
 
     p = p1.tru(p2);
-    cout << "Hieu cua hai phan so: ";
+    cout << "\nHieu cua hai phan so: ";
     p.xuat();
 
     p = p1.nhan(p2);
-    cout << "Tich cua hai phan so: ";
+    cout << "\nTich cua hai phan so: ";
     p.xuat();
 
     p = p1.chia(p2);
-    cout << "Thuong cua hai phan so: ";
+    cout << "\nThuong cua hai phan so: ";
     p.xuat();
     return 0;
 }
@@ -71,28 +71,22 @@ PhanSo PhanSo::chia(const PhanSo &a)
 }
 void PhanSo::nhap()
 {
-    cout << "Nhap tu so: ";
-    cin >> tu;
-    do
-    {
-        cout << "Nhap mau so: ";
-        cin >> mau;
-    } while (mau == 0);
+    cin >> tu >> mau;
     chuan_hoa(*this);
 }
 void PhanSo::xuat()
 {
     chuan_hoa(*this);
     if (mau == 0)
-        cout << "NaN" << endl;
+        cout << "NaN";
     else if (tu == 0)
-        cout << 0 << endl;
+        cout << 0;
     else if (mau == 1)
-        cout << tu << endl;
+        cout << tu;
     else
-        cout << tu << "/" << mau << endl;
+        cout << tu << "/" << mau;
 }
-void PhanSo::dinh_gia_tri(int t = 0, int m = 1)
+void PhanSo::dinh_gia_tri(int t, int m)
 {
     tu = t;
     mau = m;

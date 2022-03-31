@@ -33,6 +33,7 @@ public:
 };
 class TestCandidate
 {
+private:
     vector<Candidate> list;
 
 public:

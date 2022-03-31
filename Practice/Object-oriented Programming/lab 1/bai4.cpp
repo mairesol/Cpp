@@ -8,12 +8,7 @@ private:
     int date, month, year;
 
 public:
-    Day(int date = 0, int month = 0, int year = 0)
-    {
-        this->date = date;
-        this->month = month;
-        this->year = year;
-    }
+    Day(int = 0, int = 0, int = 0);
     ~Day();
     bool isLeapYear();
     bool isValid();
@@ -30,6 +25,12 @@ int main()
     cin >> d;
     cout << "Ngay tiep theo: " << d.next_day();
     return 0;
+}
+Day::Day(int d, int m, int y)
+{
+    date = d;
+    month = m;
+    year = y;
 }
 bool Day::isLeapYear()
 {

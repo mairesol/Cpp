@@ -39,7 +39,7 @@ public:
 
     /* * * * Operator Overloading * * * */
     // Direct assignment
-    BigInt &operator=(const BigInt &);
+    const BigInt &operator=(const BigInt &);
 
     // Post/Pre - Incrementation
     BigInt &operator++();
@@ -219,7 +219,7 @@ int BigInt::operator[](const int index) const
         throw("ERROR");
     return digits[index];
 }
-BigInt &BigInt::operator=(const BigInt &a)
+const BigInt &BigInt::operator=(const BigInt &a)
 {
     digits = a.digits;
     return *this;

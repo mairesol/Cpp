@@ -48,10 +48,7 @@ Diem Diem::tinh_tien(double a, double b)
 }
 void Diem::nhap()
 {
-    cout << "Nhap hoanh do: ";
-    cin >> x;
-    cout << "Nhap tung do: ";
-    cin >> y;
+    cin >> x >> y;
 }
 void Diem::xuat()
 {
