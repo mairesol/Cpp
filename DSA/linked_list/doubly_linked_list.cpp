@@ -9,12 +9,7 @@ public:
     int data;
     Node *next;
     Node *prev;
-    Node(int d)
-    {
-        data = d;
-        next = NULL;
-        prev = NULL;
-    }
+    Node(int = 0);
 };
 
 class List
@@ -24,6 +19,7 @@ public:
     Node *tail;
     List();
     List(Node *, Node *);
+    List(List &);
     ~List();
     bool empty();
     void insert_head(Node *);
@@ -50,7 +46,12 @@ int main()
     l.output();
     return 0;
 }
-
+Node::Node(int d)
+{
+    data = d;
+    next = NULL;
+    prev = NULL;
+}
 List::List()
 {
     head = tail = NULL;
@@ -59,6 +60,11 @@ List::List(Node *h, Node *t)
 {
     head = h;
     tail = t;
+}
+List::List(List &l)
+{
+    head = l.head;
+    tail = l.tail;
 }
 List::~List()
 {

@@ -4,54 +4,59 @@ using namespace std;
 
 #define max 100
 
-class Stack
+class Queue
 {
 private:
     int arr[max];
-    int Top;
+    int Front, Rear;
 
 public:
-    Stack();
-    bool isEmpty();
-    bool isFull();
-    void push(int);
-    void pop(int &);
-    int &top();
+    Queue();
+    void enqueue(int);
+    void dequeue(int &);
 };
 
 int main()
 {
     return 0;
 }
-Stack::Stack()
+Queue::Queue()
 {
-    Top = -1;
+    Front = -1;
+    Rear = -1;
 }
-bool Stack::isEmpty()
+void Queue::enqueue(int x)
 {
-    return (Top == -1);
-}
-bool Stack::isFull()
-{
-    return (Top == max - 1);
-}
-void Stack::push(int x)
-{
-    if (!isFull())
+    int f, r;
+    if (Rear - Front + 1 == max) // Nếu queue đầy thật
+        return;
+    else
     {
-        Top++;
-        arr[Top] = x;
+        if (Front == -1) // Nếu queue rỗng
+            Front = 0;
+        if (Rear == max - 1) // Queue đầy ảo
+        {
+            f = Front;
+            r = Rear;
+            for (int i = f; i <= r; i++)
+                arr[i - f] = arr[i];
+            Front = 0;
+            Rear = r - f;
+        }
+        Rear++;
+        arr[Rear] = x;
     }
 }
-void Stack::pop(int &x)
+void Queue::dequeue(int &x)
 {
-    if (!isEmpty())
+    if (Front != -1) // Nếu queue không rỗng
     {
-        x = arr[Top];
-        Top--;
+        x = arr[Front];
+        Front++;
+        if (Front > Rear) // Queue có 1 phần tử
+        {
+            Front = -1;
+            Rear = -1;
+        }
     }
-}
-int &Stack::top()
-{
-    return arr[Top];
 }

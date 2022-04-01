@@ -2,61 +2,61 @@
 
 using namespace std;
 
-#define max 1000
+#define max 100
 
 class Queue
 {
 private:
     int arr[max];
-    int front, rear;
+    int Front, Rear;
 
 public:
-    Queue()
-    {
-        front = -1;
-        rear = -1;
-    }
-    void de_queue(int &);
-    void en_queue(int);
+    Queue();
+    void enqueue(int);
+    void dequeue(int &);
 };
 
 int main()
 {
-
     return 0;
 }
-void Queue::de_queue(int &x)
+Queue::Queue()
 {
-    if (front != -1) // Nếu queue không rỗng
-    {
-        x = arr[front];
-        front++;
-        if (front > rear) // Queue có 1 phần tử
-        {
-            front = -1;
-            rear = -1;
-        }
-    }
+    Front = -1;
+    Rear = -1;
 }
-void Queue::en_queue(int x)
+void Queue::enqueue(int x)
 {
     int f, r;
-    if (rear - front + 1 == max) // Queue đầy thật
+    if (Rear - Front + 1 == max) // Nếu queue đầy thật
         return;
     else
     {
-        if (front == -1) // Nếu queue rỗng
-            front = rear = 0;
-        if (rear == max - 1) // Queue đầy ảo
+        if (Front == -1) // Nếu queue rỗng
+            Front = 0;
+        if (Rear == max - 1) // Queue đầy ảo
         {
-            f = front;
-            r = rear;
+            f = Front;
+            r = Rear;
             for (int i = f; i <= r; i++)
                 arr[i - f] = arr[i];
-            front = 0;
-            rear = r - f;
+            Front = 0;
+            Rear = r - f;
         }
-        rear++;
-        arr[rear] = x;
+        Rear++;
+        arr[Rear] = x;
+    }
+}
+void Queue::dequeue(int &x)
+{
+    if (Front != -1) // Nếu queue không rỗng
+    {
+        x = arr[Front];
+        Front++;
+        if (Front > Rear) // Queue có 1 phần tử
+        {
+            Front = -1;
+            Rear = -1;
+        }
     }
 }

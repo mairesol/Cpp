@@ -8,11 +8,7 @@ class Node
 public:
     int data;
     Node *next;
-    Node(int d)
-    {
-        data = d;
-        next = NULL;
-    }
+    Node(int = 0);
 };
 
 class List
@@ -22,6 +18,7 @@ public:
     Node *tail;
     List();
     List(Node *, Node *);
+    List(List &);
     ~List();
     bool empty();
     int size();
@@ -46,7 +43,11 @@ int main()
     l.clear();
     return 0;
 }
-
+Node::Node(int d)
+{
+    data = d;
+    next = NULL;
+}
 List::List()
 {
     head = tail = NULL;
@@ -55,6 +56,11 @@ List::List(Node *h, Node *t)
 {
     head = h;
     tail = t;
+}
+List::List(List &l)
+{
+    head = l.head;
+    tail = l.tail;
 }
 List::~List()
 {
