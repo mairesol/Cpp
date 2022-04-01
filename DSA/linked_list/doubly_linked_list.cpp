@@ -29,10 +29,12 @@ public:
     void insert_head(Node *);
     void insert_tail(Node *);
     void insert_after(Node *, Node *);
+    void insert_before(Node *, Node *);
     void erase_head();
-    void erase_after(Node *);
-    void erase(int);
     void erase_tail();
+    void erase_after(Node *);
+    void erase_before(Node *);
+    void erase(int);
     Node *search(int);
     void clear();
     void selection_sort();
@@ -64,7 +66,7 @@ List::~List()
 }
 bool List ::empty()
 {
-    return (head == NULL);
+    return (head == NULL || tail == NULL);
 }
 void List ::insert_head(Node *p)
 {
@@ -80,7 +82,7 @@ void List ::insert_head(Node *p)
 void List ::insert_tail(Node *p)
 {
     if (empty()) // Nếu list rỗng
-        insert_head(p);
+        head = tail = p;
     else // Nếu list không rỗng
     {
         tail->next = p;
@@ -90,8 +92,8 @@ void List ::insert_tail(Node *p)
 }
 void List ::insert_after(Node *q, Node *p)
 {
-    if (q == NULL) // Nếu list rỗng
-        insert_head(p);
+    if (empty()) // Nếu list rỗng
+        head = tail = p;
     else // Nếu list không rỗng
     {
         p->next = q->next;
@@ -101,6 +103,21 @@ void List ::insert_after(Node *q, Node *p)
             tail = p;
         else // Nếu q không là tail
             p->next->prev = p;
+    }
+}
+void List ::insert_before(Node *q, Node *p)
+{
+    if (empty()) // Nếu list rỗng
+        head = tail = p;
+    else // Nếu list không rỗng
+    {
+        p->prev = q->prev;
+        p->next = q;
+        q->prev = p;
+        if (head == q) // Nếu q là head
+            head = p;
+        else // Nếu q không là head
+            p->prev->next = p;
     }
 }
 void List ::erase_head()
@@ -115,6 +132,18 @@ void List ::erase_head()
             tail = NULL;
     }
 }
+void List ::erase_tail()
+{
+    if (!empty()) // Nếu list không rỗng
+    {
+        Node *p = tail;
+        tail = tail->prev;
+        tail->next = NULL;
+        delete p;
+        if (empty()) // Nếu sau khi xoá list rỗng
+            head = NULL;
+    }
+}
 void List ::erase_after(Node *q)
 {
     if (q != NULL) // Nếu list không rỗng
@@ -125,8 +154,24 @@ void List ::erase_after(Node *q)
             q->next = p->next;
             if (p == tail) // Nếu p la tail
                 tail = q;
-            else
+            else // Nếu p khong la tail
                 p->next->prev = q;
+            delete p;
+        }
+    }
+}
+void List ::erase_before(Node *q)
+{
+    if (q != NULL) // Nếu list không rỗng
+    {
+        Node *p = q->prev;
+        if (p != NULL) // Nếu q không là head
+        {
+            q->prev = p->prev;
+            if (p == head) // Nếu p la head
+                head = q;
+            else // Nếu p khong la head
+                p->prev->next = q;
             delete p;
         }
     }
@@ -146,21 +191,7 @@ void List ::erase(int x)
     else // Nếu head chứa x
         erase_head();
 }
-void List ::erase_tail()
-{
-    if (!empty()) // Nếu list không rỗng
-    {
-        Node *p = tail;
-        if (p == head) // Nếu list có 1 nút
-            erase_head();
-        else // Nếu list có nhiều nút
-        {
-            tail = tail->prev;
-            tail->next = NULL;
-            delete p;
-        }
-    }
-}
+
 Node *List ::search(int x)
 {
     Node *p = head;

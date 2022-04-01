@@ -2,57 +2,56 @@
 
 using namespace std;
 
-#define max 1000
+#define max 100
 
 class Stack
 {
 private:
     int arr[max];
-    int t;
+    int Top;
 
 public:
-    Stack()
-    {
-        t = -1;
-    }
+    Stack();
     bool isEmpty();
     bool isFull();
     void push(int);
     void pop(int &);
-    int top();
+    int &top();
 };
 
 int main()
 {
-
     return 0;
 }
-
+Stack::Stack()
+{
+    Top = -1;
+}
 bool Stack::isEmpty()
 {
-    return (t == -1);
+    return (Top == -1);
 }
 bool Stack::isFull()
 {
-    return (t >= max);
+    return (Top == max - 1);
 }
 void Stack::push(int x)
 {
     if (!isFull())
     {
-        t++;
-        arr[t] = x;
+        Top++;
+        arr[Top] = x;
     }
 }
 void Stack::pop(int &x)
 {
     if (!isEmpty())
     {
-        x = arr[t];
-        t--;
+        x = arr[Top];
+        Top--;
     }
 }
-int Stack::top()
+int &Stack::top()
 {
-    return arr[t];
+    return arr[Top];
 }

@@ -88,7 +88,7 @@ void List ::insert_head(Node *p)
 void List ::insert_tail(Node *p)
 {
     if (empty()) // Nếu list rỗng
-        insert_head(p);
+        head = tail = p;
     else // Nếu list không rỗng
     {
         tail->next = p;
@@ -97,8 +97,8 @@ void List ::insert_tail(Node *p)
 }
 void List ::insert_after(Node *q, Node *p)
 {
-    if (q == NULL) // Nếu list rỗng
-        insert_head(p);
+    if (empty()) // Nếu list rỗng
+        head = tail = p;
     else // Nếu list không rỗng
     {
         p->next = q->next;
@@ -140,10 +140,8 @@ bool List ::erase(int x)
         q = p;
         p = p->next;
     }
-    if (p == NULL) // Nếu list không có x
-    {
+    if (p != NULL) // Nếu list không có x
         return false;
-    }
     else
     {
         if (q != NULL) // Nếu head không chứa x
