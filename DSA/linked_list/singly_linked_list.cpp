@@ -206,8 +206,8 @@ void List ::selection_sort()
         {
             if (q->data < min->data)
                 min = q;
-            swap(p->data, min->data);
         }
+        swap(p->data, min->data);
     }
 }
 void List::input()
