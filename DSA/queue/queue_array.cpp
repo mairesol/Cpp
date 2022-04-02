@@ -12,8 +12,11 @@ private:
 
 public:
     Queue();
+    bool isEmpty();
+    int size();
     void enqueue(int);
     void dequeue(int &);
+    void clear();
 };
 
 int main()
@@ -25,6 +28,16 @@ Queue::Queue()
     Front = -1;
     Rear = -1;
 }
+bool Queue::isEmpty()
+{
+    return (Front == -1);
+}
+int Queue::size()
+{
+    if (isEmpty())
+        return 0;
+    return Rear - Front + 1;
+}
 void Queue::enqueue(int x)
 {
     int f, r;
@@ -32,9 +45,9 @@ void Queue::enqueue(int x)
         return;
     else
     {
-        if (Front == -1) // Nếu queue rỗng
+        if (isEmpty()) // Nếu queue rỗng
             Front = 0;
-        if (Rear == max - 1) // Queue đầy ảo
+        if (Rear == max - 1) // Nếu queue đầy ảo
         {
             f = Front;
             r = Rear;
@@ -49,14 +62,18 @@ void Queue::enqueue(int x)
 }
 void Queue::dequeue(int &x)
 {
-    if (Front != -1) // Nếu queue không rỗng
+    if (!isEmpty()) // Nếu queue không rỗng
     {
         x = arr[Front];
         Front++;
-        if (Front > Rear) // Queue có 1 phần tử
+        if (Front > Rear) // Nếu queue có 1 phần tử
         {
             Front = -1;
             Rear = -1;
         }
     }
+}
+void Queue::clear()
+{
+    Front = Rear = -1;
 }

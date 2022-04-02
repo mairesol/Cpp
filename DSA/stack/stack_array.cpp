@@ -14,9 +14,11 @@ public:
     Stack();
     bool isEmpty();
     bool isFull();
+    int size();
     void push(int);
     void pop(int &);
     int &top();
+    void clear();
 };
 
 int main()
@@ -34,6 +36,10 @@ bool Stack::isEmpty()
 bool Stack::isFull()
 {
     return (Top == max - 1);
+}
+int Stack::size()
+{
+    return Top + 1;
 }
 void Stack::push(int x)
 {
@@ -54,4 +60,8 @@ void Stack::pop(int &x)
 int &Stack::top()
 {
     return arr[Top];
+}
+void Stack::clear()
+{
+    Top = -1;
 }

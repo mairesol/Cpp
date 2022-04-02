@@ -18,6 +18,7 @@ public:
     Queue();
     ~Queue();
     bool empty();
+    int size();
     void enqueue(Node *);
     void dequeue(int &);
     int &front();
@@ -45,6 +46,17 @@ Queue::~Queue()
 bool Queue ::empty()
 {
     return (head == NULL);
+}
+int Queue ::size()
+{
+    int size = 0;
+    Node *p = head;
+    while (p != NULL)
+    {
+        size++;
+        p = p->next;
+    }
+    return size;
 }
 void Queue ::enqueue(Node *p)
 {

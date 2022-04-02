@@ -4,7 +4,7 @@ using namespace std;
 
 #define max 100
 
-int menu1(char);
+int menu(char);
 int menu2(char);
 bool menu_yet_q = false;
 bool menu_yet_s = false;
@@ -89,18 +89,17 @@ int main()
     char c;
     while (act)
     {
-        cout << "\nChon loai cau truc du lieu de lam viec: q(queue)/s(stack)/e(thoat chuong trinh) - ";
+        cout << "Chon loai cau truc du lieu de lam viec: q/s/esc";
         do
         {
             cin >> c;
-        } while (c != 'q' && c != 's' && c != 'e');
-        if (c == 'e')
+        } while (c != 'q' && c != 's' && c != 27);
+        if (c == 27)
         {
             cout << "Xin chao, hen gap lai lan sau.\n";
             break;
         }
         choice = menu1(c);
-        flag = true;
         switch (choice)
         {
         case 1:           // Thao tac voi mang
@@ -269,7 +268,6 @@ int main()
             act = false;
             break;
         default:
-            cout << "Lua chon khong dung, vui long nhap lai.";
             break;
         }
     }
