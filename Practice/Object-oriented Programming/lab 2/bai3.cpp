@@ -34,18 +34,18 @@ public:
 class TestCandidate
 {
 private:
-    vector<Candidate> list;
+    Candidate *list;
+    int size;
 
 public:
+    TestCandidate(int = 0);
+    ~TestCandidate();
     void nhap();
     void xuat_lon_hon_15();
 };
 
 int main()
 {
-    TestCandidate l;
-    l.nhap();
-    l.xuat_lon_hon_15();
     return 0;
 }
 Day::Day(int d, int m, int y)
@@ -77,20 +77,21 @@ double Candidate::tong_diem()
 {
     return diem_toan + diem_van + diem_anh;
 }
+
 void Candidate::nhap()
 {
-    cout << "Nhap ma: ";
+    cout << "Ma: ";
     cin >> ma;
     cin.ignore(256, '\n');
-    cout << "Nhap ten: ";
+    cout << "Ten: ";
     getline(cin, ten);
-    cout << "Nhap ngay sinh: ";
+    cout << " Ngay sinh: ";
     cin >> ngaysinh;
-    cout << "Nhap diem toan: ";
+    cout << "Diem toan: ";
     cin >> diem_toan;
-    cout << "Nhap diem van: ";
+    cout << "Diem van: ";
     cin >> diem_van;
-    cout << "Nhap diem anh: ";
+    cout << "Diem anh: ";
     cin >> diem_anh;
 }
 void Candidate::xuat()
@@ -98,16 +99,20 @@ void Candidate::xuat()
     cout << ma << "\t" << ten << "\t" << ngaysinh << "\t"
          << diem_toan << "\t" << diem_van << "\t" << diem_anh;
 }
-
+TestCandidate::TestCandidate(int s)
+{
+    size = s;
+    list = new Candidate[size];
+}
+TestCandidate::~TestCandidate()
+{
+    delete[] list;
+}
 void TestCandidate::nhap()
 {
-    int n;
-    cout << "Nhap so thi sinh: ";
-    cin >> n;
-    list.resize(n);
-    for (int i = 0; i != n; i++)
+    for (int i = 0; i != size; i++)
     {
-        cout << "Nhap thi sinh thu " << i + 1 << " :\n";
+        cout << "Nhap thi sinh thu " << i + 1 << ":\n";
         list[i].nhap();
     }
 }
@@ -115,7 +120,7 @@ void TestCandidate::xuat_lon_hon_15()
 {
     cout << "Danh sach thi sinh co tong diem lon hon 15: " << endl;
     bool flag = false;
-    for (int i = 0; i != list.size(); i++)
+    for (int i = 0; i != size; i++)
     {
         if (list[i].tong_diem() > 15.0)
         {
