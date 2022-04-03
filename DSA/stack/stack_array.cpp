@@ -2,18 +2,18 @@
 
 using namespace std;
 
-#define max 100
-
 class Stack
 {
 private:
-    int arr[max];
     int Top;
+    int capacity;
+    int *arr;
 
 public:
-    Stack();
-    bool isEmpty();
-    bool isFull();
+    Stack(int = 10);
+    ~Stack();
+    bool empty();
+    bool full();
     int size();
     void push(int);
     void pop(int &);
@@ -25,17 +25,24 @@ int main()
 {
     return 0;
 }
-Stack::Stack()
+Stack::Stack(int c)
 {
+    capacity = c;
+    arr = new int[capacity];
     Top = -1;
 }
-bool Stack::isEmpty()
+Stack::~Stack()
+{
+    delete[] arr;
+    Top = -1;
+}
+bool Stack::empty()
 {
     return (Top == -1);
 }
-bool Stack::isFull()
+bool Stack::full()
 {
-    return (Top == max - 1);
+    return (Top == capacity - 1);
 }
 int Stack::size()
 {
@@ -43,7 +50,7 @@ int Stack::size()
 }
 void Stack::push(int x)
 {
-    if (!isFull())
+    if (!full())
     {
         Top++;
         arr[Top] = x;
@@ -51,11 +58,13 @@ void Stack::push(int x)
 }
 void Stack::pop(int &x)
 {
-    if (!isEmpty())
+    if (!empty())
     {
         x = arr[Top];
         Top--;
     }
+    else
+        x = INT_MIN;
 }
 int &Stack::top()
 {
@@ -63,5 +72,6 @@ int &Stack::top()
 }
 void Stack::clear()
 {
+    delete[] arr;
     Top = -1;
 }

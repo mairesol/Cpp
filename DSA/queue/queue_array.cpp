@@ -2,17 +2,17 @@
 
 using namespace std;
 
-#define max 100
-
 class Queue
 {
 private:
-    int arr[max];
     int Front, Rear;
+    int capacity;
+    int *arr;
 
 public:
-    Queue();
-    bool isEmpty();
+    Queue(int = 10);
+    ~Queue();
+    bool empty();
     int size();
     void enqueue(int);
     void dequeue(int &);
@@ -23,31 +23,35 @@ int main()
 {
     return 0;
 }
-Queue::Queue()
+Queue::Queue(int c)
 {
-    Front = -1;
-    Rear = -1;
+    capacity = c;
+    arr = new int[capacity];
+    Front = Rear = -1;
 }
-bool Queue::isEmpty()
+Queue::~Queue()
+{
+    delete[] arr;
+    Front = Rear = -1;
+}
+bool Queue::empty()
 {
     return (Front == -1);
 }
 int Queue::size()
 {
-    if (isEmpty())
+    if (empty())
         return 0;
     return Rear - Front + 1;
 }
 void Queue::enqueue(int x)
 {
     int f, r;
-    if (Rear - Front + 1 == max) // Nếu queue đầy thật
-        return;
-    else
+    if (Rear - Front + 1 <= capacity) // Nếu queue không đầy thật
     {
-        if (isEmpty()) // Nếu queue rỗng
+        if (empty()) // Nếu queue rỗng thật
             Front = 0;
-        if (Rear == max - 1) // Nếu queue đầy ảo
+        if (Rear == capacity - 1) // Nếu queue đầy ảo
         {
             f = Front;
             r = Rear;
@@ -62,7 +66,7 @@ void Queue::enqueue(int x)
 }
 void Queue::dequeue(int &x)
 {
-    if (!isEmpty()) // Nếu queue không rỗng
+    if (!empty()) // Nếu queue không rỗng
     {
         x = arr[Front];
         Front++;
@@ -75,5 +79,6 @@ void Queue::dequeue(int &x)
 }
 void Queue::clear()
 {
+    delete[] arr;
     Front = Rear = -1;
 }
