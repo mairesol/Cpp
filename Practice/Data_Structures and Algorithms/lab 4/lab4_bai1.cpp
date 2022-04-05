@@ -6,24 +6,24 @@ bool menu_yet = false;
 int menu1();
 int menu2();
 
-class StackA
+class QueueA
 {
 private:
-    int Top;
+    int Front, Rear;
     int capacity;
     int *arr;
 
 public:
-    StackA(int = 10);
-    ~StackA();
+    QueueA(int = 10);
+    ~QueueA();
     bool empty();
-    bool full();
     int size();
-    void push(int);
-    void pop(int &);
+    void enqueue(int);
+    void dequeue(int &);
     void clear();
-    friend void program(StackA &);
+    friend void program(QueueA &);
 };
+
 class Node
 {
 public:
@@ -32,41 +32,41 @@ public:
     Node(int d = 0);
 };
 
-class StackL
+class QueueL
 {
 private:
     Node *head;
     Node *tail;
 
 public:
-    StackL();
-    ~StackL();
+    QueueL();
+    ~QueueL();
     bool empty();
     int size();
-    void push(Node *);
-    void pop(int &);
+    void enqueue(Node *);
+    void dequeue(int &);
     void clear();
-    friend void program(StackL &);
+    friend void program(QueueL &);
 };
 
 int main()
 {
-    int choice, ans;
+    int choice;
     bool flag = true;
     while (flag)
     {
         choice = menu1();
-        StackA sA;
-        StackL sL;
+        QueueA qA;
+        QueueL qL;
         switch (choice)
         {
         case 1:
-            cout << "\n============ Stack bang array ============";
-            program(sA);
+            cout << "\n============ Queue bang array ============";
+            program(qA);
             break;
         case 2:
-            cout << "\n============ Stack bang linked list ============";
-            program(sL);
+            cout << "\n============ Queue bang linked list ============";
+            program(qL);
             break;
         case 3:
             cout << "Xin chao, hen gap lai lan sau.\n";
@@ -80,7 +80,7 @@ int main()
     return 0;
 }
 // ------------------------------------Program------------------------------------ //
-void program(StackA &sA)
+void program(QueueA &qA)
 {
     int x, choice;
     bool flag = true;
@@ -90,37 +90,37 @@ void program(StackA &sA)
         switch (choice)
         {
         case 1:
-            cout << "\nPush: ";
+            cout << "\nEnqueue: ";
             cin >> x;
-            sA.push(x);
+            qA.enqueue(x);
             break;
         case 2:
-            cout << "\nPop: ";
-            if (!sA.empty())
+            cout << "\nDequeue: ";
+            if (!qA.empty())
             {
-                sA.pop(x);
+                qA.dequeue(x);
                 cout << x;
             }
             break;
         case 3:
-            if (sA.empty())
-                cout << "\nStack rong.";
+            if (qA.empty())
+                cout << "\nQueue rong.";
             else
-                cout << "\nStack khong rong";
+                cout << "\nQueue khong rong";
             break;
         case 4:
-            cout << "\nStack co " << sA.size() << " phan tu.";
+            cout << "\nQueue co " << qA.size() << " phan tu.";
             break;
         case 5:
-            sA.clear();
-            cout << "\nDa xoa tat ca phan tu cua stack.";
+            qA.clear();
+            cout << "\nDa xoa tat ca phan tu cua queue.";
             break;
         case 6:
             ::menu_yet = false;
             break;
         case 7:
-            sA.clear();
-            cout << "\nDa dung thao tac voi stack.";
+            qA.clear();
+            cout << "\nDa dung thao tac voi queue.";
             flag = ::menu_yet = false;
             break;
         default:
@@ -129,7 +129,7 @@ void program(StackA &sA)
         }
     }
 }
-void program(StackL &sL)
+void program(QueueL &qL)
 {
     int x, choice;
     bool flag = true;
@@ -139,37 +139,37 @@ void program(StackL &sL)
         switch (choice)
         {
         case 1:
-            cout << "\nPush: ";
+            cout << "\nEnqueue: ";
             cin >> x;
-            sL.push(new Node(x));
+            qL.enqueue(new Node(x));
             break;
         case 2:
-            cout << "\nPop: ";
-            if (!sL.empty())
+            cout << "\nDequeue: ";
+            if (!qL.empty())
             {
-                sL.pop(x);
+                qL.dequeue(x);
                 cout << x;
             }
             break;
         case 3:
-            if (sL.empty())
-                cout << "\nStack rong.";
+            if (qL.empty())
+                cout << "\nQueue rong.";
             else
-                cout << "\nStack khong rong";
+                cout << "\nQueue khong rong";
             break;
         case 4:
-            cout << "\nStack co " << sL.size() << " phan tu.";
+            cout << "\nQueue co " << qL.size() << " phan tu.";
             break;
         case 5:
-            sL.clear();
-            cout << "\nDa xoa tat ca phan tu cua stack.";
+            qL.clear();
+            cout << "\nDa xoa tat ca phan tu cua queue.";
             break;
         case 6:
             ::menu_yet = false;
             break;
         case 7:
-            sL.clear();
-            cout << "\nDa dung thao tac voi stack.";
+            qL.clear();
+            cout << "\nDa dung thao tac voi queue.";
             flag = ::menu_yet = false;
             break;
         default:
@@ -188,67 +188,82 @@ Node::Node(int d)
 }
 // ------------------------------------Node------------------------------------ //
 
-// ------------------------------------StackA------------------------------------ //
-StackA::StackA(int c)
+// ------------------------------------QueueA------------------------------------ //
+QueueA::QueueA(int c)
 {
     capacity = c;
     arr = new int[capacity];
-    Top = -1;
+    Front = Rear = -1;
 }
-StackA::~StackA()
+QueueA::~QueueA()
 {
     clear();
 }
-bool StackA::empty()
+bool QueueA::empty()
 {
-    return (Top == -1);
+    return (Front == -1);
 }
-bool StackA::full()
+int QueueA::size()
 {
-    return (Top == capacity - 1);
+    if (empty())
+        return 0;
+    return Rear - Front + 1;
 }
-int StackA::size()
+void QueueA::enqueue(int x)
 {
-    return Top + 1;
-}
-void StackA::push(int x)
-{
-    if (!full())
+    int f, r;
+    if (Rear - Front + 1 <= capacity) // Nếu queue không đầy thật
     {
-        Top++;
-        arr[Top] = x;
+        if (empty()) // Nếu queue rỗng thật
+            Front = 0;
+        if (Rear == capacity - 1) // Nếu queue đầy ảo
+        {
+            f = Front;
+            r = Rear;
+            for (int i = f; i <= r; i++)
+                arr[i - f] = arr[i];
+            Front = 0;
+            Rear = r - f;
+        }
+        Rear++;
+        arr[Rear] = x;
     }
 }
-void StackA::pop(int &x)
+void QueueA::dequeue(int &x)
 {
-    if (!empty())
+    if (!empty()) // Nếu queue không rỗng
     {
-        x = arr[Top];
-        Top--;
+        x = arr[Front];
+        Front++;
+        if (Front > Rear) // Nếu queue có 1 phần tử
+        {
+            Front = -1;
+            Rear = -1;
+        }
     }
 }
-void StackA::clear()
+void QueueA::clear()
 {
     if (!empty())
         delete[] arr;
-    Top = -1;
+    Front = Rear = -1;
 }
-// ------------------------------------StackA------------------------------------ //
+// ------------------------------------QueueA------------------------------------ //
 
-// ------------------------------------StackL------------------------------------ //
-StackL::StackL()
+// ------------------------------------QueueL------------------------------------ //
+QueueL::QueueL()
 {
     head = tail = NULL;
 }
-StackL::~StackL()
+QueueL::~QueueL()
 {
     clear();
 }
-bool StackL ::empty()
+bool QueueL ::empty()
 {
     return (head == NULL);
 }
-int StackL::size()
+int QueueL ::size()
 {
     int size = 0;
     Node *p = head;
@@ -259,29 +274,29 @@ int StackL::size()
     }
     return size;
 }
-void StackL ::push(Node *p)
+void QueueL ::enqueue(Node *p)
 {
-    if (empty()) // Nếu stack rỗng
+    if (empty()) // Nếu queue rỗng
         head = tail = p;
-    else // Nếu stack không rỗng
+    else // Nếu queue không rỗng
     {
-        p->next = head;
-        head = p;
+        tail->next = p;
+        tail = p;
     }
 }
-void StackL ::pop(int &x)
+void QueueL ::dequeue(int &x)
 {
-    if (!empty()) // Nếu stack không rỗng
+    if (!empty()) // Nếu queue không rỗng
     {
         Node *p = head;
         head = head->next;
         x = p->data;
         delete p;
-        if (empty()) // Nếu sau khi xoá stack rỗng
+        if (empty()) // Nếu sau khi xoá queue rỗng
             tail = NULL;
     }
 }
-void StackL ::clear()
+void QueueL ::clear()
 {
     Node *p;
     while (!empty())
@@ -292,16 +307,16 @@ void StackL ::clear()
     }
     tail = NULL;
 }
-// ------------------------------------StackL------------------------------------ //
+// ------------------------------------QueueL------------------------------------ //
 
 // ------------------------------------menu------------------------------------ //
 int menu1()
 {
     int choice;
     cout << "\n ================================";
-    cout << "\n Vui long chon loai stack de lam viec:";
-    cout << "\n 1. Stack bang mang.";
-    cout << "\n 2. Stack bang DSLK.";
+    cout << "\n Vui long chon loai queue de lam viec:";
+    cout << "\n 1. Queue bang mang.";
+    cout << "\n 2. Queue bang DSLK.";
     cout << "\n 3. Thoat chuong trinh.";
     cout << "\n ================================";
     cout << "\n Lua chon: ";
@@ -315,14 +330,14 @@ int menu2()
     if (!::menu_yet)
     {
         cout << "\n ================================";
-        cout << "\n Vui long chon thao tac lam viec voi stack:";
-        cout << "\n 1. Push.";
-        cout << "\n 2. Pop.";
-        cout << "\n 3. Kiem tra stack co rong hay khong.";
-        cout << "\n 4. Dem so luong phan tu trong stack.";
-        cout << "\n 5. Xoa tat ca phan tu trong stack.";
+        cout << "\n Vui long chon thao tac lam viec voi queue:";
+        cout << "\n 1. Enqueue.";
+        cout << "\n 2. Dequeue.";
+        cout << "\n 3. Kiem tra queue co rong hay khong.";
+        cout << "\n 4. Dem so luong phan tu trong queue.";
+        cout << "\n 5. Xoa tat ca phan tu trong queue.";
         cout << "\n 6. Xem lai menu.";
-        cout << "\n 7. Dung thao tac voi stack.";
+        cout << "\n 7. Dung thao tac voi queue.";
         cout << "\n ================================";
         ::menu_yet = true;
     }

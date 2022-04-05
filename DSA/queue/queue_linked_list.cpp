@@ -12,9 +12,11 @@ public:
 
 class Queue
 {
-public:
+private:
     Node *head;
     Node *tail;
+
+public:
     Queue();
     ~Queue();
     bool empty();

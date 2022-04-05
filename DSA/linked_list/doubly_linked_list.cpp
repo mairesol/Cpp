@@ -98,9 +98,7 @@ void List ::insert_tail(Node *p)
 }
 void List ::insert_after(Node *q, Node *p)
 {
-    if (empty()) // Nếu list rỗng
-        head = tail = p;
-    else // Nếu list không rỗng
+    if (q != NULL)
     {
         p->next = q->next;
         p->prev = q;
@@ -113,9 +111,7 @@ void List ::insert_after(Node *q, Node *p)
 }
 void List ::insert_before(Node *q, Node *p)
 {
-    if (empty()) // Nếu list rỗng
-        head = tail = p;
-    else // Nếu list không rỗng
+    if (q != NULL)
     {
         p->prev = q->prev;
         p->next = q;
@@ -152,7 +148,7 @@ void List ::erase_tail()
 }
 void List ::erase_after(Node *q)
 {
-    if (q != NULL) // Nếu list không rỗng
+    if (q != NULL)
     {
         Node *p = q->next;
         if (p != NULL) // Nếu q không là tail
@@ -168,7 +164,7 @@ void List ::erase_after(Node *q)
 }
 void List ::erase_before(Node *q)
 {
-    if (q != NULL) // Nếu list không rỗng
+    if (q != NULL)
     {
         Node *p = q->prev;
         if (p != NULL) // Nếu q không là head

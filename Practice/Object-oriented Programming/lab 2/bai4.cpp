@@ -13,7 +13,7 @@ public:
     void thay_doi(double, double);
     double getx();
     double gety();
-    Diem tinh_tien(double, double);
+    void tinh_tien(double, double);
     void nhap();
     void xuat();
 };
@@ -40,11 +40,10 @@ double Diem::gety()
 {
     return y;
 }
-Diem Diem::tinh_tien(double a, double b)
+void Diem::tinh_tien(double a, double b)
 {
     x += a;
     y += b;
-    return *this;
 }
 void Diem::nhap()
 {

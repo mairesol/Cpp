@@ -16,6 +16,8 @@ public:
     int size();
     void enqueue(int);
     void dequeue(int &);
+    int &front();
+    int &back();
     void clear();
 };
 
@@ -31,8 +33,7 @@ Queue::Queue(int c)
 }
 Queue::~Queue()
 {
-    delete[] arr;
-    Front = Rear = -1;
+    clear();
 }
 bool Queue::empty()
 {
@@ -77,8 +78,17 @@ void Queue::dequeue(int &x)
         }
     }
 }
+int &Queue::front()
+{
+    return arr[Front];
+}
+int &Queue::back()
+{
+    return arr[Rear];
+}
 void Queue::clear()
 {
-    delete[] arr;
+    if (!empty())
+        delete[] arr;
     Front = Rear = -1;
 }

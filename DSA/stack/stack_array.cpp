@@ -33,8 +33,7 @@ Stack::Stack(int c)
 }
 Stack::~Stack()
 {
-    delete[] arr;
-    Top = -1;
+    clear();
 }
 bool Stack::empty()
 {
@@ -63,8 +62,6 @@ void Stack::pop(int &x)
         x = arr[Top];
         Top--;
     }
-    else
-        x = INT_MIN;
 }
 int &Stack::top()
 {
@@ -72,6 +69,7 @@ int &Stack::top()
 }
 void Stack::clear()
 {
-    delete[] arr;
+    if (!empty())
+        delete[] arr;
     Top = -1;
 }

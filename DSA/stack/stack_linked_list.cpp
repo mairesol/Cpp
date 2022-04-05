@@ -12,9 +12,11 @@ public:
 
 class Stack
 {
-public:
+private:
     Node *head;
     Node *tail;
+
+public:
     Stack();
     ~Stack();
     bool empty();
