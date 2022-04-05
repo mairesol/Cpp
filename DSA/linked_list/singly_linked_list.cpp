@@ -13,9 +13,11 @@ public:
 
 class List
 {
-public:
+private:
     Node *head;
     Node *tail;
+
+public:
     List();
     List(Node *, Node *);
     List(List &);
@@ -144,7 +146,7 @@ bool List ::erase(int x)
         q = p;
         p = p->next;
     }
-    if (p != NULL) // Nếu list không có x
+    if (p == NULL) // Nếu list không có x
         return false;
     else
     {

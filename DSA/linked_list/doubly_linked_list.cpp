@@ -14,9 +14,11 @@ public:
 
 class List
 {
-public:
+private:
     Node *head;
     Node *tail;
+
+public:
     List();
     List(Node *, Node *);
     List(List &);

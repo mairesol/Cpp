@@ -197,7 +197,7 @@ QueueA::QueueA(int c)
 }
 QueueA::~QueueA()
 {
-    clear();
+    delete[] arr;
 }
 bool QueueA::empty()
 {
@@ -244,8 +244,6 @@ void QueueA::dequeue(int &x)
 }
 void QueueA::clear()
 {
-    if (!empty())
-        delete[] arr;
     Front = Rear = -1;
 }
 // ------------------------------------QueueA------------------------------------ //
@@ -345,3 +343,4 @@ int menu2()
     cin >> choice;
     return choice;
 }
+// ------------------------------------menu------------------------------------ //

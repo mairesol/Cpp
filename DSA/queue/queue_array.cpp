@@ -33,7 +33,7 @@ Queue::Queue(int c)
 }
 Queue::~Queue()
 {
-    clear();
+    delete[] arr;
 }
 bool Queue::empty()
 {
@@ -88,7 +88,5 @@ int &Queue::back()
 }
 void Queue::clear()
 {
-    if (!empty())
-        delete[] arr;
     Front = Rear = -1;
 }

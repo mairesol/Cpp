@@ -197,7 +197,7 @@ StackA::StackA(int c)
 }
 StackA::~StackA()
 {
-    clear();
+    delete[] arr;
 }
 bool StackA::empty()
 {
@@ -229,8 +229,6 @@ void StackA::pop(int &x)
 }
 void StackA::clear()
 {
-    if (!empty())
-        delete[] arr;
     Top = -1;
 }
 // ------------------------------------StackA------------------------------------ //
@@ -330,3 +328,4 @@ int menu2()
     cin >> choice;
     return choice;
 }
+// ------------------------------------menu------------------------------------ //
