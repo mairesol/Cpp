@@ -32,10 +32,5 @@ void quick_sort(int arr[], int low, int high)
 
 int main()
 {
-    int arr[7] = {10, 80, 30, 90, 40, 50, 70};
-    quick_sort(arr, 0, 6);
-    for (int i = 0; i < 7; i++)
-    {
-        cout << arr[i] << " ";
-    }
+    return 0;
 }

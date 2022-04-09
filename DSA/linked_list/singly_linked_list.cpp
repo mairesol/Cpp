@@ -203,10 +203,8 @@ void List ::selection_sort()
     {
         min = p;
         for (Node *q = p->next; q != NULL; q = q->next)
-        {
             if (q->data < min->data)
                 min = q;
-        }
         swap(p->data, min->data);
     }
 }

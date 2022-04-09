@@ -21,10 +21,5 @@ void insertion_sort(int arr[], int n)
 
 int main()
 {
-    int arr[5] = {12, 11, 13, 5, 6};
-    insertion_sort(arr, 5);
-    for (int i = 0; i < 5; i++)
-    {
-        cout << arr[i] << " ";
-    }
+    return 0;
 }

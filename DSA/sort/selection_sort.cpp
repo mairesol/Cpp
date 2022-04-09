@@ -18,10 +18,5 @@ void selection_sort(int arr[], int n)
 
 int main()
 {
-    int arr[10] = {8, 4, 6, 5, 66, 14, 45, 66, 2, 14};
-    selection_sort(arr, 10);
-    for (int i = 0; i < 10; i++)
-    {
-        cout << arr[i] << " ";
-    }
+    return 0;
 }

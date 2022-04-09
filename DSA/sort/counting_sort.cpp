@@ -28,10 +28,5 @@ void counting_sort(int arr[], int n)
 
 int main()
 {
-    int arr[10] = {1, 4, 1, 2, 7, 5, 2, 3, 8, 1};
-    counting_sort(arr, 10);
-    for (int i = 0; i < 10; i++)
-    {
-        cout << arr[i] << " ";
-    }
+    return 0;
 }

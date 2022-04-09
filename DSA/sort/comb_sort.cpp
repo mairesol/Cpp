@@ -35,10 +35,5 @@ void comb_sort(int arr[], int n)
 
 int main()
 {
-    int arr[10] = {8, 4, 1, 56, 3, -44, 23, -6, 28, 0};
-    comb_sort(arr, 10);
-    for (int i = 0; i < 10; i++)
-    {
-        cout << arr[i] << " ";
-    }
+    return 0;
 }

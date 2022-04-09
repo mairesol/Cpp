@@ -1,4 +1,3 @@
-/* rand example: guess the number */
 #include <iostream>
 #include <stdlib.h> /* srand, rand */
 #include <time.h>   /* time */
@@ -8,7 +7,7 @@ void random_range(int &iSecret, int &minN, int &maxN)
 {
     cout << "Range: ";
     cin >> minN >> maxN;
-    iSecret = minN + rand() % (maxN + 1 - minN);
+    iSecret = minN + rand() % (maxN - minN + 1);
 }
 int main()
 {
