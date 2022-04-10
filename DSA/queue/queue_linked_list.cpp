@@ -21,7 +21,7 @@ public:
     ~Queue();
     bool empty();
     int size();
-    void enqueue(Node *);
+    void enqueue(int);
     void dequeue(int &);
     int &front();
     int &back();
@@ -60,8 +60,9 @@ int Queue ::size()
     }
     return size;
 }
-void Queue ::enqueue(Node *p)
+void Queue ::enqueue(int x)
 {
+    Node *p = new Node(x);
     if (empty()) // Nếu queue rỗng
         head = tail = p;
     else // Nếu queue không rỗng

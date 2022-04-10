@@ -12,10 +12,8 @@ int binary_search(int arr[], int left, int right, int x)
             return mid;
         if (arr[mid] > x)
             return binary_search(arr, left, mid - 1, x);
-
         return binary_search(arr, mid + 1, right, x);
     }
-
     return -1;
 }
 

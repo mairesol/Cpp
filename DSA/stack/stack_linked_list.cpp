@@ -21,7 +21,7 @@ public:
     ~Stack();
     bool empty();
     int size();
-    void push(Node *);
+    void push(int);
     void pop(int &);
     int &top();
     void clear();
@@ -59,8 +59,9 @@ int Stack::size()
     }
     return size;
 }
-void Stack ::push(Node *p)
+void Stack ::push(int x)
 {
+    Node *p = new Node(x);
     if (empty()) // Nếu stack rỗng
         head = tail = p;
     else // Nếu stack không rỗng

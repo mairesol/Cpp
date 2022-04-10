@@ -171,7 +171,6 @@ void List ::erase_tail()
                 p = p->next;
             }
             delete p->next;
-            p->next = NULL;
             tail = p;
         }
     }
