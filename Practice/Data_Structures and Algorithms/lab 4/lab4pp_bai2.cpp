@@ -21,7 +21,6 @@ public:
 
 public:
     ListI();
-    ListI(NodeI *, NodeI *);
     ~ListI();
     bool empty();
     int size();
@@ -64,7 +63,6 @@ public:
 
 public:
     ListC();
-    ListC(NodeC *, NodeC *);
     ~ListC();
     bool empty();
     void insert_tail(NodeC *);
@@ -161,12 +159,6 @@ ListI::ListI()
 {
     head = tail = NULL;
 }
-ListI::ListI(NodeI *h, NodeI *t)
-{
-    head = h;
-    tail = t;
-}
-
 ListI::~ListI()
 {
     clear();
@@ -309,12 +301,6 @@ ListC::ListC()
 {
     head = tail = NULL;
 }
-ListC::ListC(NodeC *h, NodeC *t)
-{
-    head = h;
-    tail = t;
-}
-
 ListC::~ListC()
 {
     clear();
