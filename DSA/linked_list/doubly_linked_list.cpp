@@ -20,8 +20,6 @@ private:
 
 public:
     List();
-    List(Node *, Node *);
-    List(List &);
     ~List();
     bool empty();
     void insert_head(Node *);
@@ -57,16 +55,6 @@ Node::Node(int d)
 List::List()
 {
     head = tail = NULL;
-}
-List::List(Node *h, Node *t)
-{
-    head = h;
-    tail = t;
-}
-List::List(List &l)
-{
-    head = l.head;
-    tail = l.tail;
 }
 List::~List()
 {
