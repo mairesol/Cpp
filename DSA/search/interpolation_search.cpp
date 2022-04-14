@@ -12,7 +12,6 @@ int interpolation_search(int arr[], int left, int right, int x)
             return mid;
         if (arr[mid] > x)
             return interpolation_search(arr, left, mid - 1, x);
-
         return interpolation_search(arr, mid + 1, right, x);
     }
 
