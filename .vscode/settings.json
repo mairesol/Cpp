@@ -111,6 +111,11 @@
 		"xstring": "cpp",
 		"xtree": "cpp",
 		"xutility": "cpp",
-		"xlocinfo": "cpp"
+		"xlocinfo": "cpp",
+		"xfacet": "cpp",
+		"xlocmes": "cpp",
+		"xloctime": "cpp",
+		"xstddef": "cpp",
+		"xtr1common": "cpp"
 	}
 }
