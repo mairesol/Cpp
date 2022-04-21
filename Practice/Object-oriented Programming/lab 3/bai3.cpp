@@ -10,8 +10,8 @@ private:
 public:
     CTimeSpan(int = 0, int = 0, int = 0, int = 0);
 
-    friend CTimeSpan chuan_hoa(CTimeSpan &);
     long tong_thoi_gian() const;
+    friend CTimeSpan chuan_hoa(CTimeSpan &);
 
     CTimeSpan operator+(const CTimeSpan &);
     CTimeSpan operator-(const CTimeSpan &);
@@ -46,6 +46,10 @@ int main()
 
 CTimeSpan::CTimeSpan(int a, int b, int c, int d) : ngay(a), gio(b), phut(c), giay(d) {}
 
+long CTimeSpan::tong_thoi_gian() const
+{
+    return (86400 * ngay + 3600 * gio + 60 * phut + giay);
+}
 CTimeSpan chuan_hoa(CTimeSpan &obj)
 {
     long sa = obj.tong_thoi_gian();
@@ -58,10 +62,6 @@ CTimeSpan chuan_hoa(CTimeSpan &obj)
     obj.giay = sa;
 
     return obj;
-}
-long CTimeSpan::tong_thoi_gian() const
-{
-    return (86400 * ngay + 3600 * gio + 60 * phut + giay);
 }
 
 CTimeSpan CTimeSpan::operator+(const CTimeSpan &obj)
