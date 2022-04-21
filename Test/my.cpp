@@ -1,128 +1,148 @@
 #include <iostream>
-#include <math.h>
 
 using namespace std;
 
-class SoPhuc
+class CTimeSpan
 {
 private:
-    double thuc, ao;
+    int ngay, gio, phut, giay;
 
 public:
-    SoPhuc(double = 0, double = 0);
+    CTimeSpan(int = 0, int = 0, int = 0, int = 0);
 
-    friend double module(const SoPhuc &);
+    friend CTimeSpan chuan_hoa(CTimeSpan &);
+    long tong_thoi_gian() const;
 
-    SoPhuc operator+(const SoPhuc &);
-    SoPhuc operator-(const SoPhuc &);
-    SoPhuc operator*(const SoPhuc &);
-    SoPhuc operator/(const SoPhuc &);
+    CTimeSpan operator+(const CTimeSpan &);
+    CTimeSpan operator-(const CTimeSpan &);
 
-    bool operator==(const SoPhuc &);
-    bool operator!=(const SoPhuc &);
-    bool operator>(const SoPhuc &);
-    bool operator>=(const SoPhuc &);
-    bool operator<(const SoPhuc &);
-    bool operator<=(const SoPhuc &);
+    bool operator==(const CTimeSpan &);
+    bool operator!=(const CTimeSpan &);
+    bool operator>(const CTimeSpan &);
+    bool operator>=(const CTimeSpan &);
+    bool operator<(const CTimeSpan &);
+    bool operator<=(const CTimeSpan &);
 
-    friend istream &operator>>(istream &, SoPhuc &);
-    friend ostream &operator<<(ostream &, const SoPhuc &);
+    friend istream &operator>>(istream &, CTimeSpan &);
+    friend ostream &operator<<(ostream &, const CTimeSpan &);
 };
 
 int main()
 {
-    SoPhuc p1, p2;
-    cout << "Nhap so phuc thu nhat: ";
-    cin >> p1;
-    cout << "Nhap so phuc thu hai: ";
-    cin >> p2;
+    int a = -1;
+    cout << a / 24;
 
-    cout << "\nTong cua hai so phuc: ";
-    cout << p1 + p2;
-
-    cout << "\nHieu cua hai so phuc: ";
-    cout << p1 - p2;
-
-    cout << "\nTich cua hai so phuc: ";
-    cout << p1 * p2;
-
-    cout << "\nThuong cua hai so phuc: ";
-    cout << p1 / p2;
     return 0;
 }
 
-SoPhuc ::SoPhuc(double t, double a) : thuc(t), ao(a) {}
+CTimeSpan::CTimeSpan(int a, int b, int c, int d) : ngay(a), gio(b), phut(c), giay(d) {}
 
-double module(const SoPhuc &b)
+CTimeSpan chuan_hoa(CTimeSpan &obj)
 {
-    return sqrt(b.thuc * b.thuc + b.ao * b.ao);
-}
+    long sa = obj.tong_thoi_gian();
+    obj.ngay = sa / 86400;
+    sa %= 86400;
+    obj.gio = sa / 3600;
+    sa %= 3600;
+    obj.phut = sa / 60;
+    sa %= 60;
+    obj.giay = sa;
 
-SoPhuc SoPhuc::operator+(const SoPhuc &b)
-{
-    return SoPhuc(thuc + b.thuc, ao + b.ao);
+    return obj;
 }
-SoPhuc SoPhuc::operator-(const SoPhuc &b)
+long CTimeSpan::tong_thoi_gian() const
 {
-    return SoPhuc(thuc - b.thuc, ao - b.ao);
-}
-SoPhuc SoPhuc::operator*(const SoPhuc &b)
-{
-    return SoPhuc(thuc * b.thuc - ao * b.ao, thuc * b.ao + ao * b.thuc);
-}
-SoPhuc SoPhuc::operator/(const SoPhuc &b)
-{
-    return SoPhuc((thuc * b.thuc + ao * b.ao) / (b.thuc * b.thuc + b.ao * b.ao), (b.thuc * ao - thuc * b.ao) / (b.thuc * b.thuc + b.ao * b.ao));
+    return (86400 * ngay + 3600 * gio + 60 * phut + giay);
 }
 
-bool SoPhuc::operator==(const SoPhuc &b)
+CTimeSpan CTimeSpan::operator+(const CTimeSpan &obj)
 {
-    return (module(*this) == module(b));
+    CTimeSpan sa(ngay + obj.ngay, gio + obj.gio, phut + obj.phut, giay + obj.giay);
+    chuan_hoa(sa);
+    return sa;
 }
-bool SoPhuc::operator!=(const SoPhuc &b)
+CTimeSpan CTimeSpan::operator-(const CTimeSpan &obj)
 {
-    return !(*this == b);
+    CTimeSpan sa(ngay - obj.ngay, gio - obj.gio, phut - obj.phut, giay - obj.giay);
+    if (sa.tong_thoi_gian() >= 0)
+        chuan_hoa(sa);
+    else
+        cout << "Loi tinh toan.\n";
+    return sa;
 }
-bool SoPhuc::operator>(const SoPhuc &b)
+
+bool CTimeSpan::operator==(const CTimeSpan &obj)
 {
-    return (module(*this) > module(b));
+    return (ngay == obj.ngay && gio == obj.gio && phut == obj.phut && giay == obj.giay);
 }
-bool SoPhuc::operator>=(const SoPhuc &b)
+bool CTimeSpan::operator!=(const CTimeSpan &obj)
 {
-    return (module(*this) >= module(b));
+    return !(*this == obj);
 }
-bool SoPhuc::operator<(const SoPhuc &b)
+bool CTimeSpan::operator>(const CTimeSpan &obj)
 {
-    return (module(*this) < module(b));
+    return (tong_thoi_gian() > obj.tong_thoi_gian());
 }
-bool SoPhuc::operator<=(const SoPhuc &b)
+bool CTimeSpan::operator>=(const CTimeSpan &obj)
 {
-    return (module(*this) <= module(b));
+    return (tong_thoi_gian() >= obj.tong_thoi_gian());
 }
-istream &operator>>(istream &is, SoPhuc &b)
+bool CTimeSpan::operator<(const CTimeSpan &obj)
 {
-    is >> b.thuc >> b.ao;
+    return (tong_thoi_gian() < obj.tong_thoi_gian());
+}
+bool CTimeSpan::operator<=(const CTimeSpan &obj)
+{
+    return (tong_thoi_gian() <= obj.tong_thoi_gian());
+}
+
+istream &operator>>(istream &is, CTimeSpan &obj)
+{
+    is >> obj.ngay;
+    while (obj.ngay < 0)
+
+    {
+        cout << "Ngay khong hop le, nhap lai ngay: ";
+        is >> obj.ngay;
+    }
+
+    is >> obj.gio;
+    while (obj.gio < 0)
+    {
+        cout << "Gio khong hop le, nhap lai gio: ";
+        is >> obj.gio;
+    }
+
+    is >> obj.phut;
+    while (obj.phut < 0)
+    {
+        cout << "Phut khong hop le, nhap lai phut: ";
+        is >> obj.phut;
+    }
+
+    is >> obj.giay;
+    while (obj.giay < 0)
+    {
+        cout << "Giay khong hop le, nhap lai giay: ";
+        is >> obj.giay;
+    }
+    chuan_hoa(obj);
     return is;
 }
-ostream &operator<<(ostream &os, const SoPhuc &b)
+ostream &operator<<(ostream &os, const CTimeSpan &obj)
 {
-    if (b.thuc == 0 && b.ao == 0)
-        os << 0;
-    else if (b.ao == 0)
-        os << b.thuc;
-    else if (b.thuc == 0)
-    {
-        if (b.ao == 1)
-            os << 'i';
-        else
-            os << b.ao << 'i';
-    }
+    if (obj.tong_thoi_gian() < 0)
+        return os;
+
+    if (obj.tong_thoi_gian() == 0)
+        os << 0 << " giay";
+    else if (obj.tong_thoi_gian() < 60)
+        os << obj.giay << " giay";
+    else if (obj.tong_thoi_gian() < 3600)
+        os << obj.phut << " phut " << obj.giay << " giay";
+    else if (obj.tong_thoi_gian() < 86400)
+        os << obj.gio << " gio " << obj.phut << " phut " << obj.giay << " giay";
     else
-    {
-        if (b.ao == 1)
-            os << b.thuc << '+' << 'i';
-        else
-            os << b.thuc << '+' << b.ao << 'i';
-    }
+        os << obj.ngay << " ngay " << obj.gio << " gio " << obj.phut << " phut " << obj.giay << " giay";
     return os;
 }

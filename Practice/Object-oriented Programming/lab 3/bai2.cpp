@@ -111,7 +111,10 @@ istream &operator>>(istream &is, PhanSo &b)
 {
     is >> b.tu >> b.mau;
     while (b.mau == 0)
+    {
+        cout << "Mau so bang 0, nhap lai mau: ";
         is >> b.mau;
+    }
     chuan_hoa(b);
     return is;
 }
