@@ -6,7 +6,9 @@ Character handling functions
 This header declares a set of functions to classify and transform individual characters.
 */
 
-#include <bits/stdc++.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
 
 using namespace std;
 

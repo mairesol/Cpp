@@ -6,8 +6,9 @@ C Standard General Utilities Library
 This header defines several general purpose functions, including dynamic memory management,
 random number generation, communication with the environment, integer arithmetics, searching, sorting and converting.
 */
-
-#include <bits/stdc++.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 
 using namespace std;
 

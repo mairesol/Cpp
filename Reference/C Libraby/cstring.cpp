@@ -10,7 +10,9 @@ This header file defines several functions to manipulate C strings and arrays.
 Types:
 size_t: Unsigned integral typ
 */
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
 
 using namespace std;
 struct
@@ -212,7 +214,7 @@ int main()
 
     char szInput[256];
     printf("Enter a sentence: ");
-    gets(szInput);
+    cin.getline(szInput, 256);
     printf("The sentence entered is %u characters long.\n", (unsigned)strlen(szInput));
     // Enter sentence: just testing
     // The sentence entered is 12 characters long.

@@ -6,7 +6,9 @@ C numerics library
 Header <cmath> declares a set of functions to compute common mathematical operations and transformations:
 */
 
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <math.h>
+#include <iostream>
 
 using namespace std;
 

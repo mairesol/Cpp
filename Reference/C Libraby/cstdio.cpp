@@ -23,7 +23,7 @@ fpos_t: Object containing information to specify a position within a file
 size_t: Unsigned integral type
 */
 
-#include <bits/stdc++.h>
+#include <stdio.h>
 
 using namespace std;
 

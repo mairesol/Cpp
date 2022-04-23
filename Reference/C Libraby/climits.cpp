@@ -6,7 +6,7 @@ Sizes of integral types
 This header defines constants with the limits of fundamental integral types for the specific system and compiler implementation used.
 */
 
-#include <bits/stdc++.h>
+#include <limits.h>
 
 using namespace std;
 
