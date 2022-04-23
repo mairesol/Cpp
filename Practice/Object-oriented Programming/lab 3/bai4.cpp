@@ -36,10 +36,10 @@ int main()
     cout << "\nNhap so nguyen: ";
     cin >> a;
 
-    cout << "\nPhep cong so nguyen: ";
+    cout << "\nPhep cong khoang thoi gian voi so nguyen: ";
     cout << p + a;
 
-    cout << "\nPhep tru so nguyen: ";
+    cout << "\nPhep tru khoang thoi gian voi so nguyen: ";
     cout << p - a;
 
     cout << "\nNhap khoang thoi gian thu hai: ";
