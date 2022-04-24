@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
@@ -18,6 +17,7 @@ int max_element(int *, int);
 
 int linear_search(int *, int, int);
 int advanced_linear_search(int *, int, int);
+int interpolation_search(int *, int, int, int);
 void interchange_sort(int *, int);
 void selection_sort(int *, int);
 void quick_sort(int *, int, int);
@@ -66,19 +66,27 @@ int main()
             cout << "\nNhap x: ";
             cin >> x;
             start = clock();
-            cout << "\nVi tri cua x thong qua tim kiem tuyen tinh: " << linear_search(arr, n, x) << " voi thoi gian thuc hien la ";
+            k = linear_search(arr, n, x);
+            if (k != -1)
+                cout << "\nVi tri cua x: " << k;
+            else
+                cout << "\nKhong tim thay x.";
             end = clock();
             time_use = (double)(end - start) / CLOCKS_PER_SEC;
-            cout << time_use << " giay.";
+            cout << "\nThoi gian thuc thi: " << time_use << " giay.";
             break;
         case 6:
             cout << "\nNhap x: ";
             cin >> x;
             start = clock();
-            cout << "\nVi tri cua x thong qua tim kiem tuyen tinh cai tien: " << advanced_linear_search(arr, n, x) << " voi thoi gian thuc hien la ";
+            k = advanced_linear_search(arr, n, x);
+            if (k != -1)
+                cout << "\nVi tri cua x: " << k;
+            else
+                cout << "\nKhong tim thay x.";
             end = clock();
             time_use = (double)(end - start) / CLOCKS_PER_SEC;
-            cout << time_use << " giay.";
+            cout << "\nThoi gian thuc thi: " << time_use << " giay.";
             break;
         case 7:
             cout << "\nNhap x: ";
@@ -90,11 +98,58 @@ int main()
             break;
         case 8:
             rand_array_inc(arr, n);
+            cout << "\nCac phan tu cua mang: ";
+            output(arr, n);
+
+            cout << "\nNhap x: ";
+            cin >> x;
+            start = clock();
+            k = 0;
+            while (x > arr[k] && k < n)
+                k++;
+            if (x == arr[k] && k < n)
+                cout << "\nVi tri cua x: " << k;
+            else
+                cout << "\nKhong tim thay x.";
+            end = clock();
+            time_use = (double)(end - start) / CLOCKS_PER_SEC;
+            cout << "\nThoi gian thuc thi: " << time_use << " giay.";
+
+            cout << "\nTat ca vi tri co gia tri x: ";
+            for (int i = k; i < n; i++)
+                if (arr[i] == x)
+                    cout << i << " ";
+                else
+                    break;
             break;
         case 9:
             rand_array_inc(arr, n);
-            break;
+            cout << "\nCac phan tu cua mang: ";
+            output(arr, n);
 
+            cout << "\nNhap x: ";
+            cin >> x;
+            start = clock();
+            k = interpolation_search(arr, 0, n - 1, x);
+            if (k == -1)
+                cout << "\nKhong tim thay x.";
+            else
+            {
+                while (k > 0 && x == arr[k - 1])
+                    k--;
+                cout << "\nVi tri cua x: " << k;
+            }
+            end = clock();
+            time_use = (double)(end - start) / CLOCKS_PER_SEC;
+            cout << "\nThoi gian thuc thi: " << time_use << " giay.";
+
+            cout << "\nTat ca vi tri co gia tri x: ";
+            for (int i = k; i < n; i++)
+                if (arr[i] == x)
+                    cout << i << " ";
+                else
+                    break;
+            break;
         case 10:
             cout << "\nCac cap gia tri trong mang: ";
             quick_sort(arr, 0, n - 1);
@@ -114,10 +169,23 @@ int main()
             }
             break;
         case 11:
+            start = clock();
+            interchange_sort(arr, n);
+            end = clock();
+            cout << "Mang sau khi sap xep bang Interchange Sort: ";
+            output(arr, n);
+            time_use = (double)(end - start) / CLOCKS_PER_SEC;
+            cout << "\nThoi gian thuc thi: " << time_use << " giay.";
 
             break;
         case 12:
-
+            start = clock();
+            selection_sort(arr, n);
+            end = clock();
+            cout << "Mang sau khi sap xep bang Selection Sort: ";
+            output(arr, n);
+            time_use = (double)(end - start) / CLOCKS_PER_SEC;
+            cout << "\nThoi gian thuc thi: " << time_use << " giay.";
             break;
         case 13:
             ::menu_yet = false;
@@ -184,6 +252,19 @@ int advanced_linear_search(int *arr, int n, int x)
         return i;
     return -1;
 }
+int interpolation_search(int arr[], int left, int right, int x)
+{
+    if (right >= left)
+    {
+        int mid = left + ((double)(right - left) * (x - arr[left]) / (arr[right] - arr[left]));
+        if (arr[mid] == x)
+            return mid;
+        if (arr[mid] > x)
+            return interpolation_search(arr, left, mid - 1, x);
+        return interpolation_search(arr, mid + 1, right, x);
+    }
+    return -1;
+}
 // ------------------------------------search------------------------------------ //
 
 // ------------------------------------sort------------------------------------ //
@@ -206,22 +287,22 @@ void selection_sort(int *arr, int n)
         swap(arr[i], arr[min_idx]);
     }
 }
-void quick_sort(int *arr, int l, int r)
+void quick_sort(int arr[], int low, int high)
 {
-    if (l < r)
+    if (low < high)
     {
-        int p = partition(arr, l, r);
+        int pi = partition(arr, low, high);
 
-        quick_sort(arr, l, p - 1);
-        quick_sort(arr, p + 1, r);
+        quick_sort(arr, low, pi - 1);
+        quick_sort(arr, pi + 1, high);
     }
 }
 // ------------------------------------sort------------------------------------ //
-int partition(int *arr, int l, int r)
+int partition(int arr[], int low, int high)
 {
-    int pivot = arr[r];
-    int i = l - 1;
-    for (int j = l; j < r; j++)
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j < high; j++)
     {
         if (arr[j] < pivot)
         {
@@ -229,7 +310,7 @@ int partition(int *arr, int l, int r)
             swap(arr[i], arr[j]);
         }
     }
-    swap(arr[i + 1], arr[r]);
+    swap(arr[high], arr[i + 1]);
     return i + 1;
 }
 
