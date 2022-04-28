@@ -24,7 +24,6 @@ public:
     Node *head;
     Node *tail;
     List();
-    List(Node *, Node *);
     ~List();
     bool empty();
     int size();
@@ -141,11 +140,6 @@ int main()
 List::List()
 {
     head = tail = NULL;
-}
-List::List(Node *h, Node *t)
-{
-    head = h;
-    tail = t;
 }
 List::~List()
 {

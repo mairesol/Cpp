@@ -65,7 +65,7 @@ dathuc dathuc::operator-(const dathuc &sub)
         else if (sub.bacdathuc < i)
             d.ptr[i] = ptr[i];
         else if (bacdathuc < i)
-            d.ptr[i] = sub.ptr[i];
+            d.ptr[i] = -sub.ptr[i];
     }
     return d;
 }

@@ -43,7 +43,8 @@ difference_type: ptrdiff_t
 size_type: size_t
 */
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
