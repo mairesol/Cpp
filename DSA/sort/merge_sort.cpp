@@ -22,31 +22,16 @@ void merge(int arr[], int left, int mid, int right)
     while (leftIndex < leftSize && rightIndex < rightSize)
     {
         if (leftArray[leftIndex] <= rightArray[rightIndex])
-        {
-            arr[mergeIndex] = leftArray[leftIndex];
-            leftIndex++;
-        }
+            arr[mergeIndex++] = leftArray[leftIndex++];
         else
-        {
-            arr[mergeIndex] = rightArray[rightIndex];
-            rightIndex++;
-        }
-        mergeIndex++;
+            arr[mergeIndex++] = rightArray[rightIndex++];
     }
 
     while (leftIndex < leftSize)
-    {
-        arr[mergeIndex] = leftArray[leftIndex];
-        leftIndex++;
-        mergeIndex++;
-    }
+        arr[mergeIndex++] = leftArray[leftIndex++];
 
     while (rightIndex < rightSize)
-    {
-        arr[mergeIndex] = rightArray[rightIndex];
-        rightIndex++;
-        mergeIndex++;
-    }
+        arr[mergeIndex++] = rightArray[rightIndex++];
 }
 
 void merge_sort(int arr[], int left, int right)
