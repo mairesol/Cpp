@@ -45,18 +45,18 @@ int main()
 
     for (int i = 0; i < a; i++)
     {
+        cout << "\t";
         A[i].keu();
-        cout << "\t";
     }
-    for (int i = 0; i < b; i++)
+    for (int i = 0; i < a; i++)
     {
+        cout << "\t";
         B[i].keu();
-        cout << "\t";
     }
-    for (int i = 0; i < c; i++)
+    for (int i = 0; i < a; i++)
     {
-        C[i].keu();
         cout << "\t";
+        C[i].keu();
     }
     return 0;
 }
@@ -65,16 +65,16 @@ int main()
 /*--------------------------------Bo--------------------------------*/
 void Bo::keu()
 {
-    cout << "*moo moo*";
+    cout << "moo moo";
 }
 /*--------------------------------Cuu--------------------------------*/
 void Cuu::keu()
 {
-    cout << "*baa baa*";
+    cout << "baa baa";
 }
 
 /*--------------------------------De--------------------------------*/
 void De::keu()
 {
-    cout << "*baa baa*";
+    cout << "baa baa";
 }

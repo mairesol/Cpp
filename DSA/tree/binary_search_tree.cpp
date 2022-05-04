@@ -27,26 +27,24 @@ TNode *createTNode(int d)
     TNode *p = new TNode;
     if (p == NULL)
         return NULL;
-    else
-    {
-        p->data = d;
-        p->left = p->right = NULL;
-    }
+    p->data = d;
+    p->left = p->right = NULL;
+    return p;
 }
 
 void createTree(Tree &t)
 {
     t = NULL;
 }
-int insertNode(Tree &t, int x)
+int insert(Tree &t, int x)
 {
     if (t != NULL)
     {
         if (x == t->data)
             return 0;
         if (x < t->data)
-            insertNode(t->left, x);
-        insertNode(t->right, x);
+            insert(t->left, x);
+        insert(t->right, x);
     }
     else
     {

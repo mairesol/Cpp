@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ void LNR(Tree); // in - oder
 void LRN(Tree); // post - oder
 int numberNode(Tree);
 int numberLeafNode(Tree);
+int height(Tree);
 
 int main()
 {
@@ -28,55 +30,59 @@ TNode *createTNode(int d)
     TNode *p = new TNode;
     if (p == NULL)
         return NULL;
-    else
-    {
-        p->data = d;
-        p->left = p->right = NULL;
-    }
+    p->data = d;
+    p->left = p->right = NULL;
+    return p;
 }
 
 void createTree(Tree &t)
 {
     t = NULL;
 }
-void NLR(Tree root)
+void NLR(Tree t)
 {
-    if (root != NULL)
+    if (t != NULL)
     {
         // <Xử lý root>;
-        NLR(root->left);
-        NLR(root->right);
+        NLR(t->left);
+        NLR(t->right);
     }
 }
-void LNR(Tree root)
+void LNR(Tree t)
 {
-    if (root != NULL)
+    if (t != NULL)
     {
-        LNR(root->left);
+        LNR(t->left);
         // <Xử lý root>;
-        LNR(root->right);
+        LNR(t->right);
     }
 }
-void LRN(Tree root)
+void LRN(Tree t)
 {
-    if (root != NULL)
+    if (t != NULL)
     {
-        LRN(root->left);
-        LRN(root->right);
+        LRN(t->left);
+        LRN(t->right);
         // <Xử lý root>;
     }
 }
-int numberNode(Tree root)
+int numberNode(Tree t)
 {
-    if (root = NULL)
+    if (t == NULL)
         return 0;
-    return 1 + numberNode(root->left) + numberNode(root->right);
+    return 1 + numberNode(t->left) + numberNode(t->right);
 }
-int numberLeftNode(Tree root)
+int numberLeafNode(Tree t)
 {
-    if (root == NULL)
+    if (t == NULL)
         return 0;
-    if (root->left == NULL && root->right == NULL)
+    if (t->left == NULL && t->right == NULL)
         return 1;
-    return numberLeafNode(root->left) + numberLeafNode(root->right);
+    return numberLeafNode(t->left) + numberLeafNode(t->right);
+}
+int height(Tree t)
+{
+    if (t == NULL)
+        return 0;
+    return 1 + max(height(t->left), height(t->right));
 }
