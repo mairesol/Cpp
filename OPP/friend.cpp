@@ -13,13 +13,6 @@ public:
         this->length = length;
     }
     friend int printLength(Box);
-    /*
-    Hàm bạn là một hàm có thể truy cập đến các thành viên private (gồm cả các biến thành viên và các hàm thành viên) của một class,
-    như thể nó là một thành viên của class đó. Ngoại trừ đặc điểm ở trên ra thì hàm bạn hoàn toàn giống với hàm bình thường.
-    Một hàm bạn có thể chỉ là một hàm bình thường, hoặc là một hàm thành viên của một class khác. Để khai báo một hàm bạn,
-    chỉ cần sử dụng từ khóa friend ở trước phần nguyên mẫu (prototype) của hàm mà bạn muốn nó trở thành bạn của class.
-    Có thể khai báo hàm bạn bên trong phần public (công khai) hoặc phần private (riêng tư) của class đều được.
-    */
 };
 
 int printLength(Box b)
@@ -30,8 +23,10 @@ int printLength(Box b)
 
 class A
 {
-    int x = 5;
     friend class B;
+
+private:
+    int x = 5;
 };
 class B
 {

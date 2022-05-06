@@ -13,9 +13,7 @@ TNode *createTNode(int);
 typedef TNode *Tree;
 void createTree(Tree &);
 int insertNode(Tree &, int);
-
-int numberNode(Tree);
-int numberLeafNode(Tree);
+void remove(Tree &, int);
 
 int main()
 {
@@ -49,6 +47,56 @@ int insert(Tree &t, int x)
     else
     {
         t = new TNode;
-        if(
+        if (t == NULL)
+            return -1;
+        t->data = x;
+        t->left = t->right = NULL;
+        return 1;
+    }
+}
+
+TNode *search(Tree t, int x)
+{
+    if (t != NULL)
+    {
+        if (x == t->data)
+            return t;
+        if (x < t->data)
+            return search(t->left, x);
+        return search(t->right, x);
+    }
+    return NULL;
+}
+
+void remove(Tree &t, int x)
+{
+    if (t != NULL)
+    {
+        if (x < t->data)
+            remove(t->left, x);
+        else if (x > t->data)
+            remove(t->right, x);
+        else
+        {
+            TNode *pHuy = t;
+            if (t->left == NULL)
+                t = t->right;
+            else if (t->right == NULL)
+                t = t->left;
+            else
+                SearchStandFor(pHuy, t->right);
+            delete pHuy;
+        }
+    }
+}
+void SearchStandFor(Tree &pHuy, Tree &pTM)
+{
+    if (pTM->left != NULL)
+        SearchStandFor(pHuy, pTM->left);
+    else
+    {
+        pHuy->data = pTM->data;
+        pHuy = pTM;
+        pTM = pTM->right;
     }
 }

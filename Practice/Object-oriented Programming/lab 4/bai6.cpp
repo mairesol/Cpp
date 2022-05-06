@@ -65,7 +65,7 @@ int main()
     cout << "Nhap so luong de: ";
     cin >> c.so_luong;
 
-    cout << "\n\nTieng keu trong chan trai:";
+    cout << "\n\nTieng keu trong nong trai:";
     cout << "\nBo keu: ";
     for (ull i = 1; i <= a.so_luong; i++)
     {
@@ -169,7 +169,7 @@ ull Cuu::cho_sua()
 /*--------------------------------De--------------------------------*/
 void De::keu()
 {
-    cout << "*baa baa*";
+    cout << "*maa maa*";
 }
 ull De::cho_sua()
 {

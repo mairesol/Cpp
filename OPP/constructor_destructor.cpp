@@ -13,21 +13,21 @@ private:
 public:
     Employee()
     {
-        this->id = 0;
-        this->name = "";
-        this->salary = 0;
+        id = 0;
+        name = "";
+        salary = 0;
     }
     Employee(int id = 0, string name = "", float salary = 0)
     {
-        this->id = id;
-        this->name = name;
-        this->salary = salary;
+        id = id;
+        name = name;
+        salary = salary;
     }
     Employee(Employee &A)
     {
-        this->id = A.id;
-        this->name = A.name;
-        this->salary = A.salary;
+        id = A.id;
+        name = A.name;
+        salary = A.salary;
     }
 
     ~Employee()

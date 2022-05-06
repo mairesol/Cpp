@@ -142,14 +142,14 @@ public:
         for (int i = 0; i < NV.size(); i++)
         {
             cout << "STT:" << i + 1 << endl;
-            NV.at(i)->xuat(); // tùy vào đối tượng là gì mà phương thức xuất sẽ được gọi theo đúng đối tượng đó
+            NV[i]->xuat(); // tùy vào đối tượng là gì mà phương thức xuất sẽ được gọi theo đúng đối tượng đó
         }
     }
 
     void tinhLuong()
     {
         for (int i = 0; i < NV.size(); i++)
-            NV.at(i)->tinhLuong(); // tùy vào đối tượng là gì mà phương thức tính lương sẽ được gọi theo đúng đối tượng đó
+            NV[i]->tinhLuong(); // tùy vào đối tượng là gì mà phương thức tính lương sẽ được gọi theo đúng đối tượng đó
     }
 };
 

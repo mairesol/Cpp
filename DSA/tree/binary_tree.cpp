@@ -13,9 +13,9 @@ TNode *createTNode(int);
 
 typedef TNode *Tree;
 void createTree(Tree &);
-void NLR(Tree); // pre - oder
-void LNR(Tree); // in - oder
-void LRN(Tree); // post - oder
+void NLR(Tree); // pre - order
+void LNR(Tree); // in - order
+void LRN(Tree); // post - order
 int numberNode(Tree);
 int numberLeafNode(Tree);
 int height(Tree);

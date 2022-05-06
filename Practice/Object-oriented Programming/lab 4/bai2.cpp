@@ -8,8 +8,6 @@ bool menu_yet = false;
 
 class Ngay
 {
-    friend class Nguoi;
-
 private:
     int ngay, thang, nam;
 
