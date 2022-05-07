@@ -89,7 +89,7 @@ void remove(Tree &t, int x)
         }
     }
 }
-void SearchStandFor(Tree &pHuy, Tree &pTM)
+void SearchStandFor(Tree &pHuy, Tree &pTM) // Nút có khoá nhỏ nhất (trái nhất) bên cây con phải node cần xóa
 {
     if (pTM->left != NULL)
         SearchStandFor(pHuy, pTM->left);

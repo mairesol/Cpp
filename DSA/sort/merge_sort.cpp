@@ -5,33 +5,18 @@ using namespace std;
 
 void merge(int arr[], int left, int mid, int right)
 {
-    int leftSize = mid - left + 1;
-    int rightSize = right - mid;
-
-    int *leftArray = new int[leftSize];
-    int *rightArray = new int[rightSize];
-
-    for (int i = 0; i < leftSize; i++)
-        leftArray[i] = arr[left + i];
-    for (int i = 0; i < rightSize; i++)
-        rightArray[i] = arr[mid + i + 1];
-
-    int leftIndex = 0, rightIndex = 0;
-    int mergeIndex = left;
-
-    while (leftIndex < leftSize && rightIndex < rightSize)
+    int length = right - left + 1;
+    int *temp = new int[length];
+    int pos = 0, i = left, j = mid + 1;
+    while (!(i > mid && j > right))
     {
-        if (leftArray[leftIndex] <= rightArray[rightIndex])
-            arr[mergeIndex++] = leftArray[leftIndex++];
+        if ((i <= mid && j <= right && arr[i] < arr[j]) || j > right)
+            temp[pos++] = arr[i++];
         else
-            arr[mergeIndex++] = rightArray[rightIndex++];
+            temp[pos++] = arr[j++];
     }
-
-    while (leftIndex < leftSize)
-        arr[mergeIndex++] = leftArray[leftIndex++];
-
-    while (rightIndex < rightSize)
-        arr[mergeIndex++] = rightArray[rightIndex++];
+    for (int k = 0; k < length; k++)
+        arr[left + k] = temp[k];
 }
 
 void merge_sort(int arr[], int left, int right)
