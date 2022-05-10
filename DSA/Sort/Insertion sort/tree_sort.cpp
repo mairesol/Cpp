@@ -8,6 +8,7 @@ struct TNode
     TNode *left;
     TNode *right;
 };
+
 TNode *createTNode(int d)
 {
     TNode *p = new TNode;
@@ -18,8 +19,6 @@ TNode *createTNode(int d)
     return p;
 }
 
-// Stores inorder traversal of the BST
-// in arr[]
 void storeSorted(TNode *root, int arr[], int &i)
 {
     if (root != NULL)
@@ -30,8 +29,6 @@ void storeSorted(TNode *root, int arr[], int &i)
     }
 }
 
-/* A utility function to insert a new
-   TNode with given key in BST */
 TNode *insert(TNode *node, int x)
 {
     /* If the tree is empty, return a new TNode */
@@ -48,7 +45,6 @@ TNode *insert(TNode *node, int x)
     return node;
 }
 
-// This function sorts arr[0..n-1] using Tree Sort
 void tree_sort(int arr[], int n)
 {
     struct TNode *root = NULL;
@@ -58,20 +54,10 @@ void tree_sort(int arr[], int n)
     for (int i = 1; i < n; i++)
         root = insert(root, arr[i]);
 
-    // Store inorder traversal of the BST
-    // in arr[]
     int i = 0;
     storeSorted(root, arr, i);
 }
 int main()
 {
-    // create input array
-    int arr[] = {5, 4, 7, 2, 11};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    tree_sort(arr, n);
-
-    for (int i = 0; i < n; i++)
-        cout << arr[i] << " ";
     return 0;
 }
