@@ -328,7 +328,6 @@ int menu()
         cout << "\n 4. Tim tat ca vi tri co  chua gia tri lon nhat.";
         cout << "\n 5. Tim vi tri co gia tri x duoc nhap tu ban phim bang tim kiem tuyen tinh - tinh thoi gian thuc hien thuat toan.";
         cout << "\n 6. Tim vi tri co gia tri x duoc nhap tu ban phim bang tim kiem tuyen tinh cai tien - tinh thoi gian thuc hien thuat toan.";
-        cout << "\n 6. Tim vi tri co gia tri x duoc nhap tu ban phim bang tim kiem tuyen tinh cai tien - tinh thoi gian thuc hien thuat toan.";
         cout << "\n 7. Tim tat ca vi tri co gia tri x duoc nhap tu ban phim.";
         cout << "\n 8. Phat sinh lai mang mot chieu cac so nguyen theo chieu tang dan va su dung cac thuat toan tim kiem tuyen tinh de lam lai cau 5, 6, 7.";
         cout << "\n 9. Phat sinh lai mang mot chieu cac so nguyen theo chieu tang dan va su dung cac thuat toan tim kiem noi suy de lam lai cau 5, 6, 7.";

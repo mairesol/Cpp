@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// 47 43 51 42 46 49 64 44 58 66 45 57 60  69 52 63 97 55 68 42 0
 bool menu_yet = false;
 int menu();
 
@@ -21,17 +22,13 @@ void output_NLR(Tree);
 void output_NRL(Tree);
 void output_RNL(Tree);
 void output_RLN(Tree);
-TNode *search(Tree, int);
-int remove(Tree &, int);
-void searchStandFor(Tree &, Tree &);
 
 int main()
 {
-    int n, x, y;
-    Tree t, ans;
+    int n, x;
+    Tree t;
     createTree(t);
 
-    // 47 43 51 42 46 49 64 44 58 66 45 57 60  69 52 63 97 55 68 42 0
     int choice;
     bool flag = true;
     while (flag)
@@ -39,10 +36,6 @@ int main()
         choice = menu();
         switch (choice)
         {
-        case 0:
-            cout << "Chuong trinh ngung hoat dong.\n";
-            flag = false;
-            break;
         case 1:
             clear(t);
             cout << "\nNhap cac gia tri nguyen duong (neu nhap so khong duong thi dung): ";
@@ -67,27 +60,10 @@ int main()
             output_RLN(t);
             break;
         case 2:
-            cout << "\nNhap x: ";
-            cin >> x;
-            ans = search(t, x);
-            if (ans == NULL)
-                cout << "\nKhong tim thay x.";
-            else
-                cout << "\nTim thay x.";
+
             break;
         case 3:
-            cout << "\nNhap x: ";
-            cin >> x;
-            x = remove(t, x);
-            cout << x;
-            if (x == -1)
-                cout << "\nXoa khong thanh cong.";
-            else
-            {
-                cout << "\nXoa thanh cong.";
-                cout << "\nCay sau khi xoa x (LNR): ";
-                output_LNR(t);
-            }
+
             break;
         case 4:
             break;
@@ -98,6 +74,10 @@ int main()
 
         case 15:
             ::menu_yet = false;
+            break;
+        case 16:
+            cout << "Chuong trinh ngung hoat dong.\n";
+            flag = false;
             break;
         default:
             cout << "Lua chon khong dung, vui long nhap lai.";
@@ -132,50 +112,14 @@ void insert(Tree &t, int x)
         t->left = t->right = NULL;
     }
 }
-TNode *search(Tree t, int x)
+void clear(Tree &t)
 {
     if (t != NULL)
     {
-        if (x == t->key)
-            return t;
-        if (x < t->key)
-            return search(t->left, x);
-        return search(t->right, x);
-    }
-    return NULL;
-}
-int remove(Tree &t, int x)
-{
-    if (t != NULL)
-    {
-        if (x < t->key)
-            remove(t->left, x);
-        else if (x > t->key)
-            remove(t->right, x);
-        else
-        {
-            TNode *pDelete = t;
-            if (t->left == NULL)
-                t = t->right;
-            else if (t->right == NULL)
-                t = t->left;
-            else
-                searchStandFor(pDelete, t->right);
-            delete pDelete;
-        }
-        return 1;
-    }
-    return -1;
-}
-void searchStandFor(Tree &pDelete, Tree &pStand) // Nút có khoá nhỏ nhất (trái nhất) bên cây con phải node cần xóa
-{
-    if (pStand->left != NULL)
-        searchStandFor(pDelete, pStand->left);
-    else
-    {
-        pDelete->key = pStand->key;
-        pDelete = pStand;
-        pStand = pStand->right;
+        clear(t->left);
+        clear(t->right);
+        delete t;
+        t = NULL;
     }
 }
 void output_LNR(Tree t)
@@ -232,16 +176,6 @@ void output_RLN(Tree t)
         cout << t->key << " ";
     }
 }
-void clear(Tree &t)
-{
-    if (t != NULL)
-    {
-        clear(t->left);
-        clear(t->right);
-        delete t;
-        t = NULL;
-    }
-}
 // ------------------------------------tree------------------------------------ //
 
 // ------------------------------------menu------------------------------------ //
@@ -252,7 +186,6 @@ int menu()
     {
         cout << "\n ================================";
         cout << "\n Vui long chon cac chuc nang sau:";
-        cout << "\n 0. Thoat chuong trinh.";
         cout << "\n 1. Nhap vao cay nhi phan tim kiem tu ban phim va thuc hien in ra cay theo cac thu tu: LNR, LRN, NLR, NRL, RNL, RLN.";
         cout << "\n 2. Tim mot node co khoa bang x tren cay. In ra man hinh thong bao co neu tim duoc, nguoc lai thong bao khong tim duoc.";
         cout << "\n 3. Xoa mot node co khoa bang x tren cay. In ra man hinh xoa thanh cong hoac khong thanh cong.";
@@ -268,6 +201,7 @@ int menu()
         cout << "\n 13. In ra gia tri cua node co gia tri nho nhat cua cay con phai cua cay.";
         cout << "\n 14. In ra cac node tren tung muc cua cay.";
         cout << "\n 15. Xem lai menu.";
+        cout << "\n 16. Thoat chuong trinh.";
         cout << "\n ================================";
         ::menu_yet = true;
     }
