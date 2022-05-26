@@ -21,9 +21,9 @@ private:
 public:
     ull so_luong;
 
-    void keu();
+    virtual void keu() = 0;
     ull sinh_con();
-    ull cho_sua();
+    virtual ull cho_sua() = 0;
 };
 
 class Bo : public GiaSuc

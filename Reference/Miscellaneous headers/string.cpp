@@ -45,6 +45,7 @@ size_type: size_t
 
 #include <iostream>
 #include <string>
+#include <string.h>
 
 using namespace std;
 
@@ -62,19 +63,19 @@ int main()
     initializer list:       string (initializer_list<char> il);
     move:                   string (string&& str) noexcept;
     */
-    std::string s0("Initial string");
-    std::string s1;
-    std::string s2(s0);
-    std::string s3(s0, 8, 3);
-    std::string s4("A character sequence");
-    std::string s5("Another character sequence", 12);
-    std::string s6a(10, 'x');
-    std::string s6b(10, 42); // 42 is the ASCII code for '*'
-    std::string s7(s0.begin(), s0.begin() + 7);
+    string s0("Initial string");
+    string s1;
+    string s2(s0);
+    string s3(s0, 8, 3);
+    string s4("A character sequence");
+    string s5("Another character sequence", 12);
+    string s6a(10, 'x');
+    string s6b(10, 42); // 42 is the ASCII code for '*'
+    string s7(s0.begin(), s0.begin() + 7);
 
-    std::cout << "s1: " << s1 << "\ns2: " << s2 << "\ns3: " << s3;
-    std::cout << "\ns4: " << s4 << "\ns5: " << s5 << "\ns6a: " << s6a;
-    std::cout << "\ns6b: " << s6b << "\ns7: " << s7 << '\n';
+    cout << "s1: " << s1 << "\ns2: " << s2 << "\ns3: " << s3;
+    cout << "\ns4: " << s4 << "\ns5: " << s5 << "\ns6a: " << s6a;
+    cout << "\ns6b: " << s6b << "\ns7: " << s7 << '\n';
     // s1:
     // s2: Initial string
     // s3: str
@@ -136,59 +137,59 @@ int main()
     istream& getline (istream&  is, string& str);
     istream& getline (istream&& is, string& str);
     */
-    std::string str1, str2, str3;
+    string str1, str2, str3;
     str1 = "Test string: "; // c-string
     str2 = 'x';             // single character
     str3 = str1 + str2;     // string
 
-    std::cout << str3 << '\n';
+    cout << str3 << '\n';
     // Test string: x
 
-    std::string firstlevel("com");
-    std::string secondlevel("cplusplus");
-    std::string scheme("http://");
-    std::string hostname;
-    std::string url;
+    string firstlevel("com");
+    string secondlevel("cplusplus");
+    string scheme("http://");
+    string hostname;
+    string url;
 
     hostname = "www." + secondlevel + '.' + firstlevel;
     url = scheme + hostname;
 
-    std::cout << url << '\n';
+    cout << url << '\n';
     // http://www.cplusplus.com
 
-    std::string name("John");
-    std::string family("Smith");
+    string name("John");
+    string family("Smith");
     name += " K. "; // c-string
     name += family; // string
     name += '\n';   // character
 
-    std::cout << name;
+    cout << name;
     // John K. Smith
 
-    std::string foo = "alpha";
-    std::string bar = "beta";
+    string foo = "alpha";
+    string bar = "beta";
 
     if (foo == bar)
-        std::cout << "foo and bar are equal\n";
+        cout << "foo and bar are equal\n";
     if (foo != bar)
-        std::cout << "foo and bar are not equal\n";
+        cout << "foo and bar are not equal\n";
     if (foo < bar)
-        std::cout << "foo is less than bar\n";
+        cout << "foo is less than bar\n";
     if (foo > bar)
-        std::cout << "foo is greater than bar\n";
+        cout << "foo is greater than bar\n";
     if (foo <= bar)
-        std::cout << "foo is less than or equal to bar\n";
+        cout << "foo is less than or equal to bar\n";
     if (foo >= bar)
-        std::cout << "foo is greater than or equal to bar\n";
+        cout << "foo is greater than or equal to bar\n";
     // foo and bar are not equal
     // foo is less than bar
     // foo is less than or equal to bar
 
-    std::string name;
+    string name;
 
-    std::cout << "Please, enter your full name: ";
-    std::getline(std::cin, name);
-    std::cout << "Hello, " << name << "!\n";
+    cout << "Please, enter your full name: ";
+    getline(cin, name);
+    cout << "Hello, " << name << "!\n";
 
     /*
     Iterators:
@@ -208,14 +209,14 @@ int main()
 
     crend       Return const_reverse_iterator to reverse end
     */
-    std::string str("Test string");
-    for (std::string::iterator it = str.begin(); it != str.end(); ++it)
-        std::cout << *it;
-    std::cout << '\n';
+    string str("Test string");
+    for (string::iterator it = str.begin(); it != str.end(); ++it)
+        cout << *it;
+    cout << '\n';
 
-    std::string str("now step live...");
-    for (std::string::reverse_iterator rit = str.rbegin(); rit != str.rend(); ++rit)
-        std::cout << *rit;
+    string str("now step live...");
+    for (string::reverse_iterator rit = str.rbegin(); rit != str.rend(); ++rit)
+        cout << *rit;
     // ...evil pets won
 
     /*
@@ -236,40 +237,40 @@ int main()
 
     shrink_to_fit       Shrink to fit:     void shrink_to_fit();
     */
-    std::string str("Test string");
-    std::cout << "size: " << str.size() << "\n";
-    std::cout << "length: " << str.length() << "\n";
-    std::cout << "capacity: " << str.capacity() << "\n";
-    std::cout << "max_size: " << str.max_size() << "\n";
+    string str("Test string");
+    cout << "size: " << str.size() << "\n";
+    cout << "length: " << str.length() << "\n";
+    cout << "capacity: " << str.capacity() << "\n";
+    cout << "max_size: " << str.max_size() << "\n";
     // size: 11
     // length: 11
     // capacity: 15
     // max_size: 4294967291
 
-    std::string str("I like to code in C");
-    std::cout << str << '\n';
+    string str("I like to code in C");
+    cout << str << '\n';
 
     unsigned sz = str.size();
 
     str.resize(sz + 2, '+');
-    std::cout << str << '\n';
+    cout << str << '\n';
 
     str.resize(14);
-    std::cout << str << '\n';
+    cout << str << '\n';
     // I like to code in C
     // I like to code in C++
     // I like to code
 
-    std::string content;
-    std::string line;
-    std::cout << "Please introduce a text. Enter an empty line to finish:\n";
+    string content;
+    string line;
+    cout << "Please introduce a text. Enter an empty line to finish:\n";
     do
     {
-        getline(std::cin, line);
+        getline(cin, line);
         content += line + '\n';
     } while (!line.empty());
-    std::cout << "The text you introduced was:\n"
-              << content;
+    cout << "The text you introduced was:\n"
+         << content;
 
     /*
     Element access:
@@ -283,25 +284,25 @@ int main()
 
     data            Get string data:    const char* data() const noexcept;
     */
-    std::string str("test string");
+    string str("test string");
     str.front() = 'T';
-    std::cout << str << '\n';
+    cout << str << '\n';
     // Test string
 
-    std::string str("hello world.");
+    string str("hello world.");
     str.back() = '!';
-    std::cout << str << '\n';
+    cout << str << '\n';
     //   hello world!
 
-    std::string str = "Test string";
+    string str = "Test string";
     char *cstr = "Test string";
 
-    if (str.length() == std::strlen(cstr))
+    if (str.length() == strlen(cstr))
     {
-        std::cout << "str and cstr have the same length.\n";
+        cout << "str and cstr have the same length.\n";
 
         if (memcmp(cstr, str.data(), str.length()) == 0)
-            std::cout << "str and cstr have the same content.\n";
+            cout << "str and cstr have the same content.\n";
     }
     // str and cstr have the same length.
     // str and cstr have the same content.
@@ -354,9 +355,9 @@ int main()
 
     swap            Swap string values:     void swap (string& str);
     */
-    std::string str;
-    std::string str2 = "Writing ";
-    std::string str3 = "print 10 and then 5 more";
+    string str;
+    string str2 = "Writing ";
+    string str3 = "print 10 and then 5 more";
 
     str.append(str2);                         // "Writing "
     str.append(str3, 6, 3);                   // "10 "
@@ -367,29 +368,29 @@ int main()
     str.append(5, 0x2E);                      // "....."
     // Writing 10 dots here: .......... and then 5 more.....
 
-    std::string str;
-    std::string base = "The quick brown fox jumps over a lazy dog.";
+    string str;
+    string base = "The quick brown fox jumps over a lazy dog.";
 
     str.assign(base);
-    std::cout << str << '\n';
+    cout << str << '\n';
 
     str.assign(base, 10, 9);
-    std::cout << str << '\n';
+    cout << str << '\n';
 
     str.assign("pangrams are cool", 7);
-    std::cout << str << '\n';
+    cout << str << '\n';
 
     str.assign("c-string");
-    std::cout << str << '\n';
+    cout << str << '\n';
 
     str.assign(10, '*');
-    std::cout << str << '\n';
+    cout << str << '\n';
 
     str.assign(10, 0x2D);
-    std::cout << str << '\n';
+    cout << str << '\n';
 
     str.assign(base.begin() + 16, base.end() - 12);
-    std::cout << str << '\n';
+    cout << str << '\n';
     // The quick brown fox jumps over a lazy dog.
     // brown fox
     // pangram
@@ -398,10 +399,10 @@ int main()
     // ----------
     // fox jumps over
 
-    std::string str = "to be question";
-    std::string str2 = "the ";
-    std::string str3 = "or not to be";
-    std::string::iterator it;
+    string str = "to be question";
+    string str2 = "the ";
+    string str3 = "or not to be";
+    string::iterator it;
 
     // used in the same order as described above:
     str.insert(6, str2);                                // to be (the )question
@@ -413,38 +414,38 @@ int main()
     str.insert(str.end(), 3, '.');                      // to be, not to be: that is the question(...)
     str.insert(it + 2, str3.begin(), str3.begin() + 3); // (or )
 
-    std::cout << str << '\n';
+    cout << str << '\n';
     // to be, or not to be: that is the question...
 
-    std::string str("This is an example sentence.");
-    std::cout << str << '\n';
+    string str("This is an example sentence.");
+    cout << str << '\n';
 
     str.erase(10, 8);
-    std::cout << str << '\n';
+    cout << str << '\n';
 
     str.erase(str.begin() + 9);
-    std::cout << str << '\n';
+    cout << str << '\n';
 
     str.erase(str.begin() + 5, str.end() - 9);
-    std::cout << str << '\n';
+    cout << str << '\n';
     // This is an example sentence.
     // This is an sentence.
     // This is a sentence.
     // This sentence.
 
-    std::string base = "this is a test string.";
-    std::string str2 = "n example";
-    std::string str3 = "sample phrase";
-    std::string str4 = "useful.";
+    string base = "this is a test string.";
+    string str2 = "n example";
+    string str3 = "sample phrase";
+    string str4 = "useful.";
 
     // Using positions:                 0123456789*123456789*12345
-    std::string str = base;           // "this is a test string."
+    string str = base;                // "this is a test string."
     str.replace(9, 5, str2);          // "this is an example string." (1)
     str.replace(19, 6, str3, 7, 6);   // "this is an example phrase." (2)
     str.replace(8, 10, "just a");     // "this is just a phrase."     (3)
     str.replace(8, 6, "a shorty", 7); // "this is a short phrase."    (4)
     str.replace(22, 1, 3, '!');       // "this is a short phrase!!!"  (5)
-    std::cout << str << '\n';
+    cout << str << '\n';
     // this is a short phrase!!!
 
     // Using iterators:                                               0123456789*123456789*
@@ -453,19 +454,19 @@ int main()
     str.replace(str.begin() + 8, str.begin() + 14, "is coolness", 7);   // "replace is cool!!!"    (4)
     str.replace(str.begin() + 12, str.end() - 4, 4, 'o');               // "replace is cooool!!!"  (5)
     str.replace(str.begin() + 11, str.end(), str4.begin(), str4.end()); // "replace is useful."    (6)
-    std::cout << str << '\n';
+    cout << str << '\n';
     // replace is useful.
 
-    std::string buyer("money");
-    std::string seller("goods");
+    string buyer("money");
+    string seller("goods");
 
-    std::cout << "Before the swap, buyer has " << buyer;
-    std::cout << " and seller has " << seller << '\n';
+    cout << "Before the swap, buyer has " << buyer;
+    cout << " and seller has " << seller << '\n';
 
     seller.swap(buyer);
 
-    std::cout << " After the swap, buyer has " << buyer;
-    std::cout << " and seller has " << seller << '\n';
+    cout << " After the swap, buyer has " << buyer;
+    cout << " and seller has " << seller << '\n';
     //  Before the swap, buyer has money and seller has goods
     //  After the swap, buyer has goods and seller has money
 
@@ -500,18 +501,18 @@ int main()
                                                 c-string:    int compare (const char* s) const;  int compare (size_t pos, size_t len, const char* s) const;
                                                 buffer:  int compare (size_t pos, size_t len, const char* s, size_t n) const;
     */
-    std::string str("Please split this sentence into tokens");
+    string str("Please split this sentence into tokens");
 
     char *cstr = new char[str.length() + 1];
-    std::strcpy(cstr, str.c_str());
+    strcpy(cstr, str.c_str());
 
     // cstr now contains a c-string copy of str
 
-    char *p = std::strtok(cstr, " ");
+    char *p = strtok(cstr, " ");
     while (p != 0)
     {
-        std::cout << p << '\n';
-        p = std::strtok(NULL, " ");
+        cout << p << '\n';
+        p = strtok(NULL, " ");
     }
     delete[] cstr;
     // Please
@@ -522,113 +523,113 @@ int main()
     // tokens
 
     char buffer[20];
-    std::string str("Test string...");
-    std::size_t length = str.copy(buffer, 6, 5);
+    string str("Test string...");
+    size_t length = str.copy(buffer, 6, 5);
     buffer[length] = '\0';
-    std::cout << "buffer contains: " << buffer << '\n';
+    cout << "buffer contains: " << buffer << '\n';
     // buffer contains: string
 
-    std::string str("There are two needles in this haystack with needles.");
-    std::string str2("needle");
+    string str("There are two needles in this haystack with needles.");
+    string str2("needle");
 
-    std::size_t found = str.find(str2);
-    if (found != std::string::npos)
-        std::cout << "first 'needle' found at: " << found << '\n';
+    size_t found = str.find(str2);
+    if (found != string::npos)
+        cout << "first 'needle' found at: " << found << '\n';
 
     found = str.find("needles are small", found + 1, 6);
-    if (found != std::string::npos)
-        std::cout << "second 'needle' found at: " << found << '\n';
+    if (found != string::npos)
+        cout << "second 'needle' found at: " << found << '\n';
 
     found = str.find("haystack");
-    if (found != std::string::npos)
-        std::cout << "'haystack' also found at: " << found << '\n';
+    if (found != string::npos)
+        cout << "'haystack' also found at: " << found << '\n';
 
     found = str.find('.');
-    if (found != std::string::npos)
-        std::cout << "Period found at: " << found << '\n';
+    if (found != string::npos)
+        cout << "Period found at: " << found << '\n';
 
     // let's replace the first needle:
     str.replace(str.find(str2), str2.length(), "preposition");
-    std::cout << str << '\n';
+    cout << str << '\n';
 
-    std::string str("The sixth sick sheik's sixth sheep's sick.");
-    std::string key("sixth");
+    string str("The sixth sick sheik's sixth sheep's sick.");
+    string key("sixth");
 
-    std::size_t found = str.rfind(key);
-    if (found != std::string::npos)
+    size_t found = str.rfind(key);
+    if (found != string::npos)
         str.replace(found, key.length(), "seventh");
-    std::cout << str << '\n';
+    cout << str << '\n';
     // The sixth sick sheik's seventh sheep's sick.
 
-    std::string str("Please, replace the vowels in this sentence by asterisks.");
-    std::size_t found = str.find_first_of("aeiou");
-    while (found != std::string::npos)
+    string str("Please, replace the vowels in this sentence by asterisks.");
+    size_t found = str.find_first_of("aeiou");
+    while (found != string::npos)
     {
         str[found] = '*';
         found = str.find_first_of("aeiou", found + 1);
     }
 
-    std::cout << str << '\n';
+    cout << str << '\n';
     // Pl**s*, r*pl*c* th* v*w*ls *n th*s s*nt*nc* by *st*r*sks.
 
-    std::string str1("/usr/bin/man");
-    std::cout << "Splitting: " << str << '\n';
-    std::size_t found = str.find_last_of("/\\");
-    std::cout << " path: " << str.substr(0, found) << '\n';
-    std::cout << " file: " << str.substr(found + 1) << '\n';
+    string str1("/usr/bin/man");
+    cout << "Splitting: " << str << '\n';
+    size_t found = str.find_last_of("/\\");
+    cout << " path: " << str.substr(0, found) << '\n';
+    cout << " file: " << str.substr(found + 1) << '\n';
     //  Splitting: /usr/bin/man
     //  path: /usr/bin
     //  file: man
 
-    std::string str("look for non-alphabetic characters...");
+    string str("look for non-alphabetic characters...");
 
-    std::size_t found = str.find_first_not_of("abcdefghijklmnopqrstuvwxyz ");
+    size_t found = str.find_first_not_of("abcdefghijklmnopqrstuvwxyz ");
 
-    if (found != std::string::npos)
+    if (found != string::npos)
     {
-        std::cout << "The first non-alphabetic character is " << str[found];
-        std::cout << " at position " << found << '\n';
+        cout << "The first non-alphabetic character is " << str[found];
+        cout << " at position " << found << '\n';
     }
     // The first non-alphabetic character is - at position 12
 
-    std::string str("Please, erase trailing white-spaces   \n");
-    std::string whitespaces(" \t\f\v\n\r");
+    string str("Please, erase trailing white-spaces   \n");
+    string whitespaces(" \t\f\v\n\r");
 
-    std::size_t found = str.find_last_not_of(whitespaces);
-    if (found != std::string::npos)
+    size_t found = str.find_last_not_of(whitespaces);
+    if (found != string::npos)
         str.erase(found + 1);
     else
         str.clear(); // str is all whitespace
 
-    std::cout << '[' << str << "]\n";
+    cout << '[' << str << "]\n";
     // [Please, erase trailing white-spaces]
 
-    std::string str = "We think in generalities, but we live in details.";
+    string str = "We think in generalities, but we live in details.";
     // (quoting Alfred N. Whitehead)
 
-    std::string str2 = str.substr(3, 5); // "think"
+    string str2 = str.substr(3, 5); // "think"
 
-    std::size_t pos = str.find("live"); // position of "live" in str
+    size_t pos = str.find("live"); // position of "live" in str
 
-    std::string str3 = str.substr(pos); // get from "live" to the end
+    string str3 = str.substr(pos); // get from "live" to the end
 
-    std::cout << str2 << ' ' << str3 << '\n';
+    cout << str2 << ' ' << str3 << '\n';
     // think live in details.
 
-    std::string str1("green apple");
-    std::string str2("red apple");
+    string str1("green apple");
+    string str2("red apple");
 
     if (str1.compare(str2) != 0)
-        std::cout << str1 << " is not " << str2 << '\n';
+        cout << str1 << " is not " << str2 << '\n';
 
     if (str1.compare(6, 5, "apple") == 0)
-        std::cout << "still, " << str1 << " is an apple\n";
+        cout << "still, " << str1 << " is an apple\n";
 
     if (str2.compare(str2.size() - 5, 5, "apple") == 0)
-        std::cout << "and " << str2 << " is also an apple\n";
+        cout << "and " << str2 << " is also an apple\n";
 
     if (str1.compare(6, 5, str2, 4, 5) == 0)
-        std::cout << "therefore, both are apples\n";
+        cout << "therefore, both are apples\n";
     // green apple is not red apple
     // still, green apple is an apple
     // and red apple is also an apple
@@ -659,47 +660,47 @@ int main()
     to_wstring      Convert numerical value to wide string
     */
 
-    std::string orbits("365.24 29.53");
-    std::string::size_type sz1; // alias of size_t
+    string orbits("365.24 29.53");
+    string::size_type sz1; // alias of size_t
 
-    double earth = std::stod(orbits, &sz1);
-    double moon = std::stod(orbits.substr(sz1));
-    std::cout << "The moon completes " << (earth / moon) << " orbits per Earth year.\n";
+    double earth = stod(orbits, &sz1);
+    double moon = stod(orbits.substr(sz1));
+    cout << "The moon completes " << (earth / moon) << " orbits per Earth year.\n";
     // The moon completes 12.3684 orbits per Earth year.
 
-    std::string orbits("686.97 365.24");
-    std::string::size_type sz2; // alias of size_t
+    string orbits("686.97 365.24");
+    string::size_type sz2; // alias of size_t
 
-    float mars = std::stof(orbits, &sz2);
-    float earth = std::stof(orbits.substr(sz2));
-    std::cout << "One martian year takes " << (mars / earth) << " Earth years.\n";
+    float mars = stof(orbits, &sz2);
+    float earth = stof(orbits.substr(sz2));
+    cout << "One martian year takes " << (mars / earth) << " Earth years.\n";
     // One martian year takes 1.88087 Earth years.
 
-    std::string str_dec = "2001, A Space Odyssey";
-    std::string str_hex = "40c3";
-    std::string str_bin = "-10010110001";
-    std::string str_auto = "0x7f";
+    string str_dec = "2001, A Space Odyssey";
+    string str_hex = "40c3";
+    string str_bin = "-10010110001";
+    string str_auto = "0x7f";
 
-    std::string::size_type sz3; // alias of size_t
+    string::size_type sz3; // alias of size_t
 
-    int i_dec = std::stoi(str_dec, &sz3);
-    int i_hex = std::stoi(str_hex, nullptr, 16);
-    int i_bin = std::stoi(str_bin, nullptr, 2);
-    int i_auto = std::stoi(str_auto, nullptr, 0);
+    int i_dec = stoi(str_dec, &sz3);
+    int i_hex = stoi(str_hex, nullptr, 16);
+    int i_bin = stoi(str_bin, nullptr, 2);
+    int i_auto = stoi(str_auto, nullptr, 0);
 
-    std::cout << str_dec << ": " << i_dec << " and [" << str_dec.substr(sz) << "]\n";
-    std::cout << str_hex << ": " << i_hex << '\n';
-    std::cout << str_bin << ": " << i_bin << '\n';
-    std::cout << str_auto << ": " << i_auto << '\n';
+    cout << str_dec << ": " << i_dec << " and [" << str_dec.substr(sz) << "]\n";
+    cout << str_hex << ": " << i_hex << '\n';
+    cout << str_bin << ": " << i_bin << '\n';
+    cout << str_auto << ": " << i_auto << '\n';
     // 2001, A Space Odyssey: 2001 and [, A Space Odyssey]
     // 40c3:  16579
     // -10010110001: -1201
     // 0x7f: 127
 
-    std::string pi = "pi is " + std::to_string(3.1415926);
-    std::string perfect = std::to_string(1 + 2 + 4 + 7 + 14) + " is a perfect number";
-    std::cout << pi << '\n';
-    std::cout << perfect << '\n';
+    string pi = "pi is " + to_string(3.1415926);
+    string perfect = to_string(1 + 2 + 4 + 7 + 14) + " is a perfect number";
+    cout << pi << '\n';
+    cout << perfect << '\n';
     // pi is 3.141593
     // 28 is a perfect number
     return 0;

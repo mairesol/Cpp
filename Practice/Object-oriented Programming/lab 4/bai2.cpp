@@ -29,8 +29,8 @@ public:
     Nguoi(string = "", Ngay = Ngay(0, 0, 0), string = "");
     Nguoi(const char *, Ngay, const char *);
 
-    void input();
-    void output();
+    virtual void input();
+    virtual void output();
 };
 
 class SinhVien : public Nguoi
@@ -315,7 +315,7 @@ void NgheSi::output()
     cout << "\nTuoi nghe: " << tuoi_nghe;
 }
 
-/*--------------------------------NgheSi--------------------------------*/
+/*--------------------------------CaSi--------------------------------*/
 CaSi::CaSi(string h, Ngay ng, string q, string d, unsigned long long t) : Nguoi(h, ng, q), dong_nhac(d), tuoi_nghe(t){};
 CaSi::CaSi(const char *h, Ngay ng, const char *q, const char *d, unsigned long long t) : Nguoi(h, ng, q), dong_nhac(d), tuoi_nghe(t){};
 
