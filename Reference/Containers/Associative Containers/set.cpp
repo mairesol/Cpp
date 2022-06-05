@@ -21,18 +21,6 @@ The standard container classes vector, deque and list fulfill these requirements
 By default, if no container class is specified for a particular stack class instantiation, the standard container deque is used.
 */
 
-/*
-Member types:
-value_type: The first template parameter (T)
-
-container_type:	The second template parameter (Container)
-
-reference:	container_type::reference
-
-const_reference:	container_type::const_reference
-
-size_type:	an unsigned integral type
-*/
 #include <bits/stdc++.h>
 
 using namespace std;

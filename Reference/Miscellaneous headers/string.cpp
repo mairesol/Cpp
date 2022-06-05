@@ -14,35 +14,6 @@ If used to handle sequences of multi-byte or variable-length characters (such as
 all members of this class (such as length or size), as well as its iterators, will still operate in terms of bytes (not actual encoded characters).
 */
 
-/*
-Member types:
-value_type: char
-
-traits_type: char_traits<char>
-
-allocator_type: allocator<char>
-
-reference: char&
-
-const_reference: const char&
-
-pointer: char*
-
-const_pointer: const char*
-
-iterator: a random access iterator to char
-
-const_iterator: a random access iterator to const char
-
-reverse_iterator: reverse_iterator<iterator>
-
-const_reverse_iterator: reverse_iterator<const_iterator>
-
-difference_type: ptrdiff_t
-
-size_type: size_t
-*/
-
 #include <iostream>
 #include <string>
 #include <string.h>
@@ -53,15 +24,15 @@ int main()
 {
     /*
     constructor:
-    default:                string();
-    copy:                   string (const string& str);
-    substring:              string (const string& str, size_t pos, size_t len = npos);
-    from c-string:          string (const char* s);
-    from buffer:            string (const char* s, size_t n);
-    fill:                   string (size_t n, char c);
-    range:                  string  (InputIterator first, InputIterator last);
-    initializer list:       string (initializer_list<char> il);
-    move:                   string (string&& str) noexcept;
+    default: string();
+    copy: string (const string& str);
+    substring: string (const string& str, size_t pos, size_t len = npos);
+    from c-string: string (const char* s);
+    from buffer: string (const char* s, size_t n);
+    fill: string (size_t n, char c);
+    range: string  (InputIterator first, InputIterator last);
+    initializer list: string (initializer_list<char> il);
+    move: string (string&& str) noexcept;
     */
     string s0("Initial string");
     string s1;
@@ -87,29 +58,29 @@ int main()
 
     /*
     Operator:
-    string:                 string& operator= (const string& str);
-    c-string:               string& operator= (const char* s);
-    character:              string& operator= (char c);
-    initializer list:       string& operator= (initializer_list<char> il);
-    move:                   string& operator= (string&& str) noexcept;
+    string: string& operator= (const string& str);
+    c-string: string& operator= (const char* s);
+    character: string& operator= (char c);
+    initializer list: string& operator= (initializer_list<char> il);
+    move: string& operator= (string&& str) noexcept;
 
-    string:         string operator+ (const string& lhs, const string& rhs);
+    string: string operator+ (const string& lhs, const string& rhs);
                     string operator+ (string&&      lhs, string&&      rhs);
                     string operator+ (string&&      lhs, const string& rhs);
                     string operator+ (const string& lhs, string&&      rhs);
-    c-string:       string operator+ (const string& lhs, const char*   rhs);
+    c-string: string operator+ (const string& lhs, const char*   rhs);
                     string operator+ (string&&      lhs, const char*   rhs);
                     string operator+ (const char*   lhs, const string& rhs);
                     string operator+ (const char*   lhs, string&&      rhs);
-    character:      string operator+ (const string& lhs, char          rhs);
+    character: string operator+ (const string& lhs, char          rhs);
                     string operator+ (string&&      lhs, char          rhs);
                     string operator+ (char          lhs, const string& rhs);
                     string operator+ (char          lhs, string&&      rhs);
 
-    string:                 string& operator+= (const string& str);
-    c-string:               string& operator+= (const char* s);
-    character:              string& operator+= (char c);
-    initializer list:       string& operator+= (initializer_list<char> il);
+    string: string& operator+= (const string& str);
+    c-string: string& operator+= (const char* s);
+    character: string& operator+= (char c);
+    initializer list: string& operator+= (initializer_list<char> il);
 
     bool operator== (const string& lhs, const string& rhs) noexcept;
     bool operator== (const char*   lhs, const string& rhs);
@@ -193,13 +164,13 @@ int main()
 
     /*
     Iterators:
-    begin       Return iterator to beginning:   iterator begin() noexcept;  const_iterator begin() const noexcept;
+    begin       Return iterator to beginning: iterator begin() noexcept;  const_iterator begin() const noexcept;
 
-    end         Return iterator to end:   iterator end() noexcept;    const_iterator end() const noexcept;
+    end         Return iterator to end: iterator end() noexcept;    const_iterator end() const noexcept;
 
-    rbegin      Return reverse iterator to reverse beginning:  reverse_iterator rbegin() noexcept;     const_reverse_iterator rbegin() const noexcept;
+    rbegin      Return reverse iterator to reverse beginning: reverse_iterator rbegin() noexcept;     const_reverse_iterator rbegin() const noexcept;
 
-    rend        Return reverse iterator to reverse end:  reverse_iterator rend() noexcept;   const_reverse_iterator rend() const noexcept;
+    rend        Return reverse iterator to reverse end: reverse_iterator rend() noexcept;   const_reverse_iterator rend() const noexcept;
 
     cbegin      Return const_iterator to beginning
 
@@ -221,21 +192,21 @@ int main()
 
     /*
     Capacity:
-    size                Return length of string:    size_t size() const noexcept;
+    size                Return length of string: size_t size() const noexcept;
 
-    length              Return length of string:  size_t length() const noexcept;
+    length              Return length of string: size_t length() const noexcept;
 
-    max_size            Return maximum size of string:  size_t max_size() const noexcept;
+    max_size            Return maximum size of string: size_t max_size() const noexcept;
 
-    resize              Resize string:    void resize (size_t n);     void resize (size_t n, char c);
+    resize              Resize string: void resize (size_t n);     void resize (size_t n, char c);
 
-    capacity            Return size of allocated storage:   size_t capacity() const noexcept;
+    capacity            Return size of allocated storage: size_t capacity() const noexcept;
 
-    reserve             Request a change in capacity:    void reserve (size_t n = 0);
+    reserve             Request a change in capacity: void reserve (size_t n = 0);
 
-    empty               Test if string is empty:   bool empty() const noexcept;
+    empty               Test if string is empty: bool empty() const noexcept;
 
-    shrink_to_fit       Shrink to fit:     void shrink_to_fit();
+    shrink_to_fit       Shrink to fit: void shrink_to_fit();
     */
     string str("Test string");
     cout << "size: " << str.size() << "\n";
@@ -274,15 +245,15 @@ int main()
 
     /*
     Element access:
-    operator[]      Get character of string:  char& operator[] (size_t pos);  const char& operator[] (size_t pos) const;
+    operator[]      Get character of string: char& operator[] (size_t pos);  const char& operator[] (size_t pos) const;
 
-    at              Get character in string:  char& at (size_t pos);  const char& at (size_t pos) const;
+    at              Get character in string: char& at (size_t pos);  const char& at (size_t pos) const;
 
-    front           Access first character:   char& front();    const char& front() const;
+    front           Access first character: char& front();    const char& front() const;
 
-    back            Access last character:  char& back();   const char& back() const;
+    back            Access last character: char& back();   const char& back() const;
 
-    data            Get string data:    const char* data() const noexcept;
+    data            Get string data: const char* data() const noexcept;
     */
     string str("test string");
     str.front() = 'T';
@@ -309,51 +280,51 @@ int main()
 
     /*
     Modifiers:
-    append          Append to string:       string:     string& append (const string& str);
-                                            substring:  string& append (const string& str, size_t subpos, size_t sublen);
-                                            c-string:   string& append (const char* s);
-                                            buffer:     string& append (const char* s, size_t n);
-                                            fill:   string& append (size_t n, char c);
-                                            range:  string& append (InputIterator first, InputIterator last);
-                                            initializer list:   string& append (initializer_list<char> il);
+    append          Append to string: string: string& append (const string& str);
+                                            substring: string& append (const string& str, size_t subpos, size_t sublen);
+                                            c-string: string& append (const char* s);
+                                            buffer: string& append (const char* s, size_t n);
+                                            fill: string& append (size_t n, char c);
+                                            range: string& append (InputIterator first, InputIterator last);
+                                            initializer list: string& append (initializer_list<char> il);
 
-    push_back       Append character to string:    void push_back (char c);
+    push_back       Append character to string: void push_back (char c);
 
-    pop_back        Delete last character:     void pop_back();
+    pop_back        Delete last character: void pop_back();
 
-    assign          Assign content to string:       string:     string& assign (const string& str);
-                                                    substring:  string& assign (const string& str, size_t subpos, size_t sublen);
-                                                    c-string:   string& assign (const char* s);
-                                                    buffer:     string& assign (const char* s, size_t n);
-                                                    fill:   string& assign (size_t n, char c);
-                                                    range:   string& assign (InputIterator first, InputIterator last);
-                                                    initializer list:    string& assign (initializer_list<char> il);
-                                                    move:   string& assign (string&& str) noexcept;
+    assign          Assign content to string: string: string& assign (const string& str);
+                                                    substring: string& assign (const string& str, size_t subpos, size_t sublen);
+                                                    c-string: string& assign (const char* s);
+                                                    buffer: string& assign (const char* s, size_t n);
+                                                    fill: string& assign (size_t n, char c);
+                                                    range: string& assign (InputIterator first, InputIterator last);
+                                                    initializer list: string& assign (initializer_list<char> il);
+                                                    move: string& assign (string&& str) noexcept;
 
-    insert          Insert into string:     string:      string& insert (size_t pos, const string& str);
-                                            substring:   string& insert (size_t pos, const string& str, size_t subpos, size_t sublen);
-                                            c-string:    string& insert (size_t pos, const char* s);
-                                            buffer:      string& insert (size_t pos, const char* s, size_t n);
-                                            single character:   iterator insert (const_iterator p, char c);
-                                            fill:    string& insert (size_t pos, size_t n, char c);   iterator insert (const_iterator p, size_t n, char c);
-                                            range:  iterator insert (iterator p, InputIterator first, InputIterator last);
-                                            initializer list:    string& insert (const_iterator p, initializer_list<char> il);
+    insert          Insert into string: string: string& insert (size_t pos, const string& str);
+                                            substring: string& insert (size_t pos, const string& str, size_t subpos, size_t sublen);
+                                            c-string: string& insert (size_t pos, const char* s);
+                                            buffer: string& insert (size_t pos, const char* s, size_t n);
+                                            single character: iterator insert (const_iterator p, char c);
+                                            fill: string& insert (size_t pos, size_t n, char c);   iterator insert (const_iterator p, size_t n, char c);
+                                            range: iterator insert (iterator p, InputIterator first, InputIterator last);
+                                            initializer list: string& insert (const_iterator p, initializer_list<char> il);
 
-    erase           Erase characters from string:       sequence:    string& erase (size_t pos = 0, size_t len = npos);
-                                                        character:  iterator erase (const_iterator p);
-                                                        range:  iterator erase (const_iterator first, const_iterator last);
+    erase           Erase characters from string: sequence: string& erase (size_t pos = 0, size_t len = npos);
+                                                        character: iterator erase (const_iterator p);
+                                                        range: iterator erase (const_iterator first, const_iterator last);
 
-    clear           Clear string:  void clear() noexcept;
+    clear           Clear string: void clear() noexcept;
 
-    replace         Replace portion of string:      string:     string& replace (size_t pos, size_t len, const string& str);    string& replace (const_iterator i1, const_iterator i2, const string& str);
-                                                    substring:  string& replace (size_t pos, size_t len, const string& str, size_t subpos, size_t sublen);
-                                                    c-string:   string& replace (size_t pos, size_t len, const char* s);    string& replace (const_iterator i1, const_iterator i2, const char* s);
-                                                    buffer:     string& replace (size_t pos, size_t len, const char* s, size_t n);    string& replace (const_iterator i1, const_iterator i2, const char* s, size_t n);
-                                                    fill:   string& replace (size_t pos, size_t len, size_t n, char c);    string& replace (const_iterator i1, const_iterator i2, size_t n, char c);
-                                                    range:  string& replace (const_iterator i1, const_iterator i2, InputIterator first, InputIterator last);
-                                                    initializer list:   string& replace (const_iterator i1, const_iterator i2, initializer_list<char> il);
+    replace         Replace portion of string: string: string& replace (size_t pos, size_t len, const string& str);    string& replace (const_iterator i1, const_iterator i2, const string& str);
+                                                    substring: string& replace (size_t pos, size_t len, const string& str, size_t subpos, size_t sublen);
+                                                    c-string: string& replace (size_t pos, size_t len, const char* s);    string& replace (const_iterator i1, const_iterator i2, const char* s);
+                                                    buffer: string& replace (size_t pos, size_t len, const char* s, size_t n);    string& replace (const_iterator i1, const_iterator i2, const char* s, size_t n);
+                                                    fill: string& replace (size_t pos, size_t len, size_t n, char c);    string& replace (const_iterator i1, const_iterator i2, size_t n, char c);
+                                                    range: string& replace (const_iterator i1, const_iterator i2, InputIterator first, InputIterator last);
+                                                    initializer list: string& replace (const_iterator i1, const_iterator i2, initializer_list<char> il);
 
-    swap            Swap string values:     void swap (string& str);
+    swap            Swap string values: void swap (string& str);
     */
     string str;
     string str2 = "Writing ";
@@ -438,7 +409,7 @@ int main()
     string str3 = "sample phrase";
     string str4 = "useful.";
 
-    // Using positions:                 0123456789*123456789*12345
+    // Using positions: 0123456789*123456789*12345
     string str = base;                // "this is a test string."
     str.replace(9, 5, str2);          // "this is an example string." (1)
     str.replace(19, 6, str3, 7, 6);   // "this is an example phrase." (2)
@@ -448,7 +419,7 @@ int main()
     cout << str << '\n';
     // this is a short phrase!!!
 
-    // Using iterators:                                               0123456789*123456789*
+    // Using iterators:                            0123456789*123456789*
     str.replace(str.begin(), str.end() - 3, str3);                      // "sample phrase!!!"      (1)
     str.replace(str.begin(), str.begin() + 6, "replace");               // "replace phrase!!!"     (3)
     str.replace(str.begin() + 8, str.begin() + 14, "is coolness", 7);   // "replace is cool!!!"    (4)
@@ -472,21 +443,21 @@ int main()
 
     /*
     Others:
-    c_str                   Get C string equivalent:   const char* c_str() const noexcept;
+    c_str                   Get C string equivalent: const char* c_str() const noexcept;
 
-    copy                    Copy sequence of characters from string:     size_t copy (char* s, size_t len, size_t pos = 0) const;
+    copy                    Copy sequence of characters from string: size_t copy (char* s, size_t len, size_t pos = 0) const;
 
-    find                    Find content in string:     string:  size_t find (const string& str, size_t pos = 0) const noexcept;
-                                                        c-string:    size_t find (const char* s, size_t pos = 0) const;
-                                                        buffer:  size_t find (const char* s, size_t pos, size_type n) const;
-                                                        character:   size_t find (char c, size_t pos = 0) const noexcept;
+    find                    Find content in string: string: size_t find (const string& str, size_t pos = 0) const noexcept;
+                                                        c-string: size_t find (const char* s, size_t pos = 0) const;
+                                                        buffer: size_t find (const char* s, size_t pos, size_type n) const;
+                                                        character: size_t find (char c, size_t pos = 0) const noexcept;
 
     rfind                   Find last occurrence of content in string
 
-    find_first_of           Find character in string:  string:  size_t find_first_of (const string& str, size_t pos = 0) const noexcept;
-                                                c-string:    size_t find_first_of (const char* s, size_t pos = 0) const;
-                                                buffer:  size_t find_first_of (const char* s, size_t pos, size_t n) const;
-                                                character:   size_t find_first_of (char c, size_t pos = 0) const noexcept;
+    find_first_of           Find character in string: string: size_t find_first_of (const string& str, size_t pos = 0) const noexcept;
+                                                c-string: size_t find_first_of (const char* s, size_t pos = 0) const;
+                                                buffer: size_t find_first_of (const char* s, size_t pos, size_t n) const;
+                                                character: size_t find_first_of (char c, size_t pos = 0) const noexcept;
 
     find_last_of            Find character in string from the end
 
@@ -494,12 +465,12 @@ int main()
 
     find_last_not_of        Find non-matching character in string from the end
 
-    substr                  Generate substring:   string substr (size_t pos = 0, size_t len = npos) const;
+    substr                  Generate substring: string substr (size_t pos = 0, size_t len = npos) const;
 
-    compare                 Compare strings:    string:  int compare (const string& str) const noexcept;
-                                                substrings:  int compare (size_t pos, size_t len, const string& str) const;  int compare (size_t pos, size_t len, const string& str, size_t subpos, size_t sublen) const;
-                                                c-string:    int compare (const char* s) const;  int compare (size_t pos, size_t len, const char* s) const;
-                                                buffer:  int compare (size_t pos, size_t len, const char* s, size_t n) const;
+    compare                 Compare strings: string: int compare (const string& str) const noexcept;
+                                                substrings: int compare (size_t pos, size_t len, const string& str) const;  int compare (size_t pos, size_t len, const string& str, size_t subpos, size_t sublen) const;
+                                                c-string: int compare (const char* s) const;  int compare (size_t pos, size_t len, const char* s) const;
+                                                buffer: int compare (size_t pos, size_t len, const char* s, size_t n) const;
     */
     string str("Please split this sentence into tokens");
 
@@ -637,23 +608,23 @@ int main()
 
     /*
     Functions:
-    stod            Convert string to double:   double stod (const string&  str, size_t* idx = 0);  double stod (const wstring& str, size_t* idx = 0);
+    stod            Convert string to double: double stod (const string&  str, size_t* idx = 0);  double stod (const wstring& str, size_t* idx = 0);
 
-    stof            Convert string to float:    float stof (const string&  str, size_t* idx = 0);   float stof (const wstring& str, size_t* idx = 0);
+    stof            Convert string to float: float stof (const string&  str, size_t* idx = 0);   float stof (const wstring& str, size_t* idx = 0);
 
-    stoi            Convert string to integer:  int stoi (const string&  str, size_t* idx = 0, int base = 10);  int stoi (const wstring& str, size_t* idx = 0, int base = 10);
+    stoi            Convert string to integer: int stoi (const string&  str, size_t* idx = 0, int base = 10);  int stoi (const wstring& str, size_t* idx = 0, int base = 10);
 
-    stol            Convert string to long int:    long stol (const string&  str, size_t* idx = 0, int base = 10);  long stol (const wstring& str, size_t* idx = 0, int base = 10);
+    stol            Convert string to long int: long stol (const string&  str, size_t* idx = 0, int base = 10);  long stol (const wstring& str, size_t* idx = 0, int base = 10);
 
-    stold           Convert string to long double:  long double stold (const string&  str, size_t* idx = 0);    long double stold (const wstring& str, size_t* idx = 0);
+    stold           Convert string to long double: long double stold (const string&  str, size_t* idx = 0);    long double stold (const wstring& str, size_t* idx = 0);
 
-    stoll           Convert string to long long:    long long stoll (const string&  str, size_t* idx = 0, int base = 10);   long long stoll (const wstring& str, size_t* idx = 0, int base = 10);
+    stoll           Convert string to long long: long long stoll (const string&  str, size_t* idx = 0, int base = 10);   long long stoll (const wstring& str, size_t* idx = 0, int base = 10);
 
-    stoul           Convert string to unsigned long integer:     unsigned long stoul (const string&  str, size_t* idx = 0, int base = 10);   unsigned long stoul (const wstring& str, size_t* idx = 0, int base = 10);
+    stoul           Convert string to unsigned long integer: unsigned long stoul (const string&  str, size_t* idx = 0, int base = 10);   unsigned long stoul (const wstring& str, size_t* idx = 0, int base = 10);
 
-    stoull          Convert string to unsigned long long:   unsigned long long stoull (const string&  str, size_t* idx = 0, int base = 10);     unsigned long long stoull (const wstring& str, size_t* idx = 0, int base = 10);
+    stoull          Convert string to unsigned long long: unsigned long long stoull (const string&  str, size_t* idx = 0, int base = 10);     unsigned long long stoull (const wstring& str, size_t* idx = 0, int base = 10);
 
-    to_string       Convert numerical value to string:      string to_string (int val);     string to_string (long val);    string to_string (long long val);
+    to_string       Convert numerical value to string: string to_string (int val);     string to_string (long val);    string to_string (long long val);
                                                             string to_string (unsigned val);     string to_string (unsigned long val);   string to_string (unsigned long long val);
                                                     s       tring to_string (float val);  string to_string (double val);   string to_string (long double val);
 
@@ -693,7 +664,7 @@ int main()
     cout << str_bin << ": " << i_bin << '\n';
     cout << str_auto << ": " << i_auto << '\n';
     // 2001, A Space Odyssey: 2001 and [, A Space Odyssey]
-    // 40c3:  16579
+    // 40c3: 16579
     // -10010110001: -1201
     // 0x7f: 127
 

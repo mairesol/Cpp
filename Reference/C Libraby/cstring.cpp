@@ -6,10 +6,6 @@ C Strings
 This header file defines several functions to manipulate C strings and arrays.
 */
 
-/*
-Types:
-size_t: Unsigned integral typ
-*/
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
@@ -24,7 +20,7 @@ struct
 int main()
 {
     //----------------------------------------Copying----------------------------------------//
-    // memcpy      Copy block of memory:   void *memcpy(void *destination, const void *source, size_t num);
+    // memcpy      Copy block of memory: void *memcpy(void *destination, const void *source, size_t num);
     char myname[] = "Pierre de Fermat";
     memcpy(person.name, myname, strlen(myname) + 1);
     person.age = 46;
@@ -32,13 +28,13 @@ int main()
     printf("person_copy: %s, %d \n", person_copy.name, person_copy.age);
     // person_copy: Pierre de Fermat, 46
 
-    // memmove     Move block of memory:    void *memmove(void *destination, const void *source, size_t num);
+    // memmove     Move block of memory: void *memmove(void *destination, const void *source, size_t num);
     char str[] = "memmove can be very useful......";
     memmove(str + 20, str + 15, 11);
     puts(str);
     // memmove can be very very useful.
 
-    // strcpy      Copy string:    char *strcpy(char *destination, const char *source);
+    // strcpy      Copy string: char *strcpy(char *destination, const char *source);
     char str1[] = "Sample string";
     char str2[40];
     char str3[40];
@@ -49,7 +45,7 @@ int main()
     // str2: Sample string
     // str3: copy successful
 
-    // strncpy     Copy characters from string:    char *strncpy(char *destination, const char *source, size_t num);
+    // strncpy     Copy characters from string: char *strncpy(char *destination, const char *source, size_t num);
     char str1[] = "To be or not to be";
     char str2[40];
     char str3[40];
@@ -66,7 +62,7 @@ int main()
     // To be
 
     //----------------------------------------Concatenation----------------------------------------//
-    // strcat      Concatenate strings:    char *strcat(char *destination, const char *source);
+    // strcat      Concatenate strings: char *strcat(char *destination, const char *source);
     char str[80];
     strcpy(str, "these ");
     strcat(str, "strings ");
@@ -75,7 +71,7 @@ int main()
     puts(str);
     // these strings are concatenated.
 
-    // strncat     Append characters from string:  char *strncat(char *destination, const char *source, size_t num);
+    // strncat     Append characters from string: char *strncat(char *destination, const char *source, size_t num);
     char str1[20];
     char str2[20];
     strcpy(str1, "To be ");
@@ -85,7 +81,7 @@ int main()
     // To be or not
 
     //----------------------------------------Comparison----------------------------------------//
-    // memcmp      Compare two blocks of memory:   int memcmp(const void *ptr1, const void *ptr2, size_t num);
+    // memcmp      Compare two blocks of memory: int memcmp(const void *ptr1, const void *ptr2, size_t num);
     char buffer1[] = "DWgaOtP12df0";
     char buffer2[] = "DWGAOTP12DF0";
     int n;
@@ -98,7 +94,7 @@ int main()
         printf("'%s' is the same as '%s'.\n", buffer1, buffer2);
     // 'DWgaOtP12df0' is greater than 'DWGAOTP12DF0'.
 
-    // strcmp      Compare two strings:    int strcmp(const char *str1, const char *str2);
+    // strcmp      Compare two strings: int strcmp(const char *str1, const char *str2);
     char key[] = "apple";
     char buffer[80];
     do
@@ -112,9 +108,9 @@ int main()
     // Guess my favourite fruit? apple
     // Correct answer!
 
-    // strcoll     Compare two strings using locale:    int strcoll(const char *str1, const char *str2);
+    // strcoll     Compare two strings using locale: int strcoll(const char *str1, const char *str2);
 
-    // strncmp     Compare characters of two strings:  int strncmp(const char *str1, const char *str2, size_t num);
+    // strncmp     Compare characters of two strings: int strncmp(const char *str1, const char *str2, size_t num);
     char strs[3][5] = {"R2D2", "C3PO", "R2A6"};
     int n;
     puts("Looking for R2 astromech droids...");
@@ -127,10 +123,10 @@ int main()
     // found R2D2
     // found R2A6
 
-    // strxfrm     Transform string using locale:  size_t strxfrm(char *destination, const char *source, size_t num);
+    // strxfrm     Transform string using locale: size_t strxfrm(char *destination, const char *source, size_t num);
 
     //----------------------------------------Searching----------------------------------------//
-    // memchr      Locate character in block of memory:  const void *memchr(const void *ptr, int value, size_t num);    void *memchr(void *ptr, int value, size_t num);
+    // memchr      Locate character in block of memory: const void *memchr(const void *ptr, int value, size_t num);    void *memchr(void *ptr, int value, size_t num);
     char *pch;
     char str[] = "Example string";
     pch = (char *)memchr(str, 'p', strlen(str));
@@ -140,7 +136,7 @@ int main()
         printf("'p' not found.\n");
     // 'p' found at position 5.
 
-    // strchr      Locate first occurrence of character in string:   const char *strchr(const char *str, int character);   char *strchr(char *str, int character);
+    // strchr      Locate first occurrence of character in string: const char *strchr(const char *str, int character);   char *strchr(char *str, int character);
     char str[] = "This is a sample string";
     char *pch;
     printf("Looking for the 's' character in \"%s\"...\n", str);
@@ -156,14 +152,14 @@ int main()
     // found at 11
     // found at 18
 
-    // strrchr     Locate last occurrence of character in string:   const char *strrchr(const char *str, int character);     char *strrchr(char *str, int character);
+    // strrchr     Locate last occurrence of character in string: const char *strrchr(const char *str, int character);     char *strrchr(char *str, int character);
     char str[] = "This is a sample string";
     char *pch;
     pch = strrchr(str, 's');
     printf("Last occurence of 's' found at %d \n", pch - str + 1);
     // Last occurrence of 's' found at 18
 
-    // strcspn     Get span until character in string:  size_t strcspn(const char *str1, const char *str2);
+    // strcspn     Get span until character in string: size_t strcspn(const char *str1, const char *str2);
     char str[] = "fcba73";
     char keys[] = "1234567890";
     int i;
@@ -171,9 +167,9 @@ int main()
     printf("The first number in str is at position %d.\n", i + 1);
     // The first number in str is at position 5
 
-    // strspn      Get span of character set in string:     size_t strspn(const char *str1, const char *str2);
+    // strspn      Get span of character set in string: size_t strspn(const char *str1, const char *str2);
 
-    // strpbrk     Locate characters in string:    const char *strpbrk(const char *str1, const char *str2);    char *strpbrk(char *str1, const char *str2);
+    // strpbrk     Locate characters in string: const char *strpbrk(const char *str1, const char *str2);    char *strpbrk(char *str1, const char *str2);
     char str[] = "This is a sample string";
     char key[] = "aeiou";
     char *pch;
@@ -186,7 +182,7 @@ int main()
     }
     // Vowels in 'This is a sample string': i i a a e i
 
-    // strstr      Locate substring:     const char *strstr(const char *str1, const char *str2);     char *strstr(     char *str1, const char *str2);
+    // strstr      Locate substring: const char *strstr(const char *str1, const char *str2);     char *strstr(     char *str1, const char *str2);
     char str[] = "This is a simple string";
     char *pch;
     pch = strstr(str, "simple");
@@ -195,7 +191,7 @@ int main()
     puts(str);
     // This is a sample string
 
-    // strtok      Split string into tokens:     char *strtok(char *str, const char *delimiters);
+    // strtok      Split string into tokens: char *strtok(char *str, const char *delimiters);
     char str[] = "- This, a sample string.";
     char *pch;
     printf("Splitting string \"%s\" into tokens:\n", str);
@@ -212,20 +208,20 @@ int main()
     // string
 
     //----------------------------------------Others----------------------------------------//
-    // memset      Fill block of memory:     void *memset(void *ptr, int value, size_t num);
+    // memset      Fill block of memory: void *memset(void *ptr, int value, size_t num);
     char str[] = "almost every programmer should know memset!";
     memset(str, '-', 6);
     puts(str);
     // ------ every programmer should know memset!
 
-    // strerror    Get pointer to error message string:     char *strerror(int errnum);
+    // strerror    Get pointer to error message string: char *strerror(int errnum);
     FILE *pFile;
     pFile = fopen("unexist.ent", "r");
     if (pFile == NULL)
         printf("Error opening file unexist.ent: %s\n", strerror(errno));
     // Error opening file unexist.ent: No such file or directory
 
-    // strlen      Get string length:   size_t strlen(const char *str);
+    // strlen      Get string length: size_t strlen(const char *str);
     char szInput[256];
     printf("Enter a sentence: ");
     cin.getline(szInput, 256);
