@@ -6,6 +6,12 @@
 
 using namespace std;
 
+enum NguongChiSo
+{
+    ChiSoThap = 30,
+    ChiSoCao = 70
+};
+
 class Personality
 {
 protected:

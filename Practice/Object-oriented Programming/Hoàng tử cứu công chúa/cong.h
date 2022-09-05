@@ -23,8 +23,6 @@ public:
     virtual void nhap() = 0;
     virtual void xuat() = 0;
     int get_loai();
-
-    virtual double get_chi_so_co_ban() = 0;
 };
 
 class CongGiaoThuong : public Cong
@@ -42,7 +40,7 @@ public:
     void xuat();
     void tinh_tien();
 
-    double get_chi_so_co_ban();
+    double get_tien();
 };
 
 class CongHocThuat : public Cong
@@ -57,7 +55,7 @@ public:
     void nhap();
     void xuat();
 
-    double get_chi_so_co_ban();
+    double get_tri_tue();
 };
 
 class CongSucManh : public Cong
@@ -72,5 +70,5 @@ public:
     void nhap();
     void xuat();
 
-    double get_chi_so_co_ban();
+    double get_suc_manh();
 };

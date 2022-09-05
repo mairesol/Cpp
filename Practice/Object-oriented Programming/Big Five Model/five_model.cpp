@@ -5,12 +5,6 @@
 
 using namespace std;
 
-enum NguongChiSo
-{
-    ChiSoThap = 30,
-    ChiSoCao = 70
-};
-
 // Personality
 Personality::Personality(int a) : gia_tri(a){};
 Personality::~Personality(){};

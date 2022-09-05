@@ -35,7 +35,7 @@ void CongGiaoThuong::tinh_tien()
 {
     tien = gia * hang;
 }
-double CongGiaoThuong::get_chi_so_co_ban()
+double CongGiaoThuong::get_tien()
 {
     return tien;
 };
@@ -55,7 +55,7 @@ void CongHocThuat::xuat()
 {
     cout << tri_tue;
 }
-double CongHocThuat::get_chi_so_co_ban()
+double CongHocThuat::get_tri_tue()
 {
     return tri_tue;
 };
@@ -75,7 +75,7 @@ void CongSucManh::xuat()
 {
     cout << suc_manh;
 }
-double CongSucManh ::get_chi_so_co_ban()
+double CongSucManh ::get_suc_manh()
 {
     return suc_manh;
 }

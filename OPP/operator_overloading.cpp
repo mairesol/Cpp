@@ -168,6 +168,7 @@ const Complex &Complex::operator=(const Complex &c)
 {
     this->real = c.real;
     this->imag = c.imag;
+    return *this;
 }
 void Complex::operator+=(const Complex &c)
 {

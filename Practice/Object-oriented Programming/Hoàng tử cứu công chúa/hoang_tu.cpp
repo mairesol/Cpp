@@ -44,15 +44,15 @@ bool HoangTu::vuot_qua(Cong *p)
     switch (loai)
     {
     case 1:
-        flag = tra_tien(p->get_chi_so_co_ban());
+        flag = tra_tien(dynamic_cast<CongGiaoThuong *>(p)->get_tien());
         break;
 
     case 2:
-        flag = tra_loi_cau_hoi(p->get_chi_so_co_ban());
+        flag = tra_loi_cau_hoi(dynamic_cast<CongHocThuat *>(p)->get_tri_tue());
         break;
 
     case 3:
-        flag = mat_suc(p->get_chi_so_co_ban());
+        flag = mat_suc(dynamic_cast<CongSucManh *>(p)->get_suc_manh());
         break;
 
     default:

@@ -52,11 +52,12 @@ int main()
     SoHong *p;
     for (int i = 0; i < n; i++)
     {
-        if (nam_hien_tai > dynamic_cast<SoHongDatNongNghiep *>(list[i])->get_thoi_han())
-        {
-            list[i]->xuat();
-            cout << endl;
-        }
+        if (p->get_loai() == DatNongNghiep)
+            if (nam_hien_tai > dynamic_cast<SoHongDatNongNghiep *>(list[i])->get_thoi_han())
+            {
+                list[i]->xuat();
+                cout << endl;
+            }
     }
     delete[] list;
 }
